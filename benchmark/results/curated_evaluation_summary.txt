@@ -1,0 +1,14 @@
+SigLIP 2 vs CLIP on the 'curated' benchmark
+================================================
+Queries: 620
+Images:  620
+
+Model                    Top-1               Top-5     MRR
+SigLIP 2       82.6% (512/620)     97.3% (603/620)   0.891
+CLIP           45.0% (279/620)     66.0% (409/620)   0.552
+
+SigLIP 2 minus CLIP: +37.6 pp top-1, +31.3 pp top-5
+
+Models:
+  - SigLIP 2 So400m/14 @ 384px (PyTorch, Hugging Face transformers)
+  - CLIP ViT-L/14 @ 336px (Hugging Face transformers)

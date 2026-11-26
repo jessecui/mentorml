@@ -1,4 +1,3 @@
 {
-  "extraPaths": ["big_vision_repo"],
   "reportMissingImports": "warning"
 }

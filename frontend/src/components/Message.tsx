@@ -1,73 +1,55 @@
 import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
+import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
-import type { Message as MessageType, Diagram } from "../types";
+import type { Message as MessageType, Diagram, TeachingPlan } from "../types";
 import { DiagramCard } from "./DiagramCard";
-import { cn } from "../lib/utils";
-import { User, Bot, Loader2, ChevronDown, ChevronRight, Brain, StopCircle } from "lucide-react";
+import { Loader2, ChevronDown, ChevronRight, StopCircle } from "lucide-react";
 import { useState, type ReactNode } from "react";
+
+// Matches MAX_DIAGRAMS_PER_ANSWER on the server
+const MAX_DIAGRAMS = 2;
 
 interface MessageProps {
   message: MessageType;
 }
 
-// Component to show the thinking/planning process
-function ThinkingSection({ thinking }: { thinking: string }) {
+// The agent's teaching plan: one quiet line that expands
+function PlanSection({ plan }: { plan: TeachingPlan }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  
-  // Parse the JSON from the thinking content (it's wrapped in ```json ... ```)
-  const parseThinking = (raw: string) => {
-    try {
-      const jsonMatch = raw.match(/```json\s*([\s\S]*?)\s*```/);
-      if (jsonMatch) {
-        const parsed = JSON.parse(jsonMatch[1]);
-        return parsed;
-      }
-      // Try parsing directly
-      return JSON.parse(raw);
-    } catch {
-      return null;
-    }
-  };
-
-  const parsed = parseThinking(thinking);
 
   return (
-    <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50">
+    <div className="mb-3 text-sm">
       <button
+        type="button"
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm font-medium text-amber-800 hover:bg-amber-100 cursor-pointer flex-wrap"
+        aria-expanded={isExpanded}
+        className="flex max-w-full cursor-pointer items-center gap-1.5 rounded-md py-0.5 text-left text-muted-foreground hover:text-foreground"
       >
-        <span className="flex items-center gap-2">
-          {isExpanded ? (
-            <ChevronDown className="h-4 w-4" />
-          ) : (
-            <ChevronRight className="h-4 w-4" />
-          )}
-          <Brain className="h-4 w-4" />
-          <span>Teaching Plan</span>
-        </span>
-        {parsed?.topic && (
-          <span className="font-normal text-amber-600 basis-full sm:basis-auto sm:ml-1">— {parsed.topic}</span>
+        {isExpanded ? (
+          <ChevronDown className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+        ) : (
+          <ChevronRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
         )}
+        <span className="shrink-0 font-medium">Plan</span>
+        <span className="truncate">
+          {plan.topic} · {plan.steps.length} {plan.steps.length === 1 ? "step" : "steps"}
+        </span>
       </button>
-      {isExpanded && parsed && (
-        <div className="border-t border-amber-200 px-4 py-3 text-sm">
-          {parsed.steps && (
-            <div className="mb-3">
-              <div className="mb-1 font-medium text-amber-900">Steps:</div>
-              <ol className="ml-4 list-decimal space-y-1 text-amber-800">
-                {parsed.steps.map((step: string, i: number) => (
-                  <li key={i}>{step}</li>
-                ))}
-              </ol>
-            </div>
+      {isExpanded && (
+        <div className="ml-1.5 mt-2 space-y-3 border-l-2 border-border pl-4 text-muted-foreground">
+          {plan.steps.length > 0 && (
+            <ol className="ml-4 list-decimal space-y-1">
+              {plan.steps.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
+            </ol>
           )}
-          {parsed.diagrams_needed && (
+          {plan.diagrams_needed.length > 0 && (
             <div>
-              <div className="mb-1 font-medium text-amber-900">Diagrams to find:</div>
-              <ul className="ml-4 list-disc space-y-1 text-amber-800">
-                {parsed.diagrams_needed.map((d: string, i: number) => (
+              <div className="mb-1 font-medium text-foreground">Diagrams searched for</div>
+              <ul className="ml-4 list-disc space-y-1">
+                {plan.diagrams_needed.map((d, i) => (
                   <li key={i}>{d}</li>
                 ))}
               </ul>
@@ -86,11 +68,12 @@ export function Message({ message }: MessageProps) {
   const diagramMap = new Map<string, Diagram>();
   message.diagrams?.forEach((d) => diagramMap.set(d.id, d));
 
-  // Custom renderer to replace [diagram: diagram_xxx] with actual diagrams
+  // Custom renderer to replace [diagram: <id>] with actual diagrams
   const renderContent = (content: string) => {
     // Split by diagram references
-    const parts = content.split(/\[diagram:\s*(diagram_\d+)\]/g);
+    const parts = content.split(/\[diagram:\s*([A-Za-z0-9_-]+)\]/g);
     const result: ReactNode[] = [];
+    const shown = new Set<string>();
 
     for (let i = 0; i < parts.length; i++) {
       if (i % 2 === 0) {
@@ -99,11 +82,22 @@ export function Message({ message }: MessageProps) {
           result.push(
             <ReactMarkdown
               key={`text-${i}`}
-              remarkPlugins={[remarkMath]}
+              remarkPlugins={[[remarkGfm, { singleTilde: false }], remarkMath]}
               rehypePlugins={[rehypeKatex]}
               components={{
+                a: ({ children, href }) => (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent-text underline underline-offset-2"
+                  >
+                    {children}
+                  </a>
+                ),
+                hr: () => <hr className="my-6 border-border" />,
                 h1: ({ children }) => (
-                  <h1 className="mb-4 mt-6 text-2xl font-bold first:mt-0">
+                  <h1 className="mb-4 mt-6 text-2xl font-semibold tracking-tight first:mt-0">
                     {children}
                   </h1>
                 ),
@@ -117,7 +111,10 @@ export function Message({ message }: MessageProps) {
                     {children}
                   </h3>
                 ),
-                p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
+                h4: ({ children }) => (
+                  <h4 className="mb-2 mt-4 font-semibold first:mt-0">{children}</h4>
+                ),
+                p: ({ children }) => <p className="mb-3 leading-relaxed last:mb-0">{children}</p>,
                 ul: ({ children }) => (
                   <ul className="mb-3 ml-6 list-disc space-y-1">{children}</ul>
                 ),
@@ -132,17 +129,36 @@ export function Message({ message }: MessageProps) {
                 code: ({ children, className }) => {
                   const isBlock = className?.includes("language-");
                   return isBlock ? (
-                    <pre className="my-3 overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm text-slate-100">
+                    <pre className="my-3 overflow-x-auto rounded-md bg-code-bg p-4 text-sm text-code-fg">
                       <code>{children}</code>
                     </pre>
                   ) : (
-                    <code className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono">
+                    <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.9em]">
                       {children}
                     </code>
                   );
                 },
+                table: ({ children }) => (
+                  <div className="my-4 overflow-x-auto rounded-md border border-border bg-surface">
+                    <table className="w-full border-collapse text-sm">{children}</table>
+                  </div>
+                ),
+                thead: ({ children }) => <thead className="bg-muted">{children}</thead>,
+                tr: ({ children }) => (
+                  <tr className="border-b border-border last:border-b-0">{children}</tr>
+                ),
+                th: ({ children, style }) => (
+                  <th className="px-3 py-2 text-left font-semibold" style={style}>
+                    {children}
+                  </th>
+                ),
+                td: ({ children, style }) => (
+                  <td className="px-3 py-2 align-top" style={style}>
+                    {children}
+                  </td>
+                ),
                 blockquote: ({ children }) => (
-                  <blockquote className="my-3 border-l-4 border-primary/30 pl-4 italic text-muted-foreground">
+                  <blockquote className="my-3 border-l-2 border-accent pl-4 text-muted-foreground">
                     {children}
                   </blockquote>
                 ),
@@ -153,11 +169,12 @@ export function Message({ message }: MessageProps) {
           );
         }
       } else {
-        // Diagram reference
+        // Diagram reference: each diagram once, at most two, as on the server
         const diagramId = parts[i];
         const diagram = diagramMap.get(diagramId);
-        if (diagram) {
-          result.push(<DiagramCard key={`diagram-${diagramId}`} diagram={diagram} />);
+        if (diagram && !shown.has(diagramId) && shown.size < MAX_DIAGRAMS) {
+          shown.add(diagramId);
+          result.push(<DiagramCard key={`diagram-${i}-${diagramId}`} diagram={diagram} />);
         }
       }
     }
@@ -165,50 +182,52 @@ export function Message({ message }: MessageProps) {
     return result;
   };
 
+  if (isUser) {
+    return (
+      <div className="mb-6 flex justify-end">
+        <div className="max-w-[85%] whitespace-pre-wrap rounded-lg bg-muted px-4 py-2.5">
+          {message.content}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={cn(
-        "flex gap-4 px-4 py-6",
-        isUser ? "bg-white" : "bg-muted/30"
-      )}
-    >
-      <div
-        className={cn(
-          "flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
-          isUser ? "bg-primary text-primary-foreground" : "bg-slate-700 text-white"
+    <article className="mb-10">
+      {/* Show the teaching plan once it arrives */}
+      {message.plan && <PlanSection plan={message.plan} />}
+
+      <div className="max-w-none">
+        {message.content ? (
+          renderContent(message.content)
+        ) : message.isStreaming ? (
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+            <span>
+              {!message.plan
+                ? "Planning…"
+                : message.plan.diagrams_needed.length > 0
+                  ? "Finding diagrams…"
+                  : "Writing…"}
+            </span>
+          </div>
+        ) : null}
+
+        {/* Show stopped indicator */}
+        {message.wasInterrupted && (
+          <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+            <StopCircle className="h-4 w-4" aria-hidden="true" />
+            <span>Something went wrong: this answer may be incomplete</span>
+          </div>
         )}
-      >
-        {isUser ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="mb-1 text-sm font-medium">
-          {isUser ? "You" : "MentorML"}
-        </div>
-        
-        {/* Show thinking section if available */}
-        {!isUser && message.thinking && (
-          <ThinkingSection thinking={message.thinking} />
+
+        {message.wasStopped && (
+          <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+            <StopCircle className="h-4 w-4" aria-hidden="true" />
+            <span>Response stopped</span>
+          </div>
         )}
-        
-        <div className="prose prose-slate max-w-none">
-          {message.content ? (
-            renderContent(message.content)
-          ) : message.isStreaming ? (
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Loader2 className="h-4 w-4 animate-spin" />
-              <span>{message.thinking ? "Retrieving diagrams..." : "Planning..."}</span>
-            </div>
-          ) : null}
-          
-          {/* Show stopped indicator */}
-          {message.wasStopped && (
-            <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
-              <StopCircle className="h-4 w-4" />
-              <span>Response stopped</span>
-            </div>
-          )}
-        </div>
       </div>
-    </div>
+    </article>
   );
 }

@@ -1,439 +1,229 @@
 """
-SigLIP-based image-text retrieval scoring using JAX/Flax.
+SigLIP 2 scorer (PyTorch, via Hugging Face transformers).
 
-Uses contrastive embeddings for fast, accurate image-text matching.
-SigLIP (Sigmoid Language-Image Pretraining) is designed specifically
-for retrieval tasks and outperforms CLIP on standard benchmarks.
+Embeds text queries and images into the same space for query-image retrieval.
+Scores follow SigLIP's sigmoid formulation:
+
+    score = sigmoid(temperature * <image_emb, text_emb> + bias)
+
+Two loading modes:
+
+- Full model (`SigLIPScorer()`): both towers. Used offline by the curation
+  and benchmark scripts, which need to embed images.
+- Text tower only (`SigLIPScorer(text_only=True)`): used by the MCP server at
+  query time, where image embeddings are precomputed. Loads from a local
+  export (see scripts/export_text_tower.py) when one exists, which roughly
+  halves memory and avoids downloading the vision tower in production.
 
 Usage:
     from model.scorer import SigLIPScorer
-    
     scorer = SigLIPScorer()
-    score = scorer.score(image_path, query)
-    
-    # Or batch scoring
-    scores = scorer.score_batch(image_paths, query)
+    img = scorer.get_image_embedding("diagram.png")     # [1, 1152], L2-normalised
+    txt = scorer.get_text_embedding("attention heads")  # [1, 1152], L2-normalised
+    score = scorer.score("diagram.png", "attention heads")
 """
 
+from __future__ import annotations
+
+import json
 import os
 import sys
-import platform
-import warnings
-import subprocess
 from pathlib import Path
 
-# =============================================================================
-# ENVIRONMENT SETUP
-# =============================================================================
-
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
-IS_MACOS = platform.system() == "Darwin"
-USE_GPU = os.environ.get("USE_GPU", "").lower() == "true"
-
-if IS_MACOS or not USE_GPU:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-    os.environ["JAX_PLATFORMS"] = "cpu"
-    if IS_MACOS:
-        os.environ["XLA_FLAGS"] = "--xla_force_host_platform_device_count=1"
-        os.environ["OBJC_DISABLE_INITIALIZE_FORK_SAFETY"] = "YES"
-        os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
-        os.environ["GRPC_POLL_STRATEGY"] = "poll"
-        os.environ["OPENBLAS_NUM_THREADS"] = "1"
-        os.environ["MKL_NUM_THREADS"] = "1"
-        os.environ["OMP_NUM_THREADS"] = "1"
-else:
-    os.environ["JAX_PLATFORMS"] = "cuda"
-
-from dotenv import load_dotenv
-load_dotenv()
-
-warnings.filterwarnings("ignore", message="Protobuf gencode version")
-warnings.filterwarnings("ignore", category=FutureWarning)
-
-# =============================================================================
-# PATH SETUP
-# =============================================================================
-
-SCRIPT_DIR = Path(__file__).parent.resolve()
-PROJECT_ROOT = SCRIPT_DIR.parent
-REPO_DIR = PROJECT_ROOT / "big_vision_repo"
-# SigLIP 2 uses Gemma tokenizer (256k vocab)
-TOKENIZER_PATH = SCRIPT_DIR / "gemma_tokenizer.model"
-
-if str(REPO_DIR) not in sys.path:
-    sys.path.append(str(REPO_DIR))
-
-# =============================================================================
-# ML LIBRARY IMPORTS
-# =============================================================================
-
-import tensorflow as tf
-tf.config.set_visible_devices([], 'GPU')
-if IS_MACOS:
-    tf.config.threading.set_inter_op_parallelism_threads(1)
-    tf.config.threading.set_intra_op_parallelism_threads(1)
-
-import jax
-import jax.numpy as jnp
 import numpy as np
+import torch
 from PIL import Image
-import ml_collections
 
-if IS_MACOS or not USE_GPU:
-    jax.config.update('jax_platform_name', 'cpu')
+from model.siglip_config import MODEL_ID, PROJECT_ROOT, TEXT_TOWER_DIR  # noqa: F401  (re-exported)
+from model.siglip_config import read_calibration as _read_calibration
 
-import big_vision.models.proj.image_text.two_towers as two_towers
-from big_vision.utils import recover_tree, recover_dtype
-
-# =============================================================================
-# CONSTANTS
-# =============================================================================
-
-# SigLIP 2 So400m/14 at 384px - high quality, same vision backbone as PaliGemma
-# Direct download URL (no gsutil needed)
-CHECKPOINT_URL = "https://storage.googleapis.com/big_vision/siglip2/siglip2_so400m14_384.npz"
-CHECKPOINT_LOCAL = PROJECT_ROOT / "model" / "siglip2_so400m14_384.npz"
 IMAGE_SIZE = 384
-MAX_SEQ_LEN = 64  # SigLIP uses shorter sequences
-
-# Model configuration matching the checkpoint (from SigLIP2_demo.ipynb)
-VARIANT = "So400m/14"
-TXTVARIANT = "So400m"
-EMBDIM = 1152
-VOCAB_SIZE = 256_000
-
-MODEL_CONFIG = ml_collections.ConfigDict({
-    "image_model": "vit",
-    "image": {
-        "variant": VARIANT,
-        "pool_type": "map",
-        "scan": True,
-    },
-    "text_model": "proj.image_text.text_transformer",
-    "text": {
-        "variant": TXTVARIANT,
-        "vocab_size": VOCAB_SIZE,
-        "scan": True,
-    },
-    "out_dim": (None, EMBDIM),  # None means use model's default
-    "bias_init": -10.0,  # Required for SigLIP 2
-})
+MAX_SEQ_LEN = 64  # SigLIP 2 was trained with 64-token text sequences
+EMBED_DIM = 1152
 
 
-# =============================================================================
-# TOKENIZER
-# =============================================================================
+def _pick_device() -> str:
+    """SIGLIP_DEVICE if set and available, else CUDA if present, else CPU."""
+    requested = os.getenv("SIGLIP_DEVICE", "").strip().lower()
+    available = {
+        "cpu": True,
+        "cuda": torch.cuda.is_available(),
+        "mps": torch.backends.mps.is_available(),
+    }
+    if requested:
+        if available.get(requested):
+            return requested
+        # stderr: in the MCP server, stdout carries the protocol
+        print(f"SIGLIP_DEVICE={requested!r} is not available here; choosing automatically", file=sys.stderr)
+    return "cuda" if available["cuda"] else "cpu"
 
-def tokenize(text: str, max_len: int = MAX_SEQ_LEN) -> list[int]:
-    """
-    Tokenize text using SentencePiece (Gemma tokenizer).
-    
-    SigLIP 2 works best with lowercase text.
-    Uses BOS=no, EOS=sticky (appended at end).
-    
-    Runs in subprocess to avoid C++ conflicts on macOS.
-    """
-    if not TOKENIZER_PATH.exists():
-        raise FileNotFoundError(
-            f"Tokenizer not found: {TOKENIZER_PATH}\n"
-            "Download with: curl -L -o model/gemma_tokenizer.model "
-            "https://storage.googleapis.com/big_vision/paligemma_tokenizer.model"
-        )
-    
-    # Lowercase for best SigLIP 2 performance
-    text = text.lower()
-    
-    script = f'''
-import sentencepiece
-sp = sentencepiece.SentencePieceProcessor()
-sp.Load("{TOKENIZER_PATH}")
-tokens = sp.EncodeAsIds({repr(text)})
-# No BOS, sticky EOS (Gemma-style for SigLIP 2)
-eos_id = 1  # EOS token
-tokens = tokens[:({max_len} - 1)] + [eos_id]
-tokens = tokens + [0] * ({max_len} - len(tokens))
-print(tokens)
-'''
-    result = subprocess.run(
-        [sys.executable, "-c", script],
-        capture_output=True, text=True, timeout=30
-    )
-    if result.returncode != 0:
-        raise RuntimeError(f"Tokenization failed: {result.stderr}")
-    return eval(result.stdout.strip())
-
-
-# =============================================================================
-# CHECKPOINT LOADING
-# =============================================================================
-
-def download_checkpoint():
-    """Download SigLIP checkpoint if not present."""
-    if CHECKPOINT_LOCAL.exists():
-        return str(CHECKPOINT_LOCAL)
-    
-    print(f"Downloading SigLIP 2 checkpoint (~1.5GB)...")
-    print(f"  From: {CHECKPOINT_URL}")
-    print(f"  To: {CHECKPOINT_LOCAL}")
-    
-    import urllib.request
-    CHECKPOINT_LOCAL.parent.mkdir(parents=True, exist_ok=True)
-    urllib.request.urlretrieve(CHECKPOINT_URL, CHECKPOINT_LOCAL)
-    print(f"  ✅ Downloaded checkpoint")
-    
-    return str(CHECKPOINT_LOCAL)
-
-
-def load_params(checkpoint_path: str) -> dict:
-    """Load SigLIP model parameters from checkpoint."""
-    with np.load(checkpoint_path, allow_pickle=False) as npz:
-        keys = list(npz.keys())
-        values = [np.array(npz[k]) for k in keys]
-    
-    checkpoint = recover_tree(keys, values)
-    checkpoint = jax.tree.map(recover_dtype, checkpoint)
-    
-    return checkpoint
-
-
-# =============================================================================
-# SCORING FUNCTION
-# =============================================================================
-
-def make_siglip_score_fn(model):
-    """Create JIT-compiled scoring function."""
-    
-    @jax.jit
-    def encode_image(params, images):
-        """Encode images to normalized embeddings."""
-        zimg, _, out = model.apply(params, images, text=None, train=False)
-        return out["img/normalized"]
-    
-    @jax.jit
-    def encode_text(params, tokens):
-        """Encode text to normalized embeddings."""
-        _, ztxt, out = model.apply(params, image=None, text=tokens, train=False)
-        return out["txt/normalized"]
-    
-    @jax.jit
-    def score_with_params(img_emb, txt_emb, temperature, bias):
-        """
-        Compute SigLIP sigmoid probability score.
-        
-        SigLIP uses sigmoid(dot_product * temperature + bias) for scoring.
-        Temperature and bias are learned parameters stored in the checkpoint.
-        """
-        logits = jnp.sum(img_emb * txt_emb, axis=-1) * temperature + bias
-        return jax.nn.sigmoid(logits)
-    
-    return encode_image, encode_text, score_with_params
-
-
-# =============================================================================
-# SCORER CLASS
-# =============================================================================
 
 class SigLIPScorer:
-    """
-    Image-query relevance scorer using SigLIP 2 embeddings.
-    
-    Uses contrastive embeddings with sigmoid scoring for fast,
-    accurate image-text matching. Much faster than PaliGemma VQA.
-    
-    Example:
-        scorer = SigLIPScorer()
-        score = scorer.score("diagram.png", "transformer attention mechanism")
-    """
-    
-    def __init__(self, checkpoint_path: str | None = None):
+    """Query-image scorer backed by SigLIP 2."""
+
+    def __init__(self, text_only: bool = False, device: str | None = None):
         """
-        Initialize the scorer. Downloads model from GCS if needed.
-        
         Args:
-            checkpoint_path: Path to .npz checkpoint, or None to auto-download
+            text_only: Load only the text tower. Image methods will raise.
+            device: torch device string; defaults to CUDA if available, else CPU.
         """
-        if checkpoint_path is None:
-            checkpoint_path = download_checkpoint()
-        
-        # Initialize model
-        self.model = two_towers.Model(**MODEL_CONFIG)  # type: ignore[arg-type]
-        self.encode_image, self.encode_text, self.score_fn = make_siglip_score_fn(self.model)
-        self.params = load_params(checkpoint_path)
-        
-        # Extract learned temperature and bias from checkpoint
-        # t is stored as log(temperature), shape (1,)
-        t_param = self.params.get("t", jnp.log(jnp.array([10.0])))
-        self.temperature = float(jnp.exp(t_param).squeeze())
-        b_param = self.params.get("b", jnp.array([-10.0]))
-        self.bias = float(jnp.asarray(b_param).squeeze())
-        
-        # Cache for image embeddings
+        from transformers import AutoTokenizer
+
+        self.device = device or _pick_device()
+        self.text_only = text_only
         self._image_cache: dict[str, np.ndarray] = {}
-    
-    def preprocess_image(self, image: Image.Image | np.ndarray | str) -> np.ndarray:
-        """
-        Preprocess image: resize and normalize to [-1, 1].
-        
-        Args:
-            image: PIL Image, numpy array [H,W,3], or file path
-        
-        Returns:
-            [1, IMAGE_SIZE, IMAGE_SIZE, 3] float32 array
-        """
-        if isinstance(image, str):
+
+        if text_only:
+            from transformers import SiglipTextModel
+
+            calibration = _local_export_calibration()
+            if calibration is not None:
+                source = str(TEXT_TOWER_DIR)
+                self.temperature = float(calibration["temperature"])
+                self.bias = float(calibration["bias"])
+            else:
+                # No local export: pull the text tower out of the full checkpoint.
+                source = MODEL_ID
+                self.temperature, self.bias = _read_calibration(MODEL_ID)
+            self.tokenizer = AutoTokenizer.from_pretrained(source)
+            self.text_model = SiglipTextModel.from_pretrained(source).to(self.device).eval()
+            self.model = None
+            self.image_processor = None
+        else:
+            from transformers import AutoImageProcessor, AutoModel
+
+            self.tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+            # Pin the slow processor so embeddings stay identical across transformers versions.
+            self.image_processor = AutoImageProcessor.from_pretrained(MODEL_ID, use_fast=False)
+            self.model = AutoModel.from_pretrained(MODEL_ID).to(self.device).eval()
+            self.text_model = self.model.text_model
+            self.temperature = float(self.model.logit_scale.exp().item())
+            self.bias = float(self.model.logit_bias.item())
+
+    # ------------------------------------------------------------------ text
+
+    def _tokenize(self, queries: list[str]) -> dict:
+        # SigLIP 2 expects lowercased text padded to a fixed 64 tokens.
+        return self.tokenizer(
+            [q.lower() for q in queries],
+            padding="max_length",
+            max_length=MAX_SEQ_LEN,
+            truncation=True,
+            return_tensors="pt",
+        )
+
+    @torch.inference_mode()
+    def get_text_embeddings(self, queries: list[str]) -> np.ndarray:
+        """Embed several queries. Returns [N, EMBED_DIM], L2-normalised."""
+        tokens = self._tokenize(queries)
+        input_ids = tokens["input_ids"].to(self.device)
+        if self.text_only:
+            emb = self.text_model(input_ids=input_ids).pooler_output
+        else:
+            emb = self.model.get_text_features(input_ids=input_ids)
+        emb = emb / emb.norm(dim=-1, keepdim=True)
+        return emb.float().cpu().numpy()
+
+    def get_text_embedding(self, query: str) -> np.ndarray:
+        """Embed one query. Returns [1, EMBED_DIM], L2-normalised."""
+        return self.get_text_embeddings([query])
+
+    # ----------------------------------------------------------------- image
+
+    @staticmethod
+    def _load_image(image: Image.Image | np.ndarray | str | Path) -> Image.Image:
+        if isinstance(image, (str, Path)):
             image = Image.open(image)
-        if isinstance(image, Image.Image):
-            image = image.convert("RGB").resize((IMAGE_SIZE, IMAGE_SIZE))
-            image = np.array(image)
-        
-        image = image.astype(np.float32) / 127.5 - 1.0
-        return image[None, ...]
-    
-    def get_image_embedding(self, image: Image.Image | np.ndarray | str, use_cache: bool = True) -> np.ndarray:
-        """
-        Get normalized embedding for an image.
-        
-        Args:
-            image: Image (file path, PIL Image, or numpy array)
-            use_cache: Whether to cache embeddings (by file path)
-        
-        Returns:
-            [1, EmbedDim] normalized embedding
-        """
-        cache_key = image if isinstance(image, str) else None
-        
+        elif isinstance(image, np.ndarray):
+            image = Image.fromarray(image)
+        if image.mode in ("RGBA", "LA", "P", "PA") or "transparency" in image.info:
+            # Flatten transparency onto white; diagrams are drawn for light backgrounds.
+            rgba = image.convert("RGBA")
+            background = Image.new("RGBA", rgba.size, (255, 255, 255, 255))
+            image = Image.alpha_composite(background, rgba)
+        return image.convert("RGB")
+
+    @torch.inference_mode()
+    def get_image_embeddings(
+        self, images: list[Image.Image | np.ndarray | str | Path], batch_size: int = 8
+    ) -> np.ndarray:
+        """Embed several images. Returns [N, EMBED_DIM], L2-normalised."""
+        if self.text_only:
+            raise RuntimeError("SigLIPScorer was loaded with text_only=True; it cannot embed images.")
+        out: list[np.ndarray] = []
+        for start in range(0, len(images), batch_size):
+            batch = [self._load_image(img) for img in images[start:start + batch_size]]
+            pixels = self.image_processor(images=batch, return_tensors="pt")["pixel_values"].to(self.device)
+            emb = self.model.get_image_features(pixel_values=pixels)
+            emb = emb / emb.norm(dim=-1, keepdim=True)
+            out.append(emb.float().cpu().numpy())
+        return np.concatenate(out, axis=0) if out else np.zeros((0, EMBED_DIM), dtype=np.float32)
+
+    def get_image_embedding(
+        self, image: Image.Image | np.ndarray | str | Path, use_cache: bool = True
+    ) -> np.ndarray:
+        """Embed one image. Returns [1, EMBED_DIM], L2-normalised."""
+        cache_key = str(image) if isinstance(image, (str, Path)) else None
         if use_cache and cache_key and cache_key in self._image_cache:
             return self._image_cache[cache_key]
-        
-        img_batch = self.preprocess_image(image)
-        embedding = self.encode_image(self.params, img_batch)
-        embedding = np.array(embedding)
-        
+        embedding = self.get_image_embeddings([image])
         if use_cache and cache_key:
             self._image_cache[cache_key] = embedding
-        
         return embedding
-    
-    def get_text_embedding(self, query: str) -> np.ndarray:
-        """
-        Get normalized embedding for a text query.
-        
-        Args:
-            query: Text query
-        
-        Returns:
-            [1, EmbedDim] normalized embedding
-        """
-        tokens = tokenize(query, max_len=MAX_SEQ_LEN)
-        txt_batch = jnp.array([tokens], dtype=jnp.int32)
-        embedding = self.encode_text(self.params, txt_batch)
-        return np.array(embedding)
-    
-    def score(self, image: Image.Image | np.ndarray | str, query: str) -> float:
-        """
-        Compute relevance score between an image and text query.
-        
-        Args:
-            image: Image (file path, PIL Image, or numpy array)
-            query: Search query to match
-        
-        Returns:
-            Sigmoid probability score in [0, 1]. Higher = more relevant.
-        """
-        img_emb = self.get_image_embedding(image)
-        txt_emb = self.get_text_embedding(query)
-        score = self.score_fn(img_emb, txt_emb, self.temperature, self.bias)
-        return float(score[0])
-    
-    def score_batch(
-        self, 
-        image_paths: list[str], 
-        query: str, 
-        show_progress: bool = True
-    ) -> dict[str, float]:
-        """
-        Score a query against multiple images.
-        
-        Efficient: computes text embedding once, reuses for all images.
-        
-        Args:
-            image_paths: List of image file paths
-            query: Search query to match
-            show_progress: Whether to print progress
-        
-        Returns:
-            Dict mapping image_path -> relevance score
-        """
-        # Encode query once
-        txt_emb = self.get_text_embedding(query)
-        
-        scores = {}
-        for i, path in enumerate(image_paths):
-            img_emb = self.get_image_embedding(path)
-            score = self.score_fn(img_emb, txt_emb, self.temperature, self.bias)
-            scores[path] = float(score[0])
-            
-            if show_progress and (i + 1) % 10 == 0:
-                print(f"  Scored {i + 1}/{len(image_paths)} images")
-        
-        if show_progress:
-            print(f"  ✅ Scored {len(scores)} images")
-        
-        return scores
-    
-    def clear_cache(self):
-        """Clear the image embedding cache."""
+
+    # --------------------------------------------------------------- scoring
+
+    def score_embeddings(self, image_embeddings: np.ndarray, text_embedding: np.ndarray) -> np.ndarray:
+        """Sigmoid scores for one text embedding against [N, D] image embeddings."""
+        logits = image_embeddings @ text_embedding.reshape(-1) * self.temperature + self.bias
+        return 1.0 / (1.0 + np.exp(-logits))
+
+    def score(self, image: Image.Image | np.ndarray | str | Path, query: str) -> float:
+        """Probability-like score that the image matches the query."""
+        img = self.get_image_embedding(image)
+        txt = self.get_text_embedding(query)
+        return float(self.score_embeddings(img, txt)[0])
+
+    def clear_cache(self) -> None:
         self._image_cache.clear()
 
 
-# =============================================================================
-# DEMO
-# =============================================================================
+def _local_export_calibration() -> dict | None:
+    """The local text-tower export's calibration, if the export exists and is of MODEL_ID."""
+    calibration_file = TEXT_TOWER_DIR / "calibration.json"
+    if not (TEXT_TOWER_DIR / "config.json").exists() or not calibration_file.exists():
+        return None
+    calibration = json.loads(calibration_file.read_text())
+    if calibration.get("model_id") != MODEL_ID:
+        # The values huggingface_hub itself treats as "offline"
+        if os.getenv("HF_HUB_OFFLINE", "").strip().lower() in ("1", "true", "yes", "on"):
+            raise RuntimeError(
+                f"The text-tower export in {TEXT_TOWER_DIR} is of {calibration.get('model_id')!r}, but "
+                f"SIGLIP_MODEL_ID is {MODEL_ID!r}, and downloads are disabled (HF_HUB_OFFLINE=1). "
+                "Rebuild the image with --build-arg SIGLIP_MODEL_ID=... instead of changing it at runtime."
+            )
+        print(
+            f"Ignoring the text-tower export in {TEXT_TOWER_DIR}: it is of {calibration.get('model_id')!r}, "
+            f"not {MODEL_ID!r}. Re-run scripts/export_text_tower.py.",
+            file=sys.stderr,
+        )
+        return None
+    return calibration
 
-def create_test_image(text: str, path: str = "test.jpg") -> str:
-    """Create a test image with rendered text."""
-    from PIL import ImageDraw, ImageFont
-    
-    img = Image.new('RGB', (IMAGE_SIZE, IMAGE_SIZE), 'white')
-    draw = ImageDraw.Draw(img)
-    
-    # Use default font, draw text centered
-    try:
-        font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 20)
-    except (OSError, IOError):
-        font = ImageFont.load_default()
-    
-    # Simple center positioning
-    draw.text((20, 100), text, fill='black', font=font)
-    img.save(path)
-    return path
 
+def main() -> None:
+    """Smoke test: embed a query and, if a path is given, score an image against it."""
+    import sys
 
-def main():
-    """Demo: test SigLIP scoring."""
-    print("=" * 60)
-    print("SigLIP Scorer Demo")
-    print("=" * 60)
-    
-    scorer = SigLIPScorer()
-    print("✅ Model loaded")
-    
-    # Test with sample images if available
-    test_dir = PROJECT_ROOT / "benchmark" / "corpus" / "images" / "diagrams"
-    if test_dir.exists():
-        images = sorted(test_dir.glob("*.png"))[:3]
-        if images:
-            query = "transformer attention mechanism"
-            print(f"\nQuery: '{query}'")
-            print("-" * 40)
-            
-            for img_path in images:
-                score = scorer.score(str(img_path), query)
-                print(f"  {img_path.name}: {score:+.4f}")
+    query = "self-attention mechanism in a transformer"
+    if len(sys.argv) > 1:
+        scorer = SigLIPScorer()
+        print(f"score({sys.argv[1]!r}, {query!r}) = {scorer.score(sys.argv[1], query):.6f}")
     else:
-        print("\nNo test images found. Run with your own images:")
-        print("  scorer.score('image.png', 'your query')")
+        scorer = SigLIPScorer(text_only=True)
+        emb = scorer.get_text_embedding(query)
+        print(f"text embedding shape={emb.shape} norm={np.linalg.norm(emb):.4f}")
+    print(f"temperature={scorer.temperature:.3f} bias={scorer.bias:.3f}")
 
 
 if __name__ == "__main__":

@@ -1,14 +1,15 @@
 """
 End-to-end agent eval against the LangSmith retrieval dataset.
 
-Target: invokes the full LangGraph agent (planner -> executor -> MCP-backed
-retrieve_diagram) on each query and returns the agent's response plus the
-diagram_ids it actually retrieved.
+Target: invokes the full LangGraph agent (plan -> MCP-backed retrieve_diagram
+-> answer) on each query and returns the agent's response, the diagram IDs
+its searches retrieved, and the IDs the answer actually cites.
 
 Evaluators:
 - tool_call_correctness  (well-grounded): is the dataset's relevant_image_id
-                          in the agent's retrieval set? (Agent may retrieve up
-                          to 2 per response.)
+                          among the candidates the agent retrieved?
+- cited_expected         did the answer cite that diagram?
+- cited_any              did the answer include any diagram at all?
 - explanation_quality    (LLM judge, ungrounded — no reference answers):
                           accuracy + accessibility, rated 1-5 by Gemini Flash.
 
@@ -16,28 +17,23 @@ Usage:
     export LANGSMITH_API_KEY=...
     export GOOGLE_API_KEY=...
     python benchmark/scripts/langsmith_evaluate_agent.py --limit 3
-    python benchmark/scripts/langsmith_evaluate_agent.py --no-vision --no-judge
+    python benchmark/scripts/langsmith_evaluate_agent.py --no-judge
     python benchmark/scripts/langsmith_evaluate_agent.py
 """
 
 import argparse
 import asyncio
 import json
-import os
 import sys
 import uuid
 from contextlib import AsyncExitStack
-from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv()
+from common import DATASET_NAMES, PROJECT_ROOT
 
-PROJECT_ROOT = Path(__file__).parent.parent.parent
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
+load_dotenv(PROJECT_ROOT / ".env")
 
-DEFAULT_DATASET_NAME = "mentorml-diagram-retrieval"
 
 
 # =============================================================================
@@ -57,12 +53,13 @@ def make_agent_target(agent):
 
         msgs = result.get("messages", [])
 
-        # Final AI text response (skip tool-only AI messages)
+        # Final AI text response, read the way main.chat does: this turn only, and
+        # never a message that also made a tool call
         response_text = ""
         for msg in reversed(msgs):
-            if msg.type != "ai":
-                continue
-            if getattr(msg, "tool_calls", None) and not msg.content:
+            if msg.type == "human":
+                break
+            if msg.type != "ai" or getattr(msg, "tool_calls", None):
                 continue
             content = msg.content
             if isinstance(content, list):
@@ -73,17 +70,22 @@ def make_agent_target(agent):
                 response_text = content
                 break
 
-        # Diagram IDs the agent actually retrieved (in call order, deduped)
+        # Diagram IDs the agent's searches returned (in rank order, deduped)
         retrieved: list[str] = []
         for msg in msgs:
             if msg.type == "tool" and msg.name == "retrieve_diagram":
                 try:
                     tool_result = json.loads(msg.content) if isinstance(msg.content, str) else msg.content
-                    diagram_id = (tool_result or {}).get("id")
-                    if diagram_id and diagram_id not in retrieved:
-                        retrieved.append(diagram_id)
-                except (json.JSONDecodeError, TypeError):
+                    for candidate in (tool_result or {}).get("candidates", []):
+                        if candidate["id"] not in retrieved:
+                            retrieved.append(candidate["id"])
+                except (json.JSONDecodeError, TypeError, KeyError):
                     pass
+        # Only IDs a search returned count: the app shows nothing for any other ID
+        from agent.graph import rendered_ids
+
+        # What the app would show: retrieved IDs only, each once, at most two
+        cited = rendered_ids(response_text, set(retrieved), None)
 
         plan = result.get("plan")
         plan_topic = plan.topic if plan else None
@@ -91,6 +93,7 @@ def make_agent_target(agent):
         return {
             "response": response_text,
             "retrieved_diagram_ids": retrieved,
+            "cited_diagram_ids": cited,
             "plan_topic": plan_topic,
         }
 
@@ -110,6 +113,19 @@ def tool_call_correctness(run, example) -> dict:
         "score": 1 if expected in retrieved else 0,
         "comment": f"expected={expected} retrieved={retrieved}",
     }
+
+
+def cited_expected(run, example) -> dict:
+    """1 if the answer cites the dataset's relevant diagram."""
+    expected = (example.outputs or {}).get("relevant_image_id")
+    cited = (run.outputs or {}).get("cited_diagram_ids", []) or []
+    return {"key": "cited_expected", "score": 1 if expected in cited else 0, "comment": f"cited={cited}"}
+
+
+def cited_any(run, example) -> dict:
+    """1 if the answer includes at least one diagram."""
+    cited = (run.outputs or {}).get("cited_diagram_ids", []) or []
+    return {"key": "cited_any", "score": 1 if cited else 0}
 
 
 # =============================================================================
@@ -136,7 +152,24 @@ def make_quality_judge():
     from langchain_core.messages import HumanMessage, SystemMessage
     from langchain_google_genai import ChatGoogleGenerativeAI
 
-    llm = ChatGoogleGenerativeAI(model="gemini-3-flash-preview", temperature=0.0, thinking_level="low")
+    from agent.graph import _model_chain
+
+    # A fixed judge, separate from the models under test and deterministic, so scores
+    # are comparable across runs and across changes to MENTORML_ANSWER_MODELS
+    judge_models = _model_chain("MENTORML_JUDGE_MODELS", "gemini-3.6-flash,gemini-3.5-flash")
+
+    class Judge:
+        async def ainvoke(self, messages):
+            last_error: Exception | None = None
+            for model in judge_models:
+                try:
+                    llm = ChatGoogleGenerativeAI(model=model, temperature=0.0, thinking_level="low", max_retries=1)
+                    return await llm.ainvoke(messages)
+                except Exception as exc:
+                    last_error = exc
+            raise last_error or RuntimeError("no judge models configured")
+
+    llm = Judge()
 
     async def explanation_quality(run, example) -> list[dict]:
         response = (run.outputs or {}).get("response", "")
@@ -191,20 +224,18 @@ def make_quality_judge():
 
 async def amain():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--dataset-name", default=DEFAULT_DATASET_NAME)
+    parser.add_argument("--corpus", choices=["curated"], default="curated",
+                        help="Only the curated dataset works here: the agent retrieves from the curated corpus, "
+                             "so the legacy dataset's diagram IDs can never match.")
+    parser.add_argument("--dataset-name", default=None, help="Defaults to a name derived from --corpus")
     parser.add_argument("--limit", "-n", type=int, default=None)
-    parser.add_argument("--no-vision", action="store_true",
-                        help="Disable Gemini vision review on retrieved diagrams (~50%% faster).")
     parser.add_argument("--no-judge", action="store_true",
-                        help="Skip the LLM-judge evaluator (only run tool_call_correctness).")
+                        help="Skip the LLM-judge evaluator (only run the grounded checks).")
     parser.add_argument("--max-concurrency", type=int, default=2,
                         help="Parallel agent invocations. Higher = faster but risks Gemini rate limits.")
     args = parser.parse_args()
 
-    # Vision review is read by the MCP subprocess at spawn time — must set BEFORE
-    # building the MCP client.
-    if args.no_vision:
-        os.environ["ENABLE_VISION"] = "false"
+    args.dataset_name = args.dataset_name or DATASET_NAMES[args.corpus]
 
     from langgraph.checkpoint.memory import InMemorySaver
     from langsmith import Client, aevaluate
@@ -214,25 +245,31 @@ async def amain():
 
     client = Client()
 
-    # Resolve dataset
+    # Resolve the dataset, and make sure it describes the corpus the agent retrieves from
+    from common import load_benchmark
+
+    if not list(client.list_datasets(dataset_name=args.dataset_name)):
+        print(f"❌ Dataset '{args.dataset_name}' not found. Run upload_to_langsmith.py first.")
+        sys.exit(1)
+    all_examples = list(client.list_examples(dataset_name=args.dataset_name))
+    corpus_ids = set(load_benchmark("curated").image_ids)
+    stale = [e for e in all_examples if (e.outputs or {}).get("relevant_image_id") not in corpus_ids]
+    if stale:
+        print(f"❌ {len(stale)} of {len(all_examples)} examples in '{args.dataset_name}' name diagrams that are "
+              "not in the current corpus (it was probably rebuilt). Upload it again under a new --dataset-name.")
+        sys.exit(1)
     if args.limit is not None:
-        all_examples = list(client.list_examples(dataset_name=args.dataset_name))
         data = all_examples[:args.limit]
         print(f"Running against {len(data)}/{len(all_examples)} examples (--limit {args.limit})")
     else:
-        existing = list(client.list_datasets(dataset_name=args.dataset_name))
-        if not existing:
-            print(f"❌ Dataset '{args.dataset_name}' not found. Run upload_to_langsmith.py first.")
-            sys.exit(1)
         data = args.dataset_name
         print(f"Running against full dataset '{args.dataset_name}'")
 
     # Build evaluator list
-    evaluators: list = [tool_call_correctness]
+    evaluators: list = [tool_call_correctness, cited_expected, cited_any]
     if not args.no_judge:
         evaluators.append(make_quality_judge())
     print(f"Evaluators: {[getattr(e, '__name__', repr(e)) for e in evaluators]}")
-    print(f"Vision review: {'disabled' if args.no_vision else 'enabled'}")
     print(f"Max concurrency: {args.max_concurrency}")
     print()
 

@@ -1,0 +1,3743 @@
+{
+  "corpus": "curated",
+  "n_queries": 620,
+  "n_images": 620,
+  "siglip": {
+    "top1_correct": 512,
+    "top5_correct": 603,
+    "top1_accuracy": 0.8258064516129032,
+    "top5_accuracy": 0.9725806451612903,
+    "mrr": 0.8908715854179707
+  },
+  "clip": {
+    "top1_correct": 279,
+    "top5_correct": 409,
+    "top1_accuracy": 0.45,
+    "top5_accuracy": 0.6596774193548387,
+    "mrr": 0.5524107023106062
+  },
+  "details": [
+    {
+      "query": "diagram of a stacked two-layer rnn encoder-decoder showing source sequence A B C D and target sequence X Y Z with eos token",
+      "target_id": "fig_0ffcc876f6",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of global attention layer calculating context vector from all source states and global align weights for target state prediction",
+      "target_id": "fig_9cae84fcb9",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing local attention layer with context vector and aligned position window over source hidden states for target word generation",
+      "target_id": "fig_5e3def49a6",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a residual building block showing x identity shortcut bypass weight layers and addition to F(x) followed by relu",
+      "target_id": "fig_476399bcf2",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing standard residual block with 3x3 layers to a bottleneck block with 1x1 64, 3x3 64, and 1x1 256 layers",
+      "target_id": "fig_6f72fd388d",
+      "siglip_rank": 5,
+      "clip_rank": 22
+    },
+    {
+      "query": "diagram showing rl algorithm receiving predicted reward from a reward predictor module fed by human feedback and environment observations",
+      "target_id": "fig_645276a1b9",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of scaled dot-product attention showing flow from Q K and V through MatMul Scale Mask and Softmax layers",
+      "target_id": "fig_efd9514401",
+      "siglip_rank": 1,
+      "clip_rank": 8
+    },
+    {
+      "query": "visualization of self-attention head layer 5 resolving the pronoun 'its' to 'Law' and 'application' in a transformer model",
+      "target_id": "fig_33c6ce6bff",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visualize dimensions used for mean and variance in batch norm layer norm instance norm and group norm with N C H W axes",
+      "target_id": "fig_7eb54814cd",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a world model with vision model V encoding z, memory RNN M tracking state h, and controller C choosing action a",
+      "target_id": "fig_6f039abab9",
+      "siglip_rank": 1,
+      "clip_rank": 11
+    },
+    {
+      "query": "diagram of world model agent with VAE (V) MDN-RNN (M) and controller (C) showing feedback loop between environment and actions",
+      "target_id": "fig_b3d6f5b35f",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "diagram showing the summation of token embeddings E[CLS], segment embeddings EA/EB, and position embeddings E0-E10 for BERT input representations",
+      "target_id": "fig_34a0084825",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram comparing bidirectional transformer connections in BERT vs left-to-right transformer in GPT and concatenated LSTMs in ELMo using E and T labels",
+      "target_id": "fig_447c813258",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "how bert handles different tasks using [CLS] and [SEP] tokens for sequence classification versus token-level tagging in question answering SQuAD and NER",
+      "target_id": "fig_daa6a7219d",
+      "siglip_rank": 3,
+      "clip_rank": 7
+    },
+    {
+      "query": "diagram showing T5 model mapping translate English to German input to Das ist gut output and cola sentence to not acceptable label",
+      "target_id": "fig_3467ade2a5",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "T5 span corruption diagram showing original text inputs and targets with <X> and <Y> sentinel tokens for masked spans",
+      "target_id": "fig_046a7dd6b2",
+      "siglip_rank": 8,
+      "clip_rank": 83
+    },
+    {
+      "query": "Compare fully-visible, causal, and causal with prefix attention mask matrices for self-attention with input x and output y labels.",
+      "target_id": "fig_7e5074e395",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "three stage diagram showing dataset of experience, learned latent dynamics with encoders, and value and action learned by latent imagination with trophy icon",
+      "target_id": "fig_1985b19c09",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "diagram of world model dynamics showing encoder and decoder mapping between observation o and latent states with reward r and action a predictions",
+      "target_id": "fig_63a7274fa9",
+      "siglip_rank": 26,
+      "clip_rank": 80
+    },
+    {
+      "query": "diagram of latent state space model predicting v_hat r_hat and a_hat sequences from observation o_1 using imagination",
+      "target_id": "fig_e1b5938656",
+      "siglip_rank": 3,
+      "clip_rank": 134
+    },
+    {
+      "query": "diagram showing learning via SGD during unsupervised pre-training as outer loop and in-context learning as inner loop for sequence patterns",
+      "target_id": "fig_b4d82ac9e9",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram comparing zero-shot one-shot and few-shot prompt engineering with traditional fine-tuning gradient updates for language models",
+      "target_id": "fig_1c375e7b0a",
+      "siglip_rank": 1,
+      "clip_rank": 79
+    },
+    {
+      "query": "diagram of vision transformer architecture showing linear projection of flattened patches position embeddings and transformer encoder layers with multi-head attention",
+      "target_id": "fig_b878197aea",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "contrastive pre-training diagram showing I and T embedding matrix with zero-shot prediction from label text prompt a photo of a {object}",
+      "target_id": "fig_ecb2913983",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "perceiver architecture diagram showing cross attention between latent array N x D and byte array M x C with iterative repeats",
+      "target_id": "fig_679b2fe738",
+      "siglip_rank": 1,
+      "clip_rank": 11
+    },
+    {
+      "query": "comparison of hierarchical feature maps in swin transformer vs single low resolution feature maps in ViT for classification and segmentation",
+      "target_id": "fig_cfa2fbc652",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "how shifted window partitioning in layer l and l+1 creates connections between previous window boundaries in swin transformer architecture",
+      "target_id": "fig_6a2d4b7b6a",
+      "siglip_rank": 1,
+      "clip_rank": 10
+    },
+    {
+      "query": "Architecture diagram of a causal transformer processing interleaved return-to-go R_t, state s_t, and action a_t tokens to predict action a_t.",
+      "target_id": "fig_58462f762e",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing pretrained weights W summed with low rank matrices A and B where A is initialized with Gaussian distribution and B is zero",
+      "target_id": "fig_80199bb2fb",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of Masked Autoencoder (MAE) architecture showing encoder processing visible patches and decoder using mask tokens to reconstruct full image",
+      "target_id": "fig_ee073dfbac",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "rate-distortion curve comparing semantic compression via latent diffusion models and perceptual compression via autoencoder plus GAN with image samples",
+      "target_id": "fig_60d7286e27",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Architecture diagram of latent diffusion models showing the interaction between the denoising U-Net, cross-attention modules with QKV, and the conditioning encoder tau_theta.",
+      "target_id": "fig_38da64e77a",
+      "siglip_rank": 1,
+      "clip_rank": 543
+    },
+    {
+      "query": "three step process for training language models to follow instructions using human ranking feedback reward model and proximal policy optimization PPO",
+      "target_id": "fig_b44f28cb5b",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Architecture diagram of an agent using Self-reflection (LM) to update Experience (long-term memory) based on Evaluator (LM) feedback from Environment trajectories.",
+      "target_id": "fig_a0f47813c8",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing generative agent memory stream connecting perceive, act, plan, and reflect modules with retrieval loop",
+      "target_id": "fig_17b5b2b27e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison diagram of IO CoT CoT-SC and Tree of Thoughts ToT illustrating search paths and intermediate thought boxes",
+      "target_id": "fig_54317eaddf",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing full finetuning 32-bit optimizer state vs lora 16-bit adapters vs qlora 4-bit transformer with cpu paging flow",
+      "target_id": "fig_0d317ef473",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Interaction flow between Commander, Writer, and Safeguard agents for secure python code generation and execution in a multi-agent system.",
+      "target_id": "fig_86d117436e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "three step cycle of select speaker ask speaker to respond and broadcast message in autogen group chat manager",
+      "target_id": "fig_f717807c3c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a multi-agent chess system where a board agent validates moves between player agents using natural language and board state",
+      "target_id": "fig_c9eb7a7535",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing CoT, ReWOO, CoT-SC, and ToT architectures for single-path and multi-path reasoning in large language models",
+      "target_id": "fig_7352711561",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing H3 block and Gated MLP architecture showing how they combine into the Mamba block with SSM and Conv layers",
+      "target_id": "fig_b61066472c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing 1D convolution with shared weights A applied to inputs X followed by a fully connected layer F",
+      "target_id": "fig_81effd2a89",
+      "siglip_rank": 4,
+      "clip_rank": 58
+    },
+    {
+      "query": "diagram showing grid of input X_i,j nodes connecting to shared processing units A and aggregating into a single top node F in a CNN",
+      "target_id": "fig_5197fd694f",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "diagram showing a green block A expanded into a sub-network with nodes n0 n1 n2 feeding into n3 n4",
+      "target_id": "fig_c270278313",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing two normal distributions stacked with distances a and b summing to a plus b for convolution explanation",
+      "target_id": "fig_9207976591",
+      "siglip_rank": 1,
+      "clip_rank": 29
+    },
+    {
+      "query": "5x5 image kernel with -1 and 1 adjacent cells applied to Taj Mahal for vertical edge detection",
+      "target_id": "fig_c84cb107b4",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a 1D convolutional layer showing weight sharing with labels w0 and w1 connecting inputs x to neurons A",
+      "target_id": "fig_6d7f807851",
+      "siglip_rank": 9,
+      "clip_rank": 17
+    },
+    {
+      "query": "computational graph showing nodes c = a + b and d = b + 1 leading to e = c * d with numerical values a=2 b=1",
+      "target_id": "fig_864f4905ca",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "computational graph showing nodes e=c*d and c=a+b with local partial derivatives de/dc and dc/da labeled on edges",
+      "target_id": "fig_f5eba6d5c4",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "forward-mode differentiation diagram showing partial derivatives dX/dX=1 and dZ/dX as (alpha+beta+gamma)(delta+epsilon+zeta) in a graph",
+      "target_id": "fig_be75336d7e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of reverse-mode differentiation showing partial derivatives dZ/dX and dZ/dY using greek letters alpha beta gamma delta epsilon zeta to represent paths",
+      "target_id": "fig_b98fa6f70d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "reverse-mode differentiation graph showing partial derivative de/db = 5 using paths through nodes c and d with local gradients",
+      "target_id": "fig_3939efdbc5",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram showing the equivalence of a looped recurrent neural network module A and its unrolled form with inputs x0 x1 x2 and outputs h0 h1 h2",
+      "target_id": "fig_d40ddbcb7a",
+      "siglip_rank": 1,
+      "clip_rank": 19
+    },
+    {
+      "query": "unrolled rnn diagram showing short-term dependency with blue glow highlighting x0 x1 inputs and h3 output",
+      "target_id": "fig_14cbd1d9b0",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "unrolled RNN diagram showing red highlights on x0 x1 inputs and ht+1 output to illustrate long-term dependency problems",
+      "target_id": "fig_9e0cc2d93c",
+      "siglip_rank": 3,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram of LSTM cell repeating module showing sigma and tanh layers with point-wise operations and cell state path for xt h_t-1",
+      "target_id": "fig_ad2cac0963",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of bidirectional RNN with forward pass A and backward pass A' cells showing connections from x_i to y_i and horizontal state transfers",
+      "target_id": "fig_d46a4b852e",
+      "siglip_rank": 5,
+      "clip_rank": 8
+    },
+    {
+      "query": "diagram of a 2D grid of inputs x_i,j mapped to outputs y_i,j through a shared transformation block A",
+      "target_id": "fig_67e2d644f4",
+      "siglip_rank": 14,
+      "clip_rank": 31
+    },
+    {
+      "query": "diagram showing vision deep CNN connected to language generating RNN for generating captions like 'a group of people shopping at an outdoor market'",
+      "target_id": "fig_5210f8f47f",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a recurring function f mapping input a_i and state b_{i-1} to new state b_i in a sequence",
+      "target_id": "fig_8a3faf8f31",
+      "siglip_rank": 1,
+      "clip_rank": 14
+    },
+    {
+      "query": "diagram of pooling layer reducing 224x224x64 volume to 112x112x64 while preserving depth slice with downsampling example",
+      "target_id": "fig_f8cfabc40d",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "4x4 grid max pool with 2x2 filters and stride 2 numerical example showing color coded input regions to output values",
+      "target_id": "fig_cf8840375d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing W matrix multiplied by flattened image vector xi plus bias b to calculate cat dog and ship scores",
+      "target_id": "fig_43f58d871b",
+      "siglip_rank": 1,
+      "clip_rank": 8
+    },
+    {
+      "query": "diagram showing W matrix and b vector merging into single W with 1 added to input vector x_i for bias trick",
+      "target_id": "fig_e98f1cab96",
+      "siglip_rank": 2,
+      "clip_rank": 20
+    },
+    {
+      "query": "numerical example comparing hinge loss and cross-entropy loss calculation for a single score vector -2.85 0.86 0.28",
+      "target_id": "fig_52afe53e46",
+      "siglip_rank": 1,
+      "clip_rank": 65
+    },
+    {
+      "query": "labeled diagram of a biological neuron showing impulse direction from dendrites to axon terminals and branches of axon",
+      "target_id": "fig_b91644db17",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing the mapping of axon, synapse, and dendrite to mathematical weights w_i and inputs x_i in a neural network model",
+      "target_id": "fig_f646fb4440",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a 2-layer neural network with 3 inputs 4 hidden neurons and 2 output neurons showing full connectivity",
+      "target_id": "fig_13fc146abe",
+      "siglip_rank": 2,
+      "clip_rank": 28
+    },
+    {
+      "query": "diagram of a 3-layer neural network with 3 inputs, two hidden layers of 4 neurons, and one output layer showing all synapses",
+      "target_id": "fig_b05938786e",
+      "siglip_rank": 2,
+      "clip_rank": 22
+    },
+    {
+      "query": "comparison of decision boundaries for 3 hidden neurons 6 hidden neurons and 20 hidden neurons in a binary classification task",
+      "target_id": "fig_9a033045ac",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visual comparison of decision boundaries for lambda 0.001 0.01 and 0.1 regularization strength in a neural network",
+      "target_id": "fig_74e8aeb3bc",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "visual comparison of original data vs decorrelated data vs whitened data showing rotation and scaling of 2D point clouds",
+      "target_id": "fig_cb1277ed61",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "visual comparison of original images, top 144 eigenvectors, reduced images, and whitened images from a computer vision dataset",
+      "target_id": "fig_93fd48a35e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing standard neural network architecture with a thinned network after applying dropout with nodes marked by X",
+      "target_id": "fig_0c319765e4",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "geometric vector diagram comparing momentum update vs nesterov momentum update with lookahead gradient step from momentum tip",
+      "target_id": "fig_6aecf1d975",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of grid layout and random layout sampling for important and unimportant hyperparameter optimization with marginal distributions shown on axes",
+      "target_id": "fig_0019b18e93",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram showing online softmax rescaling running state m s O by e^(m-m') for blockwise attention score computation",
+      "target_id": "fig_f59d67a061",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "how to combine padding and causal masks in transformer attention using logical AND and broadcasting with valid length",
+      "target_id": "fig_4b1d8aabd5",
+      "siglip_rank": 2,
+      "clip_rank": 172
+    },
+    {
+      "query": "diagram showing matrix dimensions for Q K transpose divided by square root of d with causal masking step and multiplication by V",
+      "target_id": "fig_277ddd751e",
+      "siglip_rank": 2,
+      "clip_rank": 6
+    },
+    {
+      "query": "diagram showing query vector q_gave dot product with keys k to produce attention weights alpha and weighted sum of values v",
+      "target_id": "fig_1374300e0d",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "difference between one head one weighting and two heads two weightings in multi-head attention for recovering alpha1 and alpha2 values",
+      "target_id": "fig_606b45a81f",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of multi-head attention showing parallel heads 1 to H with weight matrices Wq Wk Wv followed by concatenation and output projection Wo",
+      "target_id": "fig_ada96a8a70",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing connectivity of CNN local window RNN sequential chain and self-attention all-to-all with path length complexity O(n/k) O(n) O(1)",
+      "target_id": "fig_bf1d448844",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram showing projected queries (batch, n, d) split into heads (batch, H, n, d_h) then merged back to (batch, n, d) before Wo",
+      "target_id": "fig_8fce18e40c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing how shifting positions of R_q and R_k by 3 preserves the angle 2theta + phi in rotary positional embeddings",
+      "target_id": "fig_01eefc307c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing query q compared to keys k1 k2 k3 with squared distance scores s_i and softmax weights alpha_i forming a convex combination of values v_i",
+      "target_id": "fig_20a1fcecfb",
+      "siglip_rank": 1,
+      "clip_rank": 100
+    },
+    {
+      "query": "diagram showing the OV circuit moving vectors h1 to a destination stream and QK circuit determining alpha_3j weights in a residual stream",
+      "target_id": "fig_7c3126617d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing layer 1 previous-token head writing follows A and layer 2 induction head matching follows A to predict B",
+      "target_id": "fig_28b9de4d40",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "compare path weights and hop counts for windowed attention w=4 versus global attention over distance delta=12",
+      "target_id": "fig_cb9cc86d9f",
+      "siglip_rank": 1,
+      "clip_rank": 19
+    },
+    {
+      "query": "Geometric visualization of RMSNorm projecting inputs onto a circle of radius sqrt(2) and applying gain g=(1.5, 0.5) to form an ellipse.",
+      "target_id": "fig_3a6ec84410",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of forward pass round(x) and identity with backward pass STE surrogate gradient vs true gradient zero almost everywhere",
+      "target_id": "fig_608db9fc02",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing python cpu issuing work op1 op2 op3 op4 to gpu and blocking at loss.item synchronization point",
+      "target_id": "fig_40f713cfd5",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "bar chart comparing memory MiB for weights activations gradients and Adam moments after initialization forward backward and optimizer step",
+      "target_id": "fig_55e7451726",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing activation checkpointing vs store all memory complexity O(K) vs O(sqrt(K)) with forward and backward pass arrows",
+      "target_id": "fig_2a75cac9d8",
+      "siglip_rank": 1,
+      "clip_rank": 34
+    },
+    {
+      "query": "hierarchical module tree diagram showing how parameter names like 1.body.0.weight are constructed from sequential and residual blocks",
+      "target_id": "fig_766c53fbc9",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a residual block showing input x splitting into a linear-relu-linear body and an identity path rejoining at an addition node",
+      "target_id": "fig_c88a578118",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visual comparison of bf16 and fp16 number grids near 1 showing 1 + 10^-3 rounding behavior and interval widths",
+      "target_id": "fig_c10357636e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing fp32 master weights cast to bf16 activations and gradients with loss scaling for fp16 mixed precision training",
+      "target_id": "fig_b1eb85a156",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "flowchart of dynamic loss scaling process showing S*L multiplication fp16 gradients and finite check for doubling or halving S factor",
+      "target_id": "fig_2b123163eb",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing weight matrix W |V| x d shared between token id row lookup and logits = h W transpose with summed gradients",
+      "target_id": "fig_db5fcb5a4c",
+      "siglip_rank": 1,
+      "clip_rank": 30
+    },
+    {
+      "query": "diagram showing the execution order of pre-hooks forward pass and hooks inside a call wrapper with an observer for capture check modify",
+      "target_id": "fig_24608fad4e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "safetensors file format layout with 8 byte header length JSON metadata and raw tensor byte offsets",
+      "target_id": "fig_8f500cffe0",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "computation graph of two-layer network showing matmul add and relu nodes with backward pass walked in reverse red arrow",
+      "target_id": "fig_5543ed41aa",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram of graph capture pipeline from python function to compiled kernels showing branch on tensor value failure and shape reuse",
+      "target_id": "fig_e3f70e7d85",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of memory traffic for 8 kernels in eager execution versus 1 fused kernel showing reads and writes to gpu memory",
+      "target_id": "fig_83e1e5d8ce",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing individual host kernel launch vs cuda graph replay showing GPU idle gaps and time saved",
+      "target_id": "fig_e36d586342",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "pyramid diagram comparing on-die SRAM, GPU HBM, host DRAM, and NVMe SSD bandwidth in TB/s and capacity in GB",
+      "target_id": "fig_76071188c5",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "relationship between die side n compute area n squared and i/o perimeter n pads doubling die side",
+      "target_id": "fig_e08e387674",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing bit width of sign exponent and mantissa for fp32 tf32 bf16 fp16 fp8 E4M3 and fp4 E2M1",
+      "target_id": "fig_d6f3264604",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "path of byte transfer between four RTX 4090 GPUs through PCIe host bridges and CPU host DRAM diagram",
+      "target_id": "fig_f740ce7bf2",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing memory usage in units of 4N for weights, Adam's moments m and v, activations, and gradients throughout a training step.",
+      "target_id": "fig_900758207c",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing no overlap vs bucketing communication with backward pass layer 4 to layer 1 allreduce buckets",
+      "target_id": "fig_d1b76d3092",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing data parallel replicate model split batch vs pipeline parallel split layer stack vs tensor parallel split every layer width",
+      "target_id": "fig_b991124f32",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing minibatch B split into B/2 for two GPUs with local gradients and an allreduce step for identical updates",
+      "target_id": "fig_c4665cf2a2",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "compare traffic load in bytes for star and ring allreduce for k=4 nodes with gradient size S",
+      "target_id": "fig_79661b8d85",
+      "siglip_rank": 1,
+      "clip_rank": 8
+    },
+    {
+      "query": "roofline model plot for RTX 4090 showing compute roof of 165 TFLOP/s and memory bandwidth of 1.0 TB/s with linear layer examples",
+      "target_id": "fig_d3e6197d53",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "three regimes of deep learning training performance bottlenecks compute-bound bandwidth-bound and overhead-bound with solutions like lower precision and kernel fusion",
+      "target_id": "fig_f30816faea",
+      "siglip_rank": 1,
+      "clip_rank": 9
+    },
+    {
+      "query": "diagram showing weight all-gather and reduce-scatter lifecycle for one block's weights on one GPU in FSDP",
+      "target_id": "fig_ae65e62d29",
+      "siglip_rank": 1,
+      "clip_rank": 37
+    },
+    {
+      "query": "Compare allreduce, reduce-scatter, all-gather, and all-to-all using a 2-GPU example with chunks a0, a1, b0, and b1.",
+      "target_id": "fig_1b0f86b2f4",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "fully convolutional network architecture diagram showing input image cnn 1x1 conv transposed conv and semantic segmentation output mask",
+      "target_id": "fig_eb3893d11a",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing copy of Layer 1 and Layer L-1 from source model to target model with random initialization of output layer for fine-tuning",
+      "target_id": "fig_22e3b29df9",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing content loss from middle layers and style loss from multiple layers of a CNN for neural style transfer",
+      "target_id": "fig_2043fb857c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing selective search region proposals feeding into a CNN for class prediction and bounding box prediction in R-CNN architecture",
+      "target_id": "fig_7671af71ae",
+      "siglip_rank": 2,
+      "clip_rank": 84
+    },
+    {
+      "query": "Fast R-CNN architecture diagram showing Selective search and CNN processing input image for RoI pooling to Class and Bounding box prediction",
+      "target_id": "fig_b63a91cfad",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "2x2 RoI pooling example mapping a 3x3 region on a 4x4 grid with values 0 to 15 to a 2x2 output grid",
+      "target_id": "fig_765b0fbf23",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Faster R-CNN diagram showing the data flow between CNN, Region Proposal Network with anchor boxes, and RoI pooling for class and bounding box prediction.",
+      "target_id": "fig_de3503c7ac",
+      "siglip_rank": 1,
+      "clip_rank": 13
+    },
+    {
+      "query": "diagram of mask r-cnn showing roi align branching to fc layers for class/box and fully convolutional network for mask prediction",
+      "target_id": "fig_81b2e13c7b",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing base network followed by multiscale feature maps generating anchor boxes for class and bounding box prediction in SSD",
+      "target_id": "fig_b663b57dd8",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "mathematical example of a 2x2 input and 2x2 kernel transposed convolution resulting in a 3x3 output with intermediate summation steps",
+      "target_id": "fig_5fe0db01a7",
+      "siglip_rank": 2,
+      "clip_rank": 2
+    },
+    {
+      "query": "step-by-step arithmetic for transposed convolution with 2x2 input and 2x2 kernel using stride 2 showing intermediate summation stages",
+      "target_id": "fig_576d061b6c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "side-by-side architectural comparison of LeNet and AlexNet showing layer types, kernel sizes, 4096-wide head, and ReLU activation vs sigmoid",
+      "target_id": "fig_e508d0c391",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "plot of learning rate \u03b7t showing linear warmup to \u03b70 at time tw and half-cosine decay reaching zero at step T",
+      "target_id": "fig_0ff59cb72a",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "compare alexnet and vgg-11 architecture diagram showing 3x3 convolutions stacked to see 5x5 with fewer weights",
+      "target_id": "fig_0b87b0679c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of vgg head with flatten and dense layers versus network in network nin block with global average pooling and 1x1 convolutions",
+      "target_id": "fig_255fc67c2e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Inception block diagram showing four parallel branches with 1x1 conv channel reduction before 3x3 and 5x5 convolutions and final channel concatenation.",
+      "target_id": "fig_cf40da2b6d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "AnyNet design space diagram showing stem body head with stage parameters depth d width c group width g and bottleneck ratio b",
+      "target_id": "fig_b12ce6c497",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "How a linear ramp u_j = u_0 + aj is quantized onto a geometric grid u0m^k to determine block widths and stage depths.",
+      "target_id": "fig_6e391b7239",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "architectural comparison between ResNet-50 bottleneck and ConvNeXt block showing layer sequence and inverted bottleneck expansion 96 to 384",
+      "target_id": "fig_02cb2fea0b",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "ConvNeXt-T architecture diagram showing patchify stem 4x4 conv stage ratio 3:3:9:3 and separate layer normalization with stride 2 convolution downsampling",
+      "target_id": "fig_142ff2d648",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram showing input channel and output channel connectivity for dense 2 groups 4 groups and depthwise convolution kernels",
+      "target_id": "fig_5cdca16833",
+      "siglip_rank": 1,
+      "clip_rank": 33
+    },
+    {
+      "query": "diagram comparing weights of 3x3 dense convolution vs depthwise separable convolution with 3 input and 3 output channels",
+      "target_id": "fig_93329224c6",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a separable block showing 3x3 depthwise conv for spatial filtering followed by 1x1 conv for channel mixing and computational cost ratio",
+      "target_id": "fig_d7879f745f",
+      "siglip_rank": 1,
+      "clip_rank": 30
+    },
+    {
+      "query": "diagram comparing resnet bottleneck with 1x1 conv 64 and mobilenetv2 inverted bottleneck with 3x3 depthwise conv and expansion to 144",
+      "target_id": "fig_d7e187c699",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "how to fuse 3x3 conv 1x1 conv and identity branches with batch normalization into a single 3x3 conv for inference",
+      "target_id": "fig_56933cb0f7",
+      "siglip_rank": 2,
+      "clip_rank": 3
+    },
+    {
+      "query": "illustrate how 3x3 branch 1x1 branch padded and identity kernels are summed to create a single fused 3x3 convolution kernel",
+      "target_id": "fig_f9ce8469aa",
+      "siglip_rank": 1,
+      "clip_rank": 12
+    },
+    {
+      "query": "diagram comparing nested and non-nested function classes F1 to F6 relative to target f star for deep learning model complexity",
+      "target_id": "fig_fa7b81a70c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing a regular block and a residual block showing g(x) and the addition of input x via skip connection",
+      "target_id": "fig_52af7c5046",
+      "siglip_rank": 1,
+      "clip_rank": 34
+    },
+    {
+      "query": "compare identity shortcut vs projection shortcut in residual blocks with 1x1 conv and batchnorm for channel matching",
+      "target_id": "fig_369f883817",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "ResNet-18 architecture diagram showing four stages with channel counts 64, 128, 256, 512 and resolution changes for 96x96 input",
+      "target_id": "fig_9073b9f440",
+      "siglip_rank": 1,
+      "clip_rank": 23
+    },
+    {
+      "query": "ResNeXt block diagram showing 3x3 Conv 128 with 32 groups and 1x1 Conv bottleneck layers with residual connection",
+      "target_id": "fig_64f67c2eee",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a dense block with growth rate 32 showing how input x with 64 channels grows to 128 through concat channels",
+      "target_id": "fig_12cc8a92c9",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "how to calculate cross-correlation with two input channels and kernels using element-wise multiplication and summation for the output entry 56",
+      "target_id": "fig_ddea3f8642",
+      "siglip_rank": 3,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram showing 1x1 convolution operation on a 3x3x3 input tensor using two kernels to create a 3x3x2 output",
+      "target_id": "fig_55438f9d7c",
+      "siglip_rank": 3,
+      "clip_rank": 97
+    },
+    {
+      "query": "two-dimensional cross-correlation calculation showing how a 2x2 kernel sliding over a 3x3 input results in a 2x2 output with value 19",
+      "target_id": "fig_91f050f6f8",
+      "siglip_rank": 5,
+      "clip_rank": 25
+    },
+    {
+      "query": "diagram showing how im2col transforms a 3x3 input into a patch matrix multiplied by a kernel vector to get a flattened output",
+      "target_id": "fig_b3980bb140",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram showing the receptive field of one unit after three one-dimensional layers with kernel size 3 with shaded dependencies",
+      "target_id": "fig_0f65ffc1f3",
+      "siglip_rank": 4,
+      "clip_rank": 84
+    },
+    {
+      "query": "number of paths from each unit to the top unit for three one-dimensional layers with kernel size 3 and bell shape distribution",
+      "target_id": "fig_723b99a153",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "LeNet architecture diagram showing 5x5 conv layers with sigmoid, 2x2 average pooling, and final dense layers of 120, 84, and 10 units.",
+      "target_id": "fig_be10cb24b4",
+      "siglip_rank": 1,
+      "clip_rank": 33
+    },
+    {
+      "query": "LeNet architecture diagram with tensor shapes at each layer from 28x28 image to dense 10 output including average pooling and sigmoid activations",
+      "target_id": "fig_b4354be27d",
+      "siglip_rank": 1,
+      "clip_rank": 123
+    },
+    {
+      "query": "number of windows that contain each pixel when a 1x1 2x2 or 3x3 kernel slides over input without padding diagram",
+      "target_id": "fig_e3138fc5d1",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "convolution operation with stride 2 horizontally and 3 vertically on a 5x5 padded input with a 2x2 kernel",
+      "target_id": "fig_0cd115de1e",
+      "siglip_rank": 4,
+      "clip_rank": 6
+    },
+    {
+      "query": "diagram showing 3x3 kernel with dilation 1 vs dilation 2 footprints on a pixel grid with highlighted weights",
+      "target_id": "fig_6844fef81e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing receptive field of strides 2, 2, 1 versus dilations 1, 2, 4 in three stacked layers with kernel size 3",
+      "target_id": "fig_476facf033",
+      "siglip_rank": 1,
+      "clip_rank": 25
+    },
+    {
+      "query": "diagram of 2x2 max-pooling on a 3x3 input matrix showing the calculation max(0, 1, 3, 4) equals 4 with shaded cells",
+      "target_id": "fig_b859689ed0",
+      "siglip_rank": 1,
+      "clip_rank": 10
+    },
+    {
+      "query": "4x4 feature map 2x2 max-pooling stride 2 response in column 0 to 3 showing spatial invariance and block boundaries",
+      "target_id": "fig_6aa9f88b53",
+      "siglip_rank": 1,
+      "clip_rank": 8
+    },
+    {
+      "query": "diagram showing input X and shifted input TvX where applying function f results in f(TvX) = Tvf(X) with grid grids",
+      "target_id": "fig_bdae736ad5",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "visualize weight matrix for fully connected vs equivariant vs local connectivity with 8 hidden units and 8 input samples",
+      "target_id": "fig_5a55b38b39",
+      "siglip_rank": 1,
+      "clip_rank": 13
+    },
+    {
+      "query": "how do indices a and b change for a 3x3 kernel K when it is flipped along both axes to become K' in convolution",
+      "target_id": "fig_f22e0fb44e",
+      "siglip_rank": 1,
+      "clip_rank": 18
+    },
+    {
+      "query": "diagram of actor-critic architecture showing delta_t TD error updating both actor theta and critic w parameters with equations",
+      "target_id": "fig_4ca8767724",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "Venn diagram showing intersection of off-policy data, function approximation, and bootstrapping with DQN at the center representing the deadly triad.",
+      "target_id": "fig_ad8ae9e195",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "DQN architecture diagram showing replay buffer D, online Qw network, frozen target Qw- network, and Huber loss gradient path.",
+      "target_id": "fig_0eb3bcc046",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "how a frozen copy of weights Qw- cuts the edge to prevent the next target y = 1 + gamma max Qw from rising indefinitely",
+      "target_id": "fig_a8e0415954",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of cyclic process refitting model f_phi, labeling states with search seeded by pi_theta, and regressing actor onto labels (si, ai*)",
+      "target_id": "fig_69d6e34e0c",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "schematic showing how short 3 step branched rollouts from real states in a replay buffer minimize compounding error compared to long rollouts",
+      "target_id": "fig_2c9ebac647",
+      "siglip_rank": 1,
+      "clip_rank": 14
+    },
+    {
+      "query": "diagram comparing on-policy off-policy and offline RL data flows including policy update expectations and fixed dataset D collected once",
+      "target_id": "fig_0362bfef98",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "stitching on the frozen lake reinforcement learning diagram showing blue episode ending in hole 11 and orange reaching goal through cell 10",
+      "target_id": "fig_983635812d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visualize how the same delta theta update of 2 leads to delta pi of 0.38 versus 0.002 depending on sigmoid slope sigma prime",
+      "target_id": "fig_c545b279c5",
+      "siglip_rank": 2,
+      "clip_rank": 7
+    },
+    {
+      "query": "comparison of gradient slopes and probability density distributions for 2tanh(u) squashing versus hard clipping in bounded action spaces",
+      "target_id": "fig_71a47538aa",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Relationship between probability density p(x) and its score function d/dx log p(x) in 1D and 2D vector fields pointing to modes.",
+      "target_id": "fig_0fc422586e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visualizing how increasing sigma in gaussian noise blurs three distinct data modes into a single bump in a 2D density plot",
+      "target_id": "fig_323821b844",
+      "siglip_rank": 3,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram of distribution matching distillation showing gradient for theta as (grad log q_theta,t - grad log p_t) transpose dx_t / dtheta",
+      "target_id": "fig_7d814db043",
+      "siglip_rank": 10,
+      "clip_rank": 30
+    },
+    {
+      "query": "diagram showing forward process q(xk|xk-1) and reverse process p_theta(xk-1|xk) Gaussian chains from data x0 to noise xT",
+      "target_id": "fig_fbf594b75f",
+      "siglip_rank": 1,
+      "clip_rank": 26
+    },
+    {
+      "query": "U-Net diagram showing 28x28x1 input with two down-sampling stages to 7x7x128 bottleneck and time t sinusoidal feature embedding addition.",
+      "target_id": "fig_cfea33f93e",
+      "siglip_rank": 2,
+      "clip_rank": 36
+    },
+    {
+      "query": "diagram showing encoder mapping image x to latent z0 with noise z1 added for training and removed for sampling with dimension labels",
+      "target_id": "fig_4053d87e1e",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "diagram comparing concatenation G([z; ec]), modulation a(c)h + b(c), and projection head D(x, c) = ecT phi(x) + psi0(x) architectures",
+      "target_id": "fig_1adb42cb3b",
+      "siglip_rank": 1,
+      "clip_rank": 11
+    },
+    {
+      "query": "DCGAN architecture diagram showing generator and critic layers from 1x1x100 latent z to 64x64x3 image including batch normalization and activation functions.",
+      "target_id": "fig_17187808b6",
+      "siglip_rank": 1,
+      "clip_rank": 279
+    },
+    {
+      "query": "visualize overlap counts of 3x3 kernel versus 4x4 kernel with stride 2 in transposed convolutions to explain checkerboard artifacts",
+      "target_id": "fig_c8b17f4ff5",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of GAN training showing generator G mapping latent draw z to generated batch G(z) and critic D outputting realness logits",
+      "target_id": "fig_58e0c700a6",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "plot of Jensen-Shannon divergence JS(p, q) saturation at log 2 for normal distributions with mean shift mu",
+      "target_id": "fig_e0a5513aa0",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "visualize gradients of JS divergence vs Wasserstein W1 vs MMD kernel witness for disjoint distributions p and q",
+      "target_id": "fig_9efb728660",
+      "siglip_rank": 1,
+      "clip_rank": 31
+    },
+    {
+      "query": "diagram showing how adding a constant b to critic score D(x) changes single-sample thresholding but leaves pairwise difference D(x) - D(x') unchanged",
+      "target_id": "fig_9ee613387f",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Comparison of sequential synchronous and asynchronous scheduling showing trial idle time and stragglers on a time axis",
+      "target_id": "fig_0bc9896ebe",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "diagram showing synchronous successive halving with worker-0 and worker-1 idle time waiting for trial-2 to finish rung 0",
+      "target_id": "fig_bd3638adad",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Asynchronous successive halving diagram showing Worker-0 and Worker-1 timelines with trial promotions to Rung 1 and Rung 2.",
+      "target_id": "fig_10b6f738e9",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing wake-word model on phone with 10^5 parameters vs assistant model in data center with 10^11 parameters for speech processing",
+      "target_id": "fig_3d71f77663",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing pretraining on web text next token prediction leading to base model then fine-tuning for classifier assistant and agent",
+      "target_id": "fig_4e7f26a309",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "diagram showing the feedback loop between agent and environment with action reward and observation boxes and directional arrows",
+      "target_id": "fig_3f962fd4c0",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "log-log plot of loss vs training compute showing the envelope of best models for parameter counts from 10^8 to 10^11",
+      "target_id": "fig_ed4ad28b42",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "visual comparison of covariate shift vs label shift vs concept shift showing changes in p(y|x) and p(x|y) distributions and decision boundaries",
+      "target_id": "fig_2e911b2598",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "ternary color scale map of United States counties showing the distribution of the terms pop soda and coke for concept shift examples",
+      "target_id": "fig_8cc6b3c071",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing feedback loop between model predicts more crime in A and training data hold more crime in A via logging and retraining",
+      "target_id": "fig_93af5ab01e",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "diagram showing linear separator shattering 3 non-collinear points with all 8 labelings and failing to shatter 4 points in R2",
+      "target_id": "fig_751c4d4544",
+      "siglip_rank": 1,
+      "clip_rank": 66
+    },
+    {
+      "query": "diagram showing logits vector flowing into softmax for smooth cross-entropy loss versus argmax for discrete accuracy calculation",
+      "target_id": "fig_1e69449653",
+      "siglip_rank": 1,
+      "clip_rank": 31
+    },
+    {
+      "query": "plot showing cross-entropy loss log2(1 + e^-m) as a convex upper bound to zero-one classification error versus margin m",
+      "target_id": "fig_cce1cac3db",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "bar charts showing softmax(o/T) for classes cat chicken dog at T=0.25 sharper T=1 softmax and T=4 flatter",
+      "target_id": "fig_241598a7a6",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "plot of training error vs test error showing noise level and generalization gap during overfitting",
+      "target_id": "fig_891daae29c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of 5-fold cross-validation showing validation fold moving across rounds 1 to 5 and averaging the K validation scores",
+      "target_id": "fig_7d842477d6",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of four step training loop showing forward pass y=Xw+b, loss calculation, backward pass gradients, and weight update w-eta*grad_L",
+      "target_id": "fig_ddbbe5ab76",
+      "siglip_rank": 3,
+      "clip_rank": 62
+    },
+    {
+      "query": "diagram of y-hat = Xw + b showing matrix dimensions n x d for features and d for weights with scalar bias broadcasting",
+      "target_id": "fig_eda5324673",
+      "siglip_rank": 1,
+      "clip_rank": 20
+    },
+    {
+      "query": "diagram showing vertical residuals between data points y(i) and a linear regression line y-hat(i) on an x-y coordinate plane",
+      "target_id": "fig_ef24b2322c",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "geometric interpretation of least squares as orthogonal projection of y onto the column space of X with residual vector r",
+      "target_id": "fig_bdbd5174c5",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of gradient descent and minibatch SGD paths on loss contours with different learning rates eta 0.2 and 0.05 showing noise balls",
+      "target_id": "fig_d1d1f583d1",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing normal distribution p(y|x) centered on regression line wx+b for probabilistic linear regression model",
+      "target_id": "fig_5f0ef4cbd5",
+      "siglip_rank": 1,
+      "clip_rank": 10
+    },
+    {
+      "query": "comparison of Gaussian and Laplace noise densities with squared error, absolute error, and Huber loss penalty functions including log scale tail view",
+      "target_id": "fig_f793cece33",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "explanation of why training loss is plotted at e + 1/2 while validation loss is plotted at e + 1 in machine learning charts",
+      "target_id": "fig_bf528e3c86",
+      "siglip_rank": 2,
+      "clip_rank": 2
+    },
+    {
+      "query": "geometric comparison of L1 diamond and L2 circle constraints with elliptical loss contours meeting at axes for sparsity",
+      "target_id": "fig_ec0ea46e6e",
+      "siglip_rank": 1,
+      "clip_rank": 25
+    },
+    {
+      "query": "plot of ridge shrinkage factor mu/(mu + lambda) vs lambda for different eigenvalue mu 0.01 1 and 100 on log scale",
+      "target_id": "fig_ee5c9246d1",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "RAG pipeline stages with corresponding failure classes like not retrieved ranked low ignored unsupported and metrics like recall@k and cov@T",
+      "target_id": "fig_1466e465b7",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of skip-gram with negative sampling showing center vector v_w, context vector u_o, and noise words like 'season' or 'river' with target 0",
+      "target_id": "fig_684892be6a",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "schematic showing benchmark lifecycle stages introduced climbed saturated replaced with curves for public test set vs fresh test set and overfitting gap",
+      "target_id": "fig_af90fff8fa",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "three scoring conventions for multiple-choice questions comparing log p of full answer text vs letter log p vs generative parsing",
+      "target_id": "fig_549dcdd2cb",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "computational graph showing forward pass values and backward pass adjoints for variables w x y z a b u v f",
+      "target_id": "fig_00f7a2b85f",
+      "siglip_rank": 5,
+      "clip_rank": 15
+    },
+    {
+      "query": "visualizing left-endpoint riemann sum convergence for f(x)=x/(1+x^2) as epsilon decreases from 0.5 to 0.05",
+      "target_id": "fig_7ef6394b3c",
+      "siglip_rank": 2,
+      "clip_rank": 26
+    },
+    {
+      "query": "visual explanation of signed area in integration with plus and minus lobes and the formula for reversing integration limits from a to b",
+      "target_id": "fig_5cb574a586",
+      "siglip_rank": 1,
+      "clip_rank": 22
+    },
+    {
+      "query": "visual proof that integral from x1 to x2 of f equals integral from a to x2 minus integral from a to x1 using shaded areas",
+      "target_id": "fig_8b9c1df865",
+      "siglip_rank": 2,
+      "clip_rank": 41
+    },
+    {
+      "query": "geometric proof of fundamental theorem of calculus using area function F(x) and rectangle approximation epsilon times f(x)",
+      "target_id": "fig_c505d0f699",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "visual explanation of integral substitution showing a sliver of width epsilon and epsilon u'(x) under a curve f(u(x))",
+      "target_id": "fig_27df69e870",
+      "siglip_rank": 3,
+      "clip_rank": 5
+    },
+    {
+      "query": "3D bar chart visualization of double integral for z = e^(-x^2-y^2) with highlighted column at fixed x representing an inner sum",
+      "target_id": "fig_8d3ab4df54",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of summing a grid of epsilon x epsilon cells with index i along x and index j along y for double integral approximation",
+      "target_id": "fig_1987a8310c",
+      "siglip_rank": 1,
+      "clip_rank": 19
+    },
+    {
+      "query": "geometric diagram showing 1D substitution scaling length by u'(x) and 2D transformation scaling unit square area by det J_phi",
+      "target_id": "fig_092d7c384f",
+      "siglip_rank": 1,
+      "clip_rank": 19
+    },
+    {
+      "query": "diagram of polar coordinate grid area element with labels r dtheta and dr showing area approximately r dr dtheta",
+      "target_id": "fig_b035b64a89",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "computational cost of full Jacobian vs scalar loss vjp vs one input jvp with matrix shapes 1xn and mx1",
+      "target_id": "fig_f15d7a63cf",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing forward mode tangents x dot to l dot vs reverse mode adjoints l bar to x bar for a chain graph",
+      "target_id": "fig_3fa497049a",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "diagram comparing standard reverse mode storing T values versus checkpointing storing sqrt(T) values with recompute segment arrows",
+      "target_id": "fig_b155172a0b",
+      "siglip_rank": 1,
+      "clip_rank": 17
+    },
+    {
+      "query": "visual comparison of differentiable map f(circle) and jacobian linear approximation f(x0)+J*delta showing circle transformation to ellipse",
+      "target_id": "fig_5c54f90f88",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "compare multiplications count for uT*J3*J2*J1 from the left versus from the right with h=n=1000 shapes",
+      "target_id": "fig_faf1009757",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "contour map showing gradient vectors perpendicular to level sets pointing away from a min point with varying vector magnitudes",
+      "target_id": "fig_0a22803d56",
+      "siglip_rank": 1,
+      "clip_rank": 23
+    },
+    {
+      "query": "3d plot of the surface z = x*e^(-x^2-y^2) and its second-order Taylor quadratic approximation at point (-1, 0)",
+      "target_id": "fig_a5aa3f0719",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "contour lines and descent arrows for Hessian eigenvalues lambda 0.86 and 1.72 versus saddle point with lambda 4 and -4",
+      "target_id": "fig_a4b62bdac7",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "visualize how a curve sin(x^x) becomes indistinguishable from its tangent line at x0 as the zoom window shrinks from 0.6 to 0.006",
+      "target_id": "fig_65c7dd66e5",
+      "siglip_rank": 1,
+      "clip_rank": 11
+    },
+    {
+      "query": "visualize how secant lines through (x, f(x)) and (x+epsilon, f(x+epsilon)) approach the tangent slope f'(x) as epsilon decreases",
+      "target_id": "fig_5d517ad627",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "geometric diagram of mean value theorem showing secant line from a to b parallel to tangent line at xi",
+      "target_id": "fig_9063d0a687",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing x - eta f'(x) update step on a convex function curve with first-order drop eta f'(x)^2 labeled",
+      "target_id": "fig_1fd3d7be92",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visual grid showing f, f', and f'' plots for local minimum, local maximum, and f''(0)=0 cases like x^3 and x^4",
+      "target_id": "fig_1cff182b7d",
+      "siglip_rank": 6,
+      "clip_rank": 1
+    },
+    {
+      "query": "visual comparison of sine curve vs tangent line vs best parabola at x0 matching curvature and slope",
+      "target_id": "fig_e60e2294b5",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "plot of f(x) = e^(-1/x^2) compared to its Taylor series at 0 identically zero showing smooth does not imply analytic",
+      "target_id": "fig_fea3a02809",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visualize the fan of supporting lines through the origin of |x| and ReLU representing subgradients and subdifferentials",
+      "target_id": "fig_20626fd9c8",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "optimization trajectory comparison between gradient descent and per-coordinate normalization on aligned and rotated 2D valleys with contour lines",
+      "target_id": "fig_addf137b28",
+      "siglip_rank": 5,
+      "clip_rank": 28
+    },
+    {
+      "query": "geometric interpretation of lagrange multipliers showing level sets of f and constraint h(x)=0 with gradients nabla f and nabla h aligned at x*",
+      "target_id": "fig_16450335d1",
+      "siglip_rank": 1,
+      "clip_rank": 12
+    },
+    {
+      "query": "visualize projection onto the probability simplex with threshold tau and clipping vs softmax for vector y = (0.9, 0.5, -0.2)",
+      "target_id": "fig_1e32a44e32",
+      "siglip_rank": 123,
+      "clip_rank": 16
+    },
+    {
+      "query": "plot comparing soft-thresholding prox_psi(z) with dead zone [-lambda, lambda] and squared penalty z/2 mapping on z-axis",
+      "target_id": "fig_b2e5601eb5",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "visualize the difference between convex and nonconvex sets using line segments and examples like the probability simplex and a half-space",
+      "target_id": "fig_26d8465e41",
+      "siglip_rank": 1,
+      "clip_rank": 460
+    },
+    {
+      "query": "visualize the difference between convex functions and functions with convex sublevel sets using epigraph chords and horizontal cuts at t=c",
+      "target_id": "fig_cdda24b3e7",
+      "siglip_rank": 17,
+      "clip_rank": 22
+    },
+    {
+      "query": "comparison of gradient descent paths on convex versus double well objective functions showing global and local minima with start points",
+      "target_id": "fig_bf6c54a8f7",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "geometric diagrams of convex functions showing the chord f(theta x + (1-theta)y) inequality and the first-order gradient condition tangent line f(x) + grad f(x)(y-x)",
+      "target_id": "fig_e577d079b5",
+      "siglip_rank": 13,
+      "clip_rank": 2
+    },
+    {
+      "query": "visualize the subdifferential of f(x) = |x| at the origin showing slopes g in the interval [-1, 1] as supporting lines",
+      "target_id": "fig_8e7867d89b",
+      "siglip_rank": 4,
+      "clip_rank": 2
+    },
+    {
+      "query": "contour plot of f(a,b) = (ab-1)^2 showing the hyperbola of minimizers and the origin saddle point f=1",
+      "target_id": "fig_5f3c74cc40",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing a quadratic model m_k approximating function f at x_k and its minimum at x_{k+1} moving towards x*",
+      "target_id": "fig_c053c4387a",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "plot of objective function vs step size eta showing quadratic ceiling tangent at eta=0 and descent lemma bound at 1/L",
+      "target_id": "fig_840d806f8d",
+      "siglip_rank": 2,
+      "clip_rank": 4
+    },
+    {
+      "query": "gradient descent trajectory comparison between kappa 1.3 well-conditioned bowl and kappa 20 ill-conditioned valley showing slow axis oscillations",
+      "target_id": "fig_4736bbfed8",
+      "siglip_rank": 2,
+      "clip_rank": 10
+    },
+    {
+      "query": "contour plots comparing too little momentum beta 0.05 vs critically damped beta 0.33 vs too much momentum beta 0.85 trajectories",
+      "target_id": "fig_44d5a04d13",
+      "siglip_rank": 1,
+      "clip_rank": 13
+    },
+    {
+      "query": "Relationship between weight vector norm and margin distance 2/||w|| in a linear SVM classifier with margin hyperplanes wTx + b = 1 and -1.",
+      "target_id": "fig_f086eef6c9",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "diagram of water-filling rule for power allocation with noise floors Ni and water level theta = 1/nu",
+      "target_id": "fig_7132568ba1",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing how the gap doubles at powers of two for floating point numbers with subnormals underflow to 0 and fp16 max overflow",
+      "target_id": "fig_f35115aeb1",
+      "siglip_rank": 1,
+      "clip_rank": 26
+    },
+    {
+      "query": "plot showing lse(0, t) = log(1 + e^t) approximation of max(0, t) with log 2 error gap at t=0",
+      "target_id": "fig_96cf3547b9",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of gradient descent and fixed-step SGD trajectories showing the noise ball radius proportional to square root of eta",
+      "target_id": "fig_bde58eab44",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "graph comparing constant noise floor, c/k decay, cosine long tail, and WSD warmup stable decay learning rate schedules over time k",
+      "target_id": "fig_75e3d6271e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "computational graph for e = (a + b) * c showing numerical values for forward pass and red gradient labels for backward pass",
+      "target_id": "fig_0c80431c3d",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram comparing a fully connected network before and after dropout where hidden units h2 and h5 are silenced with red crosses",
+      "target_id": "fig_1ee0b43b4e",
+      "siglip_rank": 1,
+      "clip_rank": 12
+    },
+    {
+      "query": "geometric interpretation of gradient descent from origin 0 to minimum-norm fit on hyperplane h^T w = y with weight vectors w1 and w2",
+      "target_id": "fig_30242d6427",
+      "siglip_rank": 1,
+      "clip_rank": 8
+    },
+    {
+      "query": "chart showing grokking with training accuracy saturating at 10^3 steps and validation accuracy jumping to generalization after 10^5 steps",
+      "target_id": "fig_74f511633a",
+      "siglip_rank": 1,
+      "clip_rank": 8
+    },
+    {
+      "query": "plot showing true risk versus best linear score for body temperature illustrating why linear regression fails for U-shaped functions",
+      "target_id": "fig_fee30ea1a7",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing x1 x2 axes with XOR points at (0,0), (0,1), (1,0), (1,1) and crossing diagonals at (1/2, 1/2)",
+      "target_id": "fig_4659badc17",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a multilayer perceptron with x1 to x4 inputs h1 to h5 hidden units and o1 to o3 outputs showing full connectivity",
+      "target_id": "fig_5b91ef4e17",
+      "siglip_rank": 1,
+      "clip_rank": 24
+    },
+    {
+      "query": "visualizing XOR problem input space x1 x2 vs hidden space h1 h2 with decision boundaries and point collapse",
+      "target_id": "fig_b016b18ab4",
+      "siglip_rank": 1,
+      "clip_rank": 48
+    },
+    {
+      "query": "how the sum of relu hinges a_j ReLU(x - t_j) approximates a smooth target function f(x) with piecewise linear segments",
+      "target_id": "fig_ae3d76bc63",
+      "siglip_rank": 1,
+      "clip_rank": 53
+    },
+    {
+      "query": "how composition of tent function g with itself g o g and g o g o g increases linear pieces in neural networks",
+      "target_id": "fig_b117035520",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of relu gelu sigmoid and tanh activation functions with their derivatives phi prime z plots",
+      "target_id": "fig_c3487c4280",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "contour plot and cross-section of saddle surface z = x^2 - y^2 showing min along x and max along y",
+      "target_id": "fig_ab3c3c6734",
+      "siglip_rank": 1,
+      "clip_rank": 9
+    },
+    {
+      "query": "plot of f(x) = tanh x showing vanishing gradient at x=4 with derivative f'(4) approximately 0.0013",
+      "target_id": "fig_6d22e40ecb",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "optimization trajectory on elliptical contours comparing gradient descent zig-zag with SGD constant-step noise ball variance formula",
+      "target_id": "fig_262a967580",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "optimization trajectory in a river valley landscape showing constant rate oscillations and decay phase settling onto the valley floor",
+      "target_id": "fig_a7d7d532d6",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "plot of velocity v_t = beta * v_{t-1} + g_t comparing consistent unit gradients vs alternating gradients g_t = (-1)^{t+1}",
+      "target_id": "fig_8d5636fd90",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "plot of contraction factor per step versus momentum \u0322 showing overdamped monotone and underdamped oscillating regions with critical damping \u0322_c",
+      "target_id": "fig_ac4d9ae05a",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visualize the difference between heavy ball and nesterov momentum with a look-ahead point and gradient correction on a contour plot",
+      "target_id": "fig_b8e01244e8",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "bar chart comparing singular values sigma_i/sigma_1 of gradient matrix G=U Sigma V^T vs orthogonalized matrix UV^T",
+      "target_id": "fig_1a490eccdb",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing why training requires more memory than inference using layer outputs h1 h2 h3 h4 and red backward pass arrows",
+      "target_id": "fig_47e8bfd123",
+      "siglip_rank": 12,
+      "clip_rank": 21
+    },
+    {
+      "query": "computational graph showing gradient flow paths for z=ux with u=x^2 vs z=cx where c is a detached constant",
+      "target_id": "fig_e038386ddc",
+      "siglip_rank": 1,
+      "clip_rank": 9
+    },
+    {
+      "query": "visual comparison of forward mode and reverse mode autodiff filling Jacobian matrix columns Je_i vs rows J^T e_i",
+      "target_id": "fig_bbbf739904",
+      "siglip_rank": 1,
+      "clip_rank": 8
+    },
+    {
+      "query": "visual demonstration of inscribed regular polygons with 4 5 6 and 8 sides showing area convergence to a circle",
+      "target_id": "fig_401f02bc31",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "geometric diagram showing secant line through P and Q and tangent line with labels f(x+h)-f(x) and h for derivative definition",
+      "target_id": "fig_adb855bc6b",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "plot of 0-1 error step function versus smooth surrogate loss curve against score z showing why zero gradients are problematic",
+      "target_id": "fig_a8a4edecaa",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "geometric interpretation of the product rule using a rectangle with side lengths f(x) and g(x) and increments f'(x)h and g'(x)h",
+      "target_id": "fig_aa2d2f28e7",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "3D plot showing partial derivatives as slopes of tangent lines along w1 and w2 axes on a loss surface L",
+      "target_id": "fig_37d8a5af1b",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "gradient descent path zigzagging on loss function contours showing negative gradient direction -nabla L toward a green minimum point",
+      "target_id": "fig_9072028b2e",
+      "siglip_rank": 2,
+      "clip_rank": 7
+    },
+    {
+      "query": "diagram showing matrix multiplication of input X 256x784 and weight W 784x10 with bias b 10 to produce scores O 256x10",
+      "target_id": "fig_b664d4d891",
+      "siglip_rank": 1,
+      "clip_rank": 11
+    },
+    {
+      "query": "visualize how a 2x3 matrix A multiplied by a vector x of length 3 results in a vector Ax of length 2 with numerical example",
+      "target_id": "fig_e1e9fe52a4",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "geometric diagram showing vector y projecting onto vector x with angle theta and length ||y||cos theta",
+      "target_id": "fig_81a38ea2e5",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "geometric diagram comparing l1 and l2 norms for vector x = (3, -4) showing manhattan distance path vs straight line distance",
+      "target_id": "fig_3e49fbc2db",
+      "siglip_rank": 66,
+      "clip_rank": 2
+    },
+    {
+      "query": "visualize linear transformation S mapping unit circle to ellipse with eigenvectors lambda=3 and lambda=1 and power iteration sequence k=0 to 4",
+      "target_id": "fig_9846cb4b11",
+      "siglip_rank": 2,
+      "clip_rank": 3
+    },
+    {
+      "query": "visual comparison of scalar vector matrix and order-3 tensor with example shape tuples like (3, 4) and (2, 3, 4)",
+      "target_id": "fig_d290c8f300",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing reshape(3, 4) on a vector with shape (12,) showing row-major element placement with color coded boxes",
+      "target_id": "fig_449e995075",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "visualize the difference in resulting shape between using integer index X[-1] and slice X[1:3] on a 3x4 matrix",
+      "target_id": "fig_da5ff11890",
+      "siglip_rank": 1,
+      "clip_rank": 18
+    },
+    {
+      "query": "visual comparison of X[mask] vs where(mask, X, 0) output shapes and tensor indexing with rows and cols tensors",
+      "target_id": "fig_9edca3c043",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visualize broadcasting 3x1 and 1x2 tensors into 3x2 shapes with dashed boxes for virtual copies and element-wise addition result",
+      "target_id": "fig_3e08d0156a",
+      "siglip_rank": 11,
+      "clip_rank": 26
+    },
+    {
+      "query": "visualizing broadcasting errors when subtracting shape (3,) from shape (3,1) resulting in a 3x3 matrix versus element-wise shape (3,1)",
+      "target_id": "fig_c005591f03",
+      "siglip_rank": 15,
+      "clip_rank": 4
+    },
+    {
+      "query": "diagram showing deletion, imputation with mean 3.29, and indicator column for a NumRooms feature with NaN",
+      "target_id": "fig_e82576e346",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visualizing how mean imputation affects standard deviation sigma using dot plots of observed and imputed data",
+      "target_id": "fig_075ee3803e",
+      "siglip_rank": 1,
+      "clip_rank": 27
+    },
+    {
+      "query": "diagram comparing fit before the split with fit on training split only using mu and sigma for standardization",
+      "target_id": "fig_66245d7efa",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "visual comparison of P(X=v) discrete bars versus P(a <= X <= b) area under continuous density curve p(x)",
+      "target_id": "fig_fec69b3aa7",
+      "siglip_rank": 3,
+      "clip_rank": 4
+    },
+    {
+      "query": "calculate marginal distribution P(X) and P(Y) and conditional distribution P(Y|x2) from a joint probability table P(X,Y)",
+      "target_id": "fig_19cc67b1a9",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Scatter plot examples of Cov > 0 move together, Cov approx 0 no linear relation, and Cov < 0 move in opposite ways",
+      "target_id": "fig_8847989dcc",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing conditional independence notation for common cause Z, chain X Y Z, and common effect Z with variables X and Y",
+      "target_id": "fig_2c3f941925",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "tree diagram calculating P(H=1 | D1=1) for 10,000 people with 0.15% prevalence and 1% false positive rate",
+      "target_id": "fig_d1758c7372",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "geometric interpretation of I - beta k k^T acting on vector s with varying beta values 0, 0.5, 1, 2",
+      "target_id": "fig_718c4c9731",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of parallel scan doubling schedule with strides 1 2 and 4 showing prefix ranges like (1:8) and (5:8)",
+      "target_id": "fig_ae8a9c5a82",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "LSTM memory cell diagram showing data flow from x_t, h_t-1, and c_t-1 through sigma and tanh gates to produce c_t and h_t",
+      "target_id": "fig_5862788f3e",
+      "siglip_rank": 2,
+      "clip_rank": 4
+    },
+    {
+      "query": "diagram of a GRU cell showing the calculation of h_t from h_{t-1} and x_t using z_t and r_t gates with element-wise operations",
+      "target_id": "fig_e8caaa15d7",
+      "siglip_rank": 1,
+      "clip_rank": 10
+    },
+    {
+      "query": "diagram of SeqLM architecture with pre-norm residual blocks showing mixer layer options like RNN LSTM GRU minGRU Mamba Gated DeltaNet or attention",
+      "target_id": "fig_861141772d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of selective copying task showing symbols at random positions mapped to query slots at the end of a sequence for content-dependent retention",
+      "target_id": "fig_6da33f644b",
+      "siglip_rank": 1,
+      "clip_rank": 16
+    },
+    {
+      "query": "Selective State Space Model diagram showing projections of x_t to B_t, C_t, and Delta_t with state update equation h_t = e^(Delta*lambda) * h_t-1 + Delta*x*B.",
+      "target_id": "fig_efa61ac410",
+      "siglip_rank": 2,
+      "clip_rank": 107
+    },
+    {
+      "query": "Architecture diagram of Mamba layer with selective SSM branch and gate branch showing causal conv width 4 and SiLU activations.",
+      "target_id": "fig_0d2e80b826",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram of encoder-decoder architecture where the final state c is fed as input into every step of the decoder for sequence reversal",
+      "target_id": "fig_3d9fcfdf7d",
+      "siglip_rank": 1,
+      "clip_rank": 9
+    },
+    {
+      "query": "diagram showing rnn backpropagation through time with red arrows for gradients using W_hq^T and W_hh^T notation across three time steps",
+      "target_id": "fig_421ec2ca13",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram comparing full and truncated backpropagation through time showing gradient detachment between segments with red arrows and state forward pass",
+      "target_id": "fig_4766809b1e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing greedy decoding choosing path A then C with total probability 0.15 while missing path B to D with 0.36",
+      "target_id": "fig_33346d15f9",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of beam search with beam width w=2 showing expansion and pruning of tokens A B C D E at time steps t=1 t=2 t=3",
+      "target_id": "fig_e93c34335c",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "diagram showing input 1 target 1 and input 2 target 2 sliding windows over token stream x1 to x8 for language model training",
+      "target_id": "fig_3e2e2925fe",
+      "siglip_rank": 1,
+      "clip_rank": 45
+    },
+    {
+      "query": "diagram of rnn unrolled across time steps t-1 to t+1 showing weight matrices Wxh Whh and Whq connecting inputs X hidden states H and outputs O",
+      "target_id": "fig_0e4205a6d7",
+      "siglip_rank": 1,
+      "clip_rank": 18
+    },
+    {
+      "query": "diagram showing RNN hidden states H1 to H4 processing tokens thing that struck me with target loss calculated at each step",
+      "target_id": "fig_2fb6b7b942",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "Geometric diagram showing gradient clipping as a projection of vector g onto a ball of radius theta while g' remains unchanged.",
+      "target_id": "fig_e4e42c1d6a",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison diagram of autoregression using window of length m vs latent autoregression with hidden states h_1 h_2 h_3 and prediction x_4",
+      "target_id": "fig_04339bb2a4",
+      "siglip_rank": 1,
+      "clip_rank": 10
+    },
+    {
+      "query": "diagram of time series sliding window transformation with feature vector xt-4 to xt-1 and target label xt for training and validation sets",
+      "target_id": "fig_7f2b5612f4",
+      "siglip_rank": 1,
+      "clip_rank": 13
+    },
+    {
+      "query": "trade-off curve between vocabulary size and sequence length relative to bytes for byte-level vs subword BPE vs word-level tokenization",
+      "target_id": "fig_d97f5c65ab",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "hierarchical merge tree diagram for subword tokenization showing merge rank 1 2 3 for character sequences hug and unseen word split hugs",
+      "target_id": "fig_584e86fdfb",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing pre-tokenization regex splitting 'The traveller\\'s clock' into chunks followed by BPE merges within chunks like 'raveller' and 'stru' 'ck'",
+      "target_id": "fig_5f64338376",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "bar chart comparing probability pi(a|s) for greedy, epsilon-greedy epsilon=0.3, and softmax temperature 0.3 across four Q-values 0.20 0.90 0.55 0.10",
+      "target_id": "fig_63eab8a922",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "plot showing exploration bonus kappa sqrt log t / n(a) shrinking with count n(a) and ucb stacked bar chart with estimates and bonuses",
+      "target_id": "fig_9171800687",
+      "siglip_rank": 1,
+      "clip_rank": 13
+    },
+    {
+      "query": "visualize thompson sampling process with Beta(1,1) untried arm vs Beta(4,2) and Beta(19,3) arms and sample draws",
+      "target_id": "fig_13686cc31c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "reinforcement learning state chain diagram action 1 forward action 0 back to state 0 reward r=1 at N-1",
+      "target_id": "fig_1dd6e867a4",
+      "siglip_rank": 2,
+      "clip_rank": 21
+    },
+    {
+      "query": "DAgger algorithm flowchart showing running the learner, expert labeling visited states, adding pairs to dataset, and refitting the model.",
+      "target_id": "fig_061f0d6a34",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing agent with policy pi(a|s) and environment with transition P(s'|s,a) and reward r(s,a) forming a trajectory tau",
+      "target_id": "fig_46be4f4ac5",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "4x4 grid world transition probability P(s' | s=9, a=down) with three possible outcomes on slippery ice",
+      "target_id": "fig_fb2ffd1f00",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "graph of weight gamma^t vs steps t and horizon 1/(1-gamma) for discount factors 0.5 0.9 0.95 and 0.99",
+      "target_id": "fig_52e7b92c54",
+      "siglip_rank": 1,
+      "clip_rank": 89
+    },
+    {
+      "query": "diagram comparing terminated vs truncated episode states showing V(s8)=0 for terminal state and y99=r99+gammaV(s100) for truncated time limit",
+      "target_id": "fig_d62bd80ada",
+      "siglip_rank": 1,
+      "clip_rank": 42
+    },
+    {
+      "query": "diagram of LQR closed loop system showing controller u_t = -K_t x_t and plant x_t+1 = Ax_t + Bu_t with Riccati gains precomputed",
+      "target_id": "fig_3e01790f6f",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visualization of one REINFORCE step showing how arrows of length proportional to R(a) move a gaussian policy pi_theta(a) mean mu",
+      "target_id": "fig_84b2f1e011",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "value iteration k=1 to k=6 grid world diagram showing propagation from goal G with start S and holes H",
+      "target_id": "fig_991b579b4a",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "visualization of policy iteration vs value iteration vs q-learning trajectories in V and pi space toward V* and pi*",
+      "target_id": "fig_f908353726",
+      "siglip_rank": 1,
+      "clip_rank": 26
+    },
+    {
+      "query": "visualize the difference between encoder-only bidirectional and decoder-only causal attention masks in a grid format with query and key axes",
+      "target_id": "fig_c61eb34724",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "compare no mask vs causal mask attention in transformer for hidden state h3 attending to input tokens x1 through x6",
+      "target_id": "fig_6c31982ece",
+      "siglip_rank": 1,
+      "clip_rank": 10
+    },
+    {
+      "query": "diagram showing cross-attention mixing cost O(MNd) from input length N to M learned latents and self-attention cost O(LM^2d)",
+      "target_id": "fig_12fac32593",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "diagram of a GPT architecture showing token embedding E tied to output head E with pre-norm residual blocks and RoPE attention",
+      "target_id": "fig_6e904831b9",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "comparison of full recomputation vs kv cache for key value vectors at step t with one new score row per step",
+      "target_id": "fig_a6f6cbc260",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing keys and values buffers at step t with new kt vt insertion and unwritten masked slots up to Tmax",
+      "target_id": "fig_532c36f40c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "plot showing roofline model for RTX 4090 comparing decode step at 0.38 arithmetic intensity and prefill at 780 intensity",
+      "target_id": "fig_3a7ca43453",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Diagram showing a router selecting FFN3 and FFN6 experts from 8 total based on softmax weights p3 and p6 in a mixture of experts layer.",
+      "target_id": "fig_23fea2b4c8",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing mixture of experts token dispatching to fixed-capacity buffers with capacity factor gamma and dropped assignments for tokens 5 and 6",
+      "target_id": "fig_1cd5453a47",
+      "siglip_rank": 1,
+      "clip_rank": 60
+    },
+    {
+      "query": "compare diagram of post-LN transformer block with normalization after addition versus pre-LN with normalization on the attention and FFN branches",
+      "target_id": "fig_cdecb461e3",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "geometric illustration of token collapse where attention adds vector u and norm rescales deviations delta_i by 1/sqrt(1+g^4)",
+      "target_id": "fig_1f8aeaac7b",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Architecture diagram of Vision Transformer showing patch embedding via 16x16 conv and L layers of multi-head attention and MLP with GELU.",
+      "target_id": "fig_52782ce4bb",
+      "siglip_rank": 1,
+      "clip_rank": 12
+    },
+    {
+      "query": "diagram showing image segmentation of karate fighters into a graph with edges labeled fighting watching and standing on for scene understanding",
+      "target_id": "fig_b7a597a84d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of graph independent layer updating node vectors Vn edge vectors En and global vector Un using MLPs in a GNN",
+      "target_id": "fig_2b6ebcf15f",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of pooling function rho mapping edge embeddings En to node predictions via classification head C in a GNN",
+      "target_id": "fig_199fc7829d",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "schematic of a graph convolutional layer showing update functions f_Un f_Vn f_En and pooling rho from layer N to N+1",
+      "target_id": "fig_dd0539d903",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "diagram of message passing layer showing update functions f_U f_V f_E and pooling functions rho_V_to_E and rho_E_to_V for graph neural networks",
+      "target_id": "fig_62eb7dc1b5",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of graph neural network node update function f_Vn conditioning on adjacent nodes edges and global embedding cond(x|z)",
+      "target_id": "fig_05b7c4d3e7",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "diagram comparing a multigraph with directed edge types and a three-level hierarchical graph with hypernodes and a global node",
+      "target_id": "fig_2d43d12aed",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visual comparison of random node sampling vs random walk sampling vs diffusion sampling on a graph for gnn mini-batching",
+      "target_id": "fig_62658653f1",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing n-gram GNN process from bag of k-subgraphs to subgraph embeddings using update function f and aggregation function g for prediction y",
+      "target_id": "fig_66da8f6f8b",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing attribution over nodes vs attribution over edges for GNN explainability and relevant subgraph extraction",
+      "target_id": "fig_435800effc",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing categorical string data to index lookup mapping to IDs then one-hot encoding feature vectors with yellow orange blue examples",
+      "target_id": "fig_8f2099fd05",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Receiver Operating Characteristic curve with TPR vs FPR showing labeled threshold points A B C and AUC 0.84 calculation",
+      "target_id": "fig_66cd65f99a",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "one-hot encoding vector diagram for food items showing 1 in the specific index for borscht, hot dog, and shawarma",
+      "target_id": "fig_16d53b9e6c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing one-hot encoded food items input layer connecting to a 3-node embedding layer with numerical values 2.98 and -0.75",
+      "target_id": "fig_473b80d685",
+      "siglip_rank": 1,
+      "clip_rank": 214
+    },
+    {
+      "query": "Diagram showing qualified but rejected candidates in majority and minority groups with blue and orange person icons and green shading.",
+      "target_id": "fig_8c3315b634",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing iterative loop of model predictions, loss calculation with labels, and adjusting weight and bias direction to reduce loss",
+      "target_id": "fig_fe74926937",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "side-by-side plot of loss vs iterations and miles per gallon vs weight regression line showing a specific training iteration link",
+      "target_id": "fig_ef7961ce05",
+      "siglip_rank": 2,
+      "clip_rank": 2
+    },
+    {
+      "query": "side-by-side plot of loss vs iterations and a linear regression model showing loss lines for pounds vs miles per gallon data",
+      "target_id": "fig_5d9e55bdfe",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "3D plot of a convex loss surface showing loss vs weight and bias with a black arrow indicating the path to the minimum",
+      "target_id": "fig_50f729a2c5",
+      "siglip_rank": 3,
+      "clip_rank": 13
+    },
+    {
+      "query": "3D surface plot of loss versus bias and weight for linear regression showing a global minimum at -5.44 weight and 35.94 bias",
+      "target_id": "fig_1949d85edf",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "3D visualization of convex loss surface for linear regression with weight and bias axes showing convergence to zero slope",
+      "target_id": "fig_45139375be",
+      "siglip_rank": 1,
+      "clip_rank": 23
+    },
+    {
+      "query": "diagram showing full batch of 1000 records vs mini batches of 100 records and how one epoch equals ten mini batches",
+      "target_id": "fig_0a7ad1192a",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "graph showing vertical arrows as loss lines connecting data points to a linear regression model line for miles per gallon vs weight",
+      "target_id": "fig_999d9af046",
+      "siglip_rank": 2,
+      "clip_rank": 9
+    },
+    {
+      "query": "visualization of how outliers pull a regression line trained using MSE away from the main data cluster",
+      "target_id": "fig_b62fadeeaf",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "linear regression plot comparing a model trained using MAE loss against data containing two distant horizontal outliers and a dense cluster",
+      "target_id": "fig_851116c9e3",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "graph showing transformation of z = 2x + 5 into sigmoid y' = 1 / (1 + e^-z) with corresponding points highlighted",
+      "target_id": "fig_5b0358bbcb",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "hyperbolic decision boundary separating orange and blue dots in four quadrants with X1 and X2 axes for feature cross explanation",
+      "target_id": "fig_0b3bf26b37",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of one-vs-all classification using a pear input image and binary classifiers for apple orange pear and grape",
+      "target_id": "fig_9904b1852d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "neural network diagram showing input image passing through hidden layers to a sigmoid activation block with multiple probability outputs for fruit classification",
+      "target_id": "fig_b4a4aa773b",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "neural network diagram showing input image connected to hidden layers and a softmax activation block producing fractional fruit classification probabilities",
+      "target_id": "fig_0fef04dc56",
+      "siglip_rank": 1,
+      "clip_rank": 17
+    },
+    {
+      "query": "histogram showing car price distribution with red vertical lines representing quantile bucketing into equal-sized bins",
+      "target_id": "fig_a2977200f2",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing how row 3 of a dataset with features b and d is transformed into a processed feature vector for a model",
+      "target_id": "fig_8077cfd38c",
+      "siglip_rank": 1,
+      "clip_rank": 18
+    },
+    {
+      "query": "comparison of histogram showing ratings per movie versus log ratings per movie for normalization in machine learning",
+      "target_id": "fig_60f1f1bb2f",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "flowchart showing the iterative loop of training on training set, evaluating on validation set, and tweaking before final confirmation on test set",
+      "target_id": "fig_91f34a3cb4",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "plot showing blue training loss line decreasing and red test loss line diverging upwards to illustrate overfitting",
+      "target_id": "fig_ea2513d45e",
+      "siglip_rank": 1,
+      "clip_rank": 18
+    },
+    {
+      "query": "visualizing a complex non-linear decision boundary for healthy versus sick trees with color-coded regions and misclassification icons",
+      "target_id": "fig_df1887a00e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "graph showing quality of predictions on real-world data versus training set with labels for fit models, underfit models, and overfit models",
+      "target_id": "fig_85132eca2b",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "plot showing training loss decreasing while loss on validation data increases over time to illustrate overfitting",
+      "target_id": "fig_7190d3c867",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of LLM agents using JSON vs python code actions for multi-step tasks like calculating smartphone price across countries with lookup_rates and lookup_phone_price APIs",
+      "target_id": "fig_500dd08184",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "how chat messages map to llama 3 special tokens like start_header_id user end_header_id and eot_id in a prompt",
+      "target_id": "fig_f28e96198e",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram of transformer model showing the connection between encoder add & norm output and decoder multi-head attention input",
+      "target_id": "fig_f1aac85e50",
+      "siglip_rank": 36,
+      "clip_rank": 120
+    },
+    {
+      "query": "difference between input and output mapping for q-table and deep q-learning neural network with state and action labels",
+      "target_id": "fig_5b88e62553",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "exploration vs exploitation grid world mouse example showing random actions for information versus known information for reward maximization",
+      "target_id": "fig_297922b5f8",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of reinforcement learning agent environment loop showing state St reward Rt and action At with temporal indices",
+      "target_id": "fig_1b64fad9f7",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "stochastic policy mapping state s0 to probability distribution of actions Left Right and Jump with values 0.1 0.7 0.2",
+      "target_id": "fig_87a38d66b7",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "reinforcement learning grid world agent selecting next state with biggest value function -7 then -6 to reach goal trophy",
+      "target_id": "fig_cb62e2276b",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "Monte Carlo update formula V(St) using total rewards Gt and learning rate alpha with grid world example",
+      "target_id": "fig_dd46230929",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of monte carlo learning at the end of the episode vs temporal difference learning at each step in grid world",
+      "target_id": "fig_f3a252c16b",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram showing a mouse in a 2x3 grid world mapped to a q-table with actions for left right up down arrows",
+      "target_id": "fig_36e8ce51ba",
+      "siglip_rank": 2,
+      "clip_rank": 11
+    },
+    {
+      "query": "diagram showing state to Q(state) neural network mapping to state action pair values and argmax greedy policy for action selection",
+      "target_id": "fig_95ce87d74c",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "visual difference between state value function and action value function in a grid world with numerical rewards for a mouse seeking cheese",
+      "target_id": "fig_050abf1c0c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of policy-based methods learning actions vs value-based methods learning state values in a grid world maze",
+      "target_id": "fig_c7558a3e50",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of atari state space 256^100800 to 10^80 atoms in the universe for reinforcement learning",
+      "target_id": "fig_e5cb6bcf10",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "stochastic policy 0.5 probability for left and right actions in aliased grid world states with wall UP and DOWN",
+      "target_id": "fig_c43f87e8fa",
+      "siglip_rank": 2,
+      "clip_rank": 81
+    },
+    {
+      "query": "Actor Critic Process diagram showing the relationship between reward R t+1, state S t+1 and the delta w update formula with TD error.",
+      "target_id": "fig_d5bf7d827e",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of transformer architecture showing the connection between the encoder feed-forward block and the decoder multi-head attention block",
+      "target_id": "fig_dac17b5bf6",
+      "siglip_rank": 6,
+      "clip_rank": 245
+    },
+    {
+      "query": "steps of DistilBertTokenizer breaking rumination into rum ##ination and adding [CLS] and [SEP] tokens to a sentence",
+      "target_id": "fig_7cadc1d77e",
+      "siglip_rank": 2,
+      "clip_rank": 3
+    },
+    {
+      "query": "DistilBertTokenizer process showing 1) break words into tokens 2) add CLS and SEP tokens 3) substitute tokens with their ids",
+      "target_id": "fig_85b450d053",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "DistilBERT tokenization diagram showing input text breaking into subword tokens like ##ination and mapping to IDs 101 and 102",
+      "target_id": "fig_4c9ecaccf0",
+      "siglip_rank": 2,
+      "clip_rank": 9
+    },
+    {
+      "query": "how distilbert produces 768-dimensional hidden state vectors for every input token including CLS and SEP special tokens",
+      "target_id": "fig_27ea09bdbf",
+      "siglip_rank": 1,
+      "clip_rank": 9
+    },
+    {
+      "query": "diagram showing [CLS] token vector from DistilBERT being passed into a Logistic Regression model for positive negative sentiment classification",
+      "target_id": "fig_6614102e49",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing how to generate training features and labels from a sentence like 'Second Law of Robotics' for a language model",
+      "target_id": "fig_c8616791c4",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "VGG-16 architecture diagram showing feature extraction blocks of conv3-64 and max pool layers followed by FC-4096 classification layers and soft-max output.",
+      "target_id": "fig_a4434ccb28",
+      "siglip_rank": 15,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram of 12 decoder layers feeding into FFNN and softmax for predicting next word probability from sequence Let's stick to",
+      "target_id": "fig_41ffb1e815",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of BERT model architecture for next sentence prediction using [CLS] token output into FFNN + Softmax for IsNext NotNext classification",
+      "target_id": "fig_407c962bd0",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "BERT fine-tuning architecture diagrams for sentence pair classification with [CLS] and [SEP] tokens and question answering start/end span prediction",
+      "target_id": "fig_1edcad771d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing BERT encoder layers 1 to 12 producing intermediate embedding vectors for tokens Help Prince Mayuko to be used as features",
+      "target_id": "fig_0b8c83d845",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing masked self-attention for the fourth token position in a decoder block attending to tokens 1 through 4",
+      "target_id": "fig_4f165d2fe6",
+      "siglip_rank": 2,
+      "clip_rank": 6
+    },
+    {
+      "query": "visual comparison showing full self-attention versus masked self-attention where tokens to the right are grayed out and inaccessible",
+      "target_id": "fig_8d8baec1c6",
+      "siglip_rank": 1,
+      "clip_rank": 408
+    },
+    {
+      "query": "how token embedding of <s> is added to positional encoding for token 1 before entering transformer decoder blocks",
+      "target_id": "fig_c60b9ff940",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram of a token vector passing through 12 decoder blocks with masked self-attention and feed forward neural network layers",
+      "target_id": "fig_17f2485ff8",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "visual metaphor of query key and value vectors in transformers using folders for a robot must obey sequence",
+      "target_id": "fig_4816e57e56",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "diagram showing multiplication of value vectors by attention scores and the final sum to produce self-attention outcome with word tokens",
+      "target_id": "fig_834fed3211",
+      "siglip_rank": 5,
+      "clip_rank": 104
+    },
+    {
+      "query": "diagram showing decoder position #1 output vector 768 multiplication with token embeddings 50,257 x 768 matrix in transformer model",
+      "target_id": "fig_44e46690bd",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "how the decoder output vector and token embeddings matrix multiply to create output token probabilities logits for sampling the next word",
+      "target_id": "fig_7acacb53c2",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "transformer decoder masked self-attention layer processing 'it' with attention weights on 'a' and 'robot' tokens",
+      "target_id": "fig_7efb21c4ec",
+      "siglip_rank": 2,
+      "clip_rank": 46
+    },
+    {
+      "query": "diagram showing input tokens x1 to x4 multiplied by weight matrices WQ WK WV to produce query key and value vectors",
+      "target_id": "fig_3a236b414c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "how masked self-attention uses negative infinity before softmax to produce 0 percent scores for future tokens x3 and x4 using query q2",
+      "target_id": "fig_e606780cc6",
+      "siglip_rank": 1,
+      "clip_rank": 15
+    },
+    {
+      "query": "diagram showing how the sentence 'robot must obey orders' is split into features and labels for causal language model training",
+      "target_id": "fig_6e80a3cef8",
+      "siglip_rank": 2,
+      "clip_rank": 388
+    },
+    {
+      "query": "diagram showing query matrix X keys matrix equals raw scores before softmax for robot must obey orders sentence",
+      "target_id": "fig_f2d06075a5",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "how do attention scores change when applying a look-ahead mask with -inf values before softmax in a transformer model",
+      "target_id": "fig_2fda1e7072",
+      "siglip_rank": 1,
+      "clip_rank": 86
+    },
+    {
+      "query": "how negative infinity masks in a matrix transform into zero scores after row-wise softmax in transformer self-attention",
+      "target_id": "fig_54dd799730",
+      "siglip_rank": 1,
+      "clip_rank": 159
+    },
+    {
+      "query": "How does a Transformer-Decoder use a <to-fr> token to perform machine translation without an encoder stack",
+      "target_id": "fig_f24aa3c457",
+      "siglip_rank": 3,
+      "clip_rank": 24
+    },
+    {
+      "query": "diagram showing transformer-decoder generating output tokens at position 114 and 115 using a training dataset with <summarize> tokens",
+      "target_id": "fig_cd93d218cc",
+      "siglip_rank": 1,
+      "clip_rank": 95
+    },
+    {
+      "query": "discrete vocabulary mapping for music generation showing 128 note on 128 note off 32 velocity and 100 time shift tokens",
+      "target_id": "fig_61de996678",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "visualization of multiple attention heads in music transformer showing query note attending to previous high notes on peaks of triangular contour",
+      "target_id": "fig_7217dbfe4d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of RETRO retrieval-enhanced transformer querying a database for 'The Dune film' to produce '2021' output",
+      "target_id": "fig_769d8c74ca",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "RETRO database structure showing BERT sentence embedding keys mapped to neighbor and completion text chunks of 64 tokens",
+      "target_id": "fig_c563ef4201",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "how RETRO retrieval-enhanced transformer combines input with nearest neighbor 1 and 2 text snippets to output 2021 date",
+      "target_id": "fig_064c71c8b1",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "RETRO transformer architecture diagram showing encoder stack for nearest neighbors and interleaved retro decoder blocks at indices 9 and 32",
+      "target_id": "fig_b9e3053a70",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of RETRO decoder block performing chunked cross-attention on nearest neighbor chunks NN1 and NN2 with encoder stack keys and values",
+      "target_id": "fig_35b97fc442",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "high level diagram of stable diffusion showing text encoder image information creator and image decoder components in sequence",
+      "target_id": "fig_a6bdc5dd30",
+      "siglip_rank": 2,
+      "clip_rank": 2
+    },
+    {
+      "query": "Stable Diffusion block diagram showing CLIPText encoder 77 tokens and image information creator UNet plus scheduler with 4x64x64 tensor output",
+      "target_id": "fig_b7eb4d613a",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Stable Diffusion pipeline showing CLIPText encoder feeding token embeddings into UNet Image Information Creator and final Autoencoder decoder stage.",
+      "target_id": "fig_4d8ee48554",
+      "siglip_rank": 3,
+      "clip_rank": 32
+    },
+    {
+      "query": "Stable Diffusion architecture showing Text Encoder CLIPText token embeddings UNet Step 1 to 50 and Image Decoder producing a generated image",
+      "target_id": "fig_3e588c58e8",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "diagram showing 4 steps of forward diffusion including pick an image, generate random noise, pick an amount of noise, and add noise to image",
+      "target_id": "fig_a91285a328",
+      "siglip_rank": 2,
+      "clip_rank": 6
+    },
+    {
+      "query": "process of adding a specific noise amount to a base image to generate training examples for a forward diffusion model",
+      "target_id": "fig_a7ab8d4a35",
+      "siglip_rank": 2,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram of unet training step showing noise prediction comparison with actual noise label and backpropagation update loop",
+      "target_id": "fig_6eaa0637d6",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing trained noise predictor UNet taking noisy image and noise amount to output predicted noise sample for subtraction",
+      "target_id": "fig_a03f47da9f",
+      "siglip_rank": 5,
+      "clip_rank": 7
+    },
+    {
+      "query": "diagram showing noise predictor subtracting predicted noise sample 1 and 2 in steps to generate pyramid image from random noise",
+      "target_id": "fig_8149e7e92d",
+      "siglip_rank": 2,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram showing image 1 and caption 1 processed by image encoder and text encoder in CLIP to produce embeddings for similarity prediction",
+      "target_id": "fig_89fa6206b8",
+      "siglip_rank": 1,
+      "clip_rank": 10
+    },
+    {
+      "query": "diagram showing UNet noise predictor taking noisy image noise amount and prompt text token embeddings as inputs to produce predicted noise sample",
+      "target_id": "fig_217832a0ef",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "dataset structure for training a noise predictor UNet with text conditioning showing input image text and output noise sample label",
+      "target_id": "fig_a86b9968ef",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram of unet noise predictor showing resnet blocks receiving noise amount embedding and outputting predicted noise sample from latents",
+      "target_id": "fig_33cb6bda0c",
+      "siglip_rank": 1,
+      "clip_rank": 38
+    },
+    {
+      "query": "diagram of a UNet noise predictor receiving noisy compressed image latents and text information token embeddings as inputs to output a predicted noise sample",
+      "target_id": "fig_6a380f4adb",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram showing how text token embeddings and noise amount are injected into resnet and attention blocks of a unet noise predictor",
+      "target_id": "fig_3a5fab74b1",
+      "siglip_rank": 1,
+      "clip_rank": 39
+    },
+    {
+      "query": "diagram showing six encoder layers feeding into six decoder layers for french to english translation machine learning",
+      "target_id": "fig_0fa6247869",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing word embeddings x1 x2 x3 flowing through self-attention and feed forward layers to produce encoder outputs",
+      "target_id": "fig_94c66b9b9e",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "visual representation of multiplying embedding x1 by weight matrices WQ WK WV to create query q1 key k1 and value v1 vectors",
+      "target_id": "fig_694fc4599f",
+      "siglip_rank": 2,
+      "clip_rank": 17
+    },
+    {
+      "query": "diagram showing calculation of attention scores for word q1 using dot product q1 dot k1 and q1 dot k2 with embeddings x1 and x2",
+      "target_id": "fig_3186c829f8",
+      "siglip_rank": 2,
+      "clip_rank": 44
+    },
+    {
+      "query": "Calculation of self-attention scores q1 dot k1 and q1 dot k2 with scaling by square root of dk and softmax normalization.",
+      "target_id": "fig_4715f3fded",
+      "siglip_rank": 2,
+      "clip_rank": 6
+    },
+    {
+      "query": "visualizing matrix multiplication of X by weight matrices WQ WK WV to produce Q K V in transformer self attention mechanism",
+      "target_id": "fig_d70ca12b8d",
+      "siglip_rank": 2,
+      "clip_rank": 2
+    },
+    {
+      "query": "visual matrix representation of softmax(Q times K transposed over sqrt dk) times V resulting in Z for self-attention",
+      "target_id": "fig_d48774afce",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "transformer multi-head attention concatenation of Z0-Z7 matrices followed by multiplication with weight matrix WO to produce Z matrix",
+      "target_id": "fig_6400323f63",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "diagram showing the addition of positional encoding vectors to word embeddings x1 x2 x3 for input sequence Je suis \u00e9tudiant",
+      "target_id": "fig_8fa38327a9",
+      "siglip_rank": 1,
+      "clip_rank": 50
+    },
+    {
+      "query": "Heatmap of transformer positional encoding matrix with 20 rows and 512 columns showing sine and cosine split with color bar from -1 to 1.",
+      "target_id": "fig_eb892b0c57",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing the path of residual connections and add and normalize layers within a single transformer encoder block with self-attention and feed forward sublayers",
+      "target_id": "fig_00dd9e50a4",
+      "siglip_rank": 5,
+      "clip_rank": 107
+    },
+    {
+      "query": "diagram showing residual connection addition and layer normalization of vectors X and Z in a transformer encoder block with self-attention",
+      "target_id": "fig_70b9161638",
+      "siglip_rank": 1,
+      "clip_rank": 80
+    },
+    {
+      "query": "diagram showing transformer decoder output vector passing through linear and softmax layers to generate log_probs and argmax word index 5",
+      "target_id": "fig_dbc5ebc12c",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "one-hot encoded probability distribution matrix for target sequence 'I am a student <eos>' with output vocabulary indices",
+      "target_id": "fig_8c29cc3629",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "heatmap showing output vocabulary probabilities across sequential positions 1 to 5 for words like 'a', 'am', 'I', 'student', and 'eos'",
+      "target_id": "fig_8211de36ac",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "visual representation of word embeddings for king man and woman showing color patterns for high dimensional vector values",
+      "target_id": "fig_0c33af20ae",
+      "siglip_rank": 2,
+      "clip_rank": 370
+    },
+    {
+      "query": "heat map visualization of word embeddings for queen woman girl boy man king water showing vertical column similarity",
+      "target_id": "fig_eb6acf3004",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "heatmap visualization of word2vec analogy king minus man plus woman equals queen showing individual vector dimensions",
+      "target_id": "fig_954507bda8",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of a language model task to predict the next word showing embedding lookup for thou shalt and output probabilities for not",
+      "target_id": "fig_94d296369f",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "sliding window across running text to create input 1 input 2 and output columns for training a machine learning model",
+      "target_id": "fig_134e56d508",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "skip-gram training data generation process showing sliding window over 'thou shalt not make a machine' and resulting input target word table",
+      "target_id": "fig_e321132ad5",
+      "siglip_rank": 3,
+      "clip_rank": 13
+    },
+    {
+      "query": "diagram showing actual target minus model prediction equals error vector used to update model parameters for word labels like taco",
+      "target_id": "fig_777a777be6",
+      "siglip_rank": 2,
+      "clip_rank": 24
+    },
+    {
+      "query": "diagram showing input word output word and target label for negative sampling in word2vec with random sampling from vocabulary",
+      "target_id": "fig_9281560e7f",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "skipgram vs negative sampling table showing target 1 for context words and target 0 for random words like aaron and taco",
+      "target_id": "fig_c1b21b8665",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "diagram showing the lookup of input word 'not' from Embedding matrix and context words 'aaron', 'taco', and 'thou' from Context matrix",
+      "target_id": "fig_0e94ba35d4",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing how error from dot product and sigmoid(input dot output) updates specific rows in embedding matrices for word2vec training",
+      "target_id": "fig_cac4ac37e8",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing how inputs X1 and X2 interact with weights W1 W2 and bias b to produce output y in a neuron",
+      "target_id": "fig_11a8a0d8ce",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram showing weights W_i,j and bias b_i connecting input x_i to softmax and output y_i for a simple 3-node neural network",
+      "target_id": "fig_bbbc32def2",
+      "siglip_rank": 4,
+      "clip_rank": 9
+    },
+    {
+      "query": "diagram showing the path from retina to V1 V2 V4 and IT gyrus with corresponding feature extraction descriptions like edge detection and object recognition",
+      "target_id": "fig_562c9a19c0",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing the unfolding of a recurrent neural network with weight matrices U V W and time steps t-1 t t+1",
+      "target_id": "fig_7b5391f354",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "AlphaGo training pipeline showing rollout policy p_pi SL policy network p_sigma RL policy network p_rho and value network v_theta with self-play data",
+      "target_id": "fig_6fe0c22d49",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing generator G and discriminator D with feedback loop for fine tune training from decision 'Is D Correct?'",
+      "target_id": "fig_8689e0fcc0",
+      "siglip_rank": 1,
+      "clip_rank": 77
+    },
+    {
+      "query": "skip-gram model diagram showing matrix W as embedding matrix and matrix W' as context matrix with one-hot input vector xi",
+      "target_id": "fig_7880fe64f8",
+      "siglip_rank": 1,
+      "clip_rank": 21
+    },
+    {
+      "query": "CBOW architecture diagram showing averaging of multiple one-hot input vectors into an N-dimension hidden vector using Matrix W and W' for softmax output.",
+      "target_id": "fig_ddd9c79e9a",
+      "siglip_rank": 2,
+      "clip_rank": 17
+    },
+    {
+      "query": "diagram of reinforcement learning loop showing agent action At, environment state St, and reward Rt feedback cycle",
+      "target_id": "fig_9687831443",
+      "siglip_rank": 2,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram of a markov decision process daily routine with states like sleepy and actions like hit snooze R reward values",
+      "target_id": "fig_e412c02209",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "compare Monte-Carlo vs Temporal-Difference vs Dynamic Programming using tree backup diagrams and update equations for state value V(St)",
+      "target_id": "fig_d5746728ab",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing A3C async and A2C sync architecture showing global network parameters and coordinator with multiple agents",
+      "target_id": "fig_73347ee29d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing MADDPG architecture with decentralized policy execution pi_1 through pi_N and centralized training using Q_1 through Q_N using global observations and actions",
+      "target_id": "fig_2ab798f969",
+      "siglip_rank": 1,
+      "clip_rank": 8
+    },
+    {
+      "query": "diagram comparing single learner versus multiple sync learners with worker learner and master learner exchanging gradients and actors sending observations",
+      "target_id": "fig_75cfe71330",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "diagram of encoder-decoder model translating she is eating a green apple into chinese showing context vector length 5",
+      "target_id": "fig_e3e19bad76",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing neural turing machine controller interacting with memory matrix M_t via read heads for weighted sum w_t and write heads for erase e_t and add a_t operations",
+      "target_id": "fig_eed65ce7fa",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "two ways to represent the shift weighting distribution st as discrete positions -1 0 1 or uniform distribution width 1",
+      "target_id": "fig_6b056f668e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of multi-head attention showing Q K V inputs passing through parallel linear layers into scaled dot-product attention then concat and linear",
+      "target_id": "fig_adaed4bb7d",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram of a transformer encoder block showing Add & Norm step with the formula LayerNorm(x + SubLayer(x)) and residual connections",
+      "target_id": "fig_ea4dab2084",
+      "siglip_rank": 2,
+      "clip_rank": 12
+    },
+    {
+      "query": "Transformer decoder block diagram with Add & Norm sublayers and the formula LayerNorm(x + SubLayer(x)) annotated for each stage.",
+      "target_id": "fig_79f17de407",
+      "siglip_rank": 3,
+      "clip_rank": 7
+    },
+    {
+      "query": "comparison diagram of local receptive field in convolution versus global coverage in self-attention with image vector grids",
+      "target_id": "fig_deb5b9acc3",
+      "siglip_rank": 1,
+      "clip_rank": 31
+    },
+    {
+      "query": "diagram showing the flow of convolution feature maps x through f(x) g(x) h(x) 1x1 conv layers to produce self-attention feature maps o in SAGAN",
+      "target_id": "fig_ae75f78342",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "autoencoder architecture diagram with encoder g_phi decoder f_theta bottleneck z and mnist digit reconstruction x prime",
+      "target_id": "fig_d38f9374c3",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "Denoising autoencoder architecture diagram showing original input x, partially destroyed input x-tilde, encoder g_phi, bottleneck z, and reconstructed output x-prime.",
+      "target_id": "fig_dff66a17a7",
+      "siglip_rank": 1,
+      "clip_rank": 9
+    },
+    {
+      "query": "plot of KL divergence between Bernoulli distributions with target rho 0.25 and variable rho hat for sparse autoencoder penalty",
+      "target_id": "fig_3e6f5c0c67",
+      "siglip_rank": 1,
+      "clip_rank": 13
+    },
+    {
+      "query": "visual comparison of forward KL divergence D_KL(P||Q) vs reversed KL divergence D_KL(Q||P) for bimodal distributions and mode-seeking behavior",
+      "target_id": "fig_f1332bd504",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing original vs reparameterised form with random node z and noise epsilon for backpropagation through f with respect to phi",
+      "target_id": "fig_9f9bfe8ffd",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "variational autoencoder diagram showing mean mu and std dev sigma blocks and the formula z = mu + sigma * epsilon",
+      "target_id": "fig_4a22aacb51",
+      "siglip_rank": 2,
+      "clip_rank": 14
+    },
+    {
+      "query": "diagram of VQ-VAE architecture showing the transition from continuous encoder output ze(x) to discrete codebook indices and quantized zq(x)",
+      "target_id": "fig_f34fbccac3",
+      "siglip_rank": 3,
+      "clip_rank": 214
+    },
+    {
+      "query": "architectural comparison of GAN with discriminator D(x), VAE with encoder q(z|x), and Flow-based model f(x) and its inverse f-1(z)",
+      "target_id": "fig_973d0e2c07",
+      "siglip_rank": 2,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram showing sequence of transformations f_i mapping z_i-1 to z_i from simple p0(z0) to complex pK(zK) distribution",
+      "target_id": "fig_44c873977c",
+      "siglip_rank": 1,
+      "clip_rank": 84
+    },
+    {
+      "query": "diagram comparing causal convolution receptive field growth versus dilated convolution with dilation factors 1 2 4 and 8",
+      "target_id": "fig_6128d52753",
+      "siglip_rank": 2,
+      "clip_rank": 40
+    },
+    {
+      "query": "diagram of 4-shot 2-class image classification with training datasets cat-bird and flower-bike versus testing dataset dog-otter showing support and prediction sets",
+      "target_id": "fig_01d6992676",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Siamese neural network diagram showing input 1 and input 2 through shared CNN to embed 1 and embed 2 with distance layer to probability output",
+      "target_id": "fig_3d9b6f4073",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "Architecture diagram of a Relation Network showing embedding module f_phi and relation module g_phi with feature map concatenation for 5-way 1-shot classification.",
+      "target_id": "fig_28ccaac3ac",
+      "siglip_rank": 1,
+      "clip_rank": 19
+    },
+    {
+      "query": "diagram of a neural network with parallel fast weight layer and slow weight layer paths summed with relu activations",
+      "target_id": "fig_111f260787",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing meta-parameter theta with gradients nabla L1 L2 L3 adapting to task-specific optima theta1* theta2* theta3*",
+      "target_id": "fig_6528a69e80",
+      "siglip_rank": 1,
+      "clip_rank": 9
+    },
+    {
+      "query": "diagram showing supervised pre-training of an encoder for translation and its use in downstream tasks with CoVe(x) and GloVe(x) concatenation",
+      "target_id": "fig_5d80910ade",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "diagram of a bidirectional LSTM with shared embedding theta_e and softmax theta_s layers for token prediction x_n to y_n",
+      "target_id": "fig_4750a430c9",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "GPT transformer decoder architecture diagram showing masked multi-headed self-attention with residual h_l = transformer_block(h_l-1) and transposed embedding W_e^T",
+      "target_id": "fig_91c8dcbb5e",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram of task-specific input transformations for GPT including classification entailment similarity and multiple choice with start delim and extract tokens",
+      "target_id": "fig_4ed9ee44fc",
+      "siglip_rank": 1,
+      "clip_rank": 21
+    },
+    {
+      "query": "diagram comparing BERT bidirectional encoder GPT autoregressive decoder and BART encoder-decoder architecture with sequence labels A B C D E",
+      "target_id": "fig_be1e0f0faf",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "ELECTRA model diagram showing generator filling [MASK] tokens and discriminator predicting original versus replaced tokens for the chef ate the meal",
+      "target_id": "fig_bb1953ad33",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "intrinsic reward calculation using variance of ensemble dynamics models f1 f2 fn next observation xt+1 prediction for exploration",
+      "target_id": "fig_05e0a4df9f",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Random Network Distillation diagram showing how intrinsic reward ri is calculated as the squared difference between features fi+1 and predicted features f-hat i+1",
+      "target_id": "fig_440a606d29",
+      "siglip_rank": 1,
+      "clip_rank": 24
+    },
+    {
+      "query": "lineage diagram showing DQN R2D2 NGU and Agent57 with components like episodic memory exploration and meta-controller",
+      "target_id": "fig_dcaa4cb38b",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram showing observations in memory, states reachable in k steps, and far from memory novel states in a transition graph",
+      "target_id": "fig_23ce7d9bb7",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Architecture diagram showing embedding network, memory buffer, and comparator network for calculating reward bonus in episodic curiosity reinforcement learning.",
+      "target_id": "fig_0da8003a32",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Architecture diagram showing the relationship between Goal Buffer, Uncertainty estimation, UVFA pi(s,g), and Replay Buffer in reinforcement learning exploration.",
+      "target_id": "fig_1d2829e7f8",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of retriever-reader framework showing question input to external knowledge and reader outputting start and end positions in context",
+      "target_id": "fig_f0e0ab0139",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "BERTserini architecture diagram showing Anserini retriever with inverted index and fine-tuned BERT reader combining span and segment scores for answer extraction.",
+      "target_id": "fig_a8149bedac",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram of BERT architecture for question answering showing [CLS] token question tokens [SEP] token paragraph tokens and start end span arrows",
+      "target_id": "fig_042c751402",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "workflow diagram of retriever re-ranker and reader for open-domain QA with reward feedback for extracted answer and gold answer",
+      "target_id": "fig_dc3f5c8377",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Dual-encoder architecture with BERT_x and BERT_z calculating S_retr(z,x) as the dot product of h_x and h_z for Wikipedia evidence retrieval.",
+      "target_id": "fig_9fb89d945f",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram showing retriever generator QA framework flow from question through external knowledge retrieval to LM text generation answer",
+      "target_id": "fig_ac0b2d58a3",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "RAG architecture diagram showing MIPS between query encoder q(x) and document index d(z) with end-to-end backpropagation through q and p theta.",
+      "target_id": "fig_84f286f42a",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing T5 pre-training with masked spans like 'President Franklin <M> born' and fine-tuning for closed-book question answering",
+      "target_id": "fig_99b35fb19b",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing anchor positive and negative samples moving in embedding space under triplet loss learning",
+      "target_id": "fig_5e3710c0ca",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing pairwise connections for contrastive embedding triplet embedding and lifted structured embedding using red and blue edges for x1 to x6 samples",
+      "target_id": "fig_5d9e8b7b5a",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of SimCLR framework showing augmentation transformations t and t' from x to x_i and x_j with encoder f and projection g",
+      "target_id": "fig_741737c885",
+      "siglip_rank": 20,
+      "clip_rank": 48
+    },
+    {
+      "query": "diagram of barlow twins objective showing empirical cross-correlation matrix C and target identity matrix I for representations ZA and ZB",
+      "target_id": "fig_cb56aac1f1",
+      "siglip_rank": 1,
+      "clip_rank": 24
+    },
+    {
+      "query": "BYOL architecture diagram showing online and target paths with projection z prediction q_theta and stop gradient sg on z prime",
+      "target_id": "fig_4544e7673f",
+      "siglip_rank": 1,
+      "clip_rank": 4
+    },
+    {
+      "query": "diagram showing the relationship between a query encoder, a momentum encoder for keys in a FIFO queue, and contrastive loss calculation",
+      "target_id": "fig_7f85bdbc01",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    },
+    {
+      "query": "Architecture diagram showing q=f_theta_q(o_q) and k=f_theta_k(o_k) encoders connecting a replay buffer to reinforcement learning and contrastive unsupervised learning blocks.",
+      "target_id": "fig_78873943cf",
+      "siglip_rank": 1,
+      "clip_rank": 33
+    },
+    {
+      "query": "diagram of deepcluster method showing convnet feature extraction followed by clustering for pseudo-labels and backpropagation for classification",
+      "target_id": "fig_ef71fd8435",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "diagram comparing contrastive instance learning and swapping assignments between views SwAV showing prototypes C and codes Q1 Q2",
+      "target_id": "fig_5628187b22",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of self-supervised versus supervised contrastive learning showing how different images of the same class move from negative to positive sets",
+      "target_id": "fig_accdcb3b5a",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "visualize difference between token cutoff feature cutoff and span cutoff for L x d sentence matrices in text augmentation",
+      "target_id": "fig_69e6c39a2e",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram comparing unsupervised SimCSE dropout augmentation vs supervised SimCSE using NLI entailment and contradiction labels for positive and negative instances",
+      "target_id": "fig_c667f26195",
+      "siglip_rank": 1,
+      "clip_rank": 10
+    },
+    {
+      "query": "SBERT architecture diagram showing softmax classifier with MLP(f(x), f(x'), |f(x) - f(x')|) and cosine similarity head for sentence embeddings",
+      "target_id": "fig_c39aefe984",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram comparing conventional encoder-decoder approach with quick-thought proposed approach using classifier to distinguish context sentences 1 2 3",
+      "target_id": "fig_cf199df8c7",
+      "siglip_rank": 2,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of GAN VAE flow-based and diffusion model architectures showing data flow from x to z and back to x'",
+      "target_id": "fig_2bce85be99",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing the transition between xt and xt-1 in diffusion models with labels for p_theta(xt-1|xt) and q(xt|xt-1) and variational lower bound annotation",
+      "target_id": "fig_9581bc0511",
+      "siglip_rank": 1,
+      "clip_rank": 72
+    },
+    {
+      "query": "Forward trajectory q(x0:T) and reverse trajectory p_theta(x0:T) with drifting term mu_theta(xt, t) - xt for swiss roll diffusion",
+      "target_id": "fig_dabaade5a4",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "plot comparing linear vs cosine schedules for the alpha_t_bar parameter over diffusion steps t/T",
+      "target_id": "fig_cbe2771f15",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram showing consistency model mapping xt t and xt' t' back to x0 0 along a probability flow ode trajectory",
+      "target_id": "fig_2c98def010",
+      "siglip_rank": 1,
+      "clip_rank": 135
+    },
+    {
+      "query": "plot of rate (bits/dim) vs distortion (RMSE) showing semantic compression with latent diffusion models and perceptual compression with autoencoder+GAN",
+      "target_id": "fig_f1307308d6",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "cascaded pipeline diagram showing model 1 model 2 model 3 increasing resolution from 32x32 to 256x256 with class ID 213 Irish Setter",
+      "target_id": "fig_4368470e1d",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "unCLIP architecture diagram showing text encoder, prior mapping to image embeddings, and decoder outputting a corgi playing a trumpet",
+      "target_id": "fig_4b60ee922b",
+      "siglip_rank": 1,
+      "clip_rank": 31
+    },
+    {
+      "query": "U-Net architecture diagram showing specific feature map dimensions from 572x572 input to 388x388 output with copy and crop connections",
+      "target_id": "fig_3095f2a248",
+      "siglip_rank": 1,
+      "clip_rank": 8
+    },
+    {
+      "query": "diagram of controlnet architecture showing locked neural network block and trainable copy with zero convolution layers and addition of condition c",
+      "target_id": "fig_24f1d9eb9c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Architecture of DiT block with adaLN-Zero showing how conditioning labels and timesteps modulate scale and shift parameters for attention and feedforward layers.",
+      "target_id": "fig_0694a69ae1",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of naive model parallelism with 4 devices showing bubbles of idle time between F0 and B0 passes on a timeline",
+      "target_id": "fig_a39f98071b",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "1F1B microbatch scheduling diagram showing forward work backward work and idle states for four machines across startup and steady state",
+      "target_id": "fig_2596291ad3",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of PipeDream-flush scheduling with Worker 1 and Worker 2 showing forward and backward passes and a pipeline flush",
+      "target_id": "fig_a46d80f35c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of MoE layer showing gating network G(x) selecting subset of experts with summation of weighted expert outputs",
+      "target_id": "fig_6433b9d817",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of switch transformer switching FFN layer showing router selecting one expert FFN out of four with probability p",
+      "target_id": "fig_1fd9641877",
+      "siglip_rank": 2,
+      "clip_rank": 188
+    },
+    {
+      "query": "diagram comparing weight and data splitting for expert and model parallelism across a 4x4 grid of cores",
+      "target_id": "fig_d273fc0a07",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing float2half conversion for FWD and BWD passes with F32 master weight update in neural networks",
+      "target_id": "fig_b06dd26333",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "histogram of weight gradient exponent values showing the cutoff point where gradients become zero in FP16 mixed precision training",
+      "target_id": "fig_97ea1e4560",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing student f_theta and teacher f_theta' connected by EMA with loss L_s + mu(t)L_u in mean teacher framework",
+      "target_id": "fig_1affd2e3fb",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing supervised cross entropy loss and MSE consistency loss between unlabeled sample u and augmented sample u-bar for semi-supervised learning",
+      "target_id": "fig_5867254e1c",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "diagram of K augmentations being classified averaged and sharpened for label guessing in semi-supervised learning",
+      "target_id": "fig_88dd4ccbb9",
+      "siglip_rank": 1,
+      "clip_rank": 369
+    },
+    {
+      "query": "diagram of FixMatch pipeline with unlabeled example split into weakly-augmented and strongly-augmented paths to produce pseudo-label and loss H(p,q)",
+      "target_id": "fig_dd0ea5389d",
+      "siglip_rank": 2,
+      "clip_rank": 341
+    },
+    {
+      "query": "three step process diagram showing task-agnostic big CNN unsupervised pretraining followed by supervised fine-tuning and task-specific CNN distillation",
+      "target_id": "fig_53bdf98520",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "Architecture diagram showing image patches with Conv Stage and text tokens feeding into a Transformer Encoder for a Transformer Decoder text generation task.",
+      "target_id": "fig_e1456b566b",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "diagram of ClipCap architecture showing CLIP embedding transformation through a mapping network into prefix embeddings for GPT-2 caption generation",
+      "target_id": "fig_60fa4de2cf",
+      "siglip_rank": 1,
+      "clip_rank": 12
+    },
+    {
+      "query": "Flamingo architecture diagram showing perceiver resampler and gated cross-attention layers connecting frozen vision encoder and frozen LM blocks.",
+      "target_id": "fig_a1f0f764dc",
+      "siglip_rank": 3,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of CoCa architecture showing unimodal text decoder for contrastive loss and multimodal text decoder with cross-attention for captioning loss",
+      "target_id": "fig_47b7a7333b",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing offline image-to-text model generating context for frozen gpt-3 in-context learning for n-shot vqa",
+      "target_id": "fig_b797dda045",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing teacher model distilling knowledge into a student model with shared data source and simplified neural network architecture",
+      "target_id": "fig_e8f6d2ce64",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "how smoothquant migrates difficulty from activations |X| with outliers to weights |W| to balance quantization levels",
+      "target_id": "fig_377fc71c0c",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing compression of sparse matrix W with R rows and C columns into non-zero data values and 2-bits indices for 2:4 sparsity",
+      "target_id": "fig_6f765a5da7",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Architecture comparison between standard MoE and PR-MoE showing expert layer L with more experts than layer 1 and fixed MLP residual connections.",
+      "target_id": "fig_1be98b1825",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Venn diagram comparing transformer models like Linformer, Longformer, Big Bird, and Reformer by memory, recurrence, and low rank kernel methods.",
+      "target_id": "fig_40ef6b4085",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison of vanilla transformer and transformer-xl training with segment reuse and fixed no-gradient cached hidden states x1 through x12",
+      "target_id": "fig_a83777c668",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "compressive transformer diagram showing f_c(1) f_c(2) f_c(3) functions mapping memory blocks to compressed memory slots over time t",
+      "target_id": "fig_c7242b4bc0",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "ALiBi attention diagram showing qk dot product matrix addition with a matrix of negative integers 0 to -4 scaled by m",
+      "target_id": "fig_6cbf9c1abe",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of universal transformer refining hidden states h_m^t through self-attention and transition functions across time steps with tied parameters",
+      "target_id": "fig_9e8a05c7d0",
+      "siglip_rank": 1,
+      "clip_rank": 3
+    },
+    {
+      "query": "diagram of local 1D attention vs local 2D attention memory blocks for a pixel q in a query block",
+      "target_id": "fig_39f3cfe44a",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "Compare attention patterns for ETC, Longformer and Big Bird showing local, global, strided and random attention blocks with window size 2w+1.",
+      "target_id": "fig_782aa310de",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing sequence of queries and keys undergoing LSH bucketing, sorting by bucket, and chunking for parallelized attention within same bucket",
+      "target_id": "fig_e389c84991",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "comparison diagram of TrXL vs TrXL-I vs GTrXL architectures showing gating layer and layer-norm placement",
+      "target_id": "fig_b70907453d",
+      "siglip_rank": 1,
+      "clip_rank": 6
+    },
+    {
+      "query": "diagram of tree of thoughts ToT branching process with green successful thought paths and pink discarded reasoning steps",
+      "target_id": "fig_b4371c1edf",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "architecture diagram of an LLM agent showing the relationship between planning, memory, tools, and action components like chain of thought and reflection",
+      "target_id": "fig_6db695d772",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of reflexion framework showing interaction between ReAct loop and Reflect loop with heuristic h and reflection LLM feeding back to query",
+      "target_id": "fig_a7ffd0d7c7",
+      "siglip_rank": 1,
+      "clip_rank": 2
+    },
+    {
+      "query": "diagram showing how algorithm distillation uses RL algorithm learning histories h_T to train a causal transformer for action prediction P_theta(a_t|h_t-1, o_t)",
+      "target_id": "fig_64c99d3f0f",
+      "siglip_rank": 1,
+      "clip_rank": 5
+    },
+    {
+      "query": "SelfCheckGPT diagram showing how stochastically-generated responses sample1 to sampleN are used to evaluate an LLM's passage at sentence-level with yes/no support answers.",
+      "target_id": "fig_b3871ec068",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "4-step chain-of-verification CoVe process diagram with baseline response plan verifications execute verifications and final verified response",
+      "target_id": "fig_8d633e4186",
+      "siglip_rank": 1,
+      "clip_rank": 133
+    },
+    {
+      "query": "comparison of direct generation vs retrieval-augmented generation vs recitation-augmented generation showing prompt input and recitation output blocks",
+      "target_id": "fig_3c4d2cd5a6",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram of question answering flow with Google Search top-K documents feeding a generator and reward model scoring multiple samples for attribution",
+      "target_id": "fig_3fbfd938c3",
+      "siglip_rank": 1,
+      "clip_rank": 12
+    },
+    {
+      "query": "diagram comparing parallel sampling branching from one prompt versus sequential revision chain with checkmarks and x marks",
+      "target_id": "fig_a681259cdc",
+      "siglip_rank": 1,
+      "clip_rank": 30
+    },
+    {
+      "query": "diagram showing how branching at decoding step 0 with top-k candidates leads to chain of thought reasoning paths for a math problem",
+      "target_id": "fig_795a4bae38",
+      "siglip_rank": 3,
+      "clip_rank": 14
+    },
+    {
+      "query": "diagram comparing chain of thought faithfulness using early answering adding mistakes paraphrasing and filler tokens for the factorial of 5",
+      "target_id": "fig_e2edbe1c40",
+      "siglip_rank": 1,
+      "clip_rank": 64
+    },
+    {
+      "query": "diagram comparing standard inference vs pause-inference with ignore output tokens and hidden layer depth for mathematical reasoning tasks",
+      "target_id": "fig_bcf575e133",
+      "siglip_rank": 1,
+      "clip_rank": 1
+    },
+    {
+      "query": "diagram showing Quiet-STaR process of generating Sampled Thoughts between original text tokens to improve next-token prediction with reward and discard paths",
+      "target_id": "fig_9f8ca3f97d",
+      "siglip_rank": 1,
+      "clip_rank": 7
+    }
+  ],
+  "top1_gap_pp": 37.58064516129032,
+  "top5_gap_pp": 31.290322580645157
+}

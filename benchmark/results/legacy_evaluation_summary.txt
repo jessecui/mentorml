@@ -1,0 +1,14 @@
+SigLIP 2 vs CLIP on the 'legacy' benchmark
+================================================
+Queries: 92
+Images:  92
+
+Model                    Top-1               Top-5     MRR
+SigLIP 2         73.9% (68/92)       98.9% (91/92)   0.853
+CLIP             46.7% (43/92)       85.9% (79/92)   0.630
+
+SigLIP 2 minus CLIP: +27.2 pp top-1, +13.0 pp top-5
+
+Models:
+  - SigLIP 2 So400m/14 @ 384px (PyTorch, Hugging Face transformers)
+  - CLIP ViT-L/14 @ 336px (Hugging Face transformers)

@@ -4,18 +4,14 @@ __pycache__/
 *.pyc
 .DS_Store
 
-# Model weights (don't push 6GB!)
+# Model weights and caches (multi-gigabyte)
 *.npz
 !benchmark/corpus/embeddings/siglip_embeddings.npz
+!corpus/embeddings.npz
 *.safetensors
 *.bin
 *.ckpt
+model/siglip2_text/
 
-# big_vision (users clone separately)
-big_vision_repo/
-
-# Test artifacts
-test.jpg
-
-# Kaggle credentials
-kaggle.json
+# Curation downloads and review pages (rebuilt by scripts/curate_corpus.py)
+corpus_cache/

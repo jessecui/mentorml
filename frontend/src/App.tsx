@@ -13,7 +13,7 @@ function App() {
       {!isAuthenticated && (
         <AuthModal onAuthenticated={() => setIsAuthenticated(true)} />
       )}
-      <Chat />
+      <Chat onUnauthorized={() => setIsAuthenticated(false)} />
     </>
   );
 }

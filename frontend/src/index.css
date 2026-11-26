@@ -1,14 +1,65 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: "Inter", system-ui, sans-serif;
-  --color-primary: #6366f1;
-  --color-primary-foreground: #ffffff;
-  --color-muted: #f1f5f9;
-  --color-muted-foreground: #64748b;
-  --color-border: #e2e8f0;
-  --color-background: #ffffff;
-  --color-foreground: #0f172a;
+/* Dark mode follows the "dark" class on <html>, set before first paint by the
+   script in index.html (system setting, or the header toggle's saved choice) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Every colour in the app comes from these tokens. Change the palette here. */
+:root {
+  --background: #f6f7f9;
+  --surface: #ffffff;
+  --foreground: #111827;
+  --muted: #eef0f3;
+  --muted-foreground: #6b7280;
+  --border: #e2e5ea;
+  /* Primary: buttons and other solid controls */
+  --primary: #18181b;
+  --primary-foreground: #ffffff;
+  /* Accent: the brand amber, used sparingly */
+  --accent: #f59e0b;
+  --accent-foreground: #1c1917;
+  /* Amber dark enough to read as text on the page background */
+  --accent-text: #b45309;
+  --danger: #b91c1c;
+  --code-bg: #0f172a;
+  --code-fg: #e2e8f0;
+  color-scheme: light;
+}
+
+.dark {
+  --background: #09090b;
+  --surface: #18181b;
+  --foreground: #e4e4e7;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --border: #2e2e33;
+  --primary: #f4f4f5;
+  --primary-foreground: #18181b;
+  --accent: #fbbf24;
+  --accent-foreground: #1c1917;
+  --accent-text: #fbbf24;
+  --danger: #f87171;
+  --code-bg: #000000;
+  --code-fg: #e4e4e7;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-text: var(--accent-text);
+  --color-danger: var(--danger);
+  --color-code-bg: var(--code-bg);
+  --color-code-fg: var(--code-fg);
 }
 
 html,
@@ -19,4 +70,13 @@ body,
 
 body {
   @apply bg-background text-foreground antialiased;
+}
+
+/* One focus style everywhere: an amber outline. In the base layer so that fields
+   which draw their own ring can switch it off with outline-none. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 }

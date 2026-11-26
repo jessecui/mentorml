@@ -1,0 +1,14 @@
+# Offline tooling: corpus curation (scripts/) and benchmarks (benchmark/scripts/).
+-r requirements.txt
+
+# Fetching and parsing source pages
+requests
+beautifulsoup4>=4.11.0
+lxml>=4.9.0
+
+# Rasterising SVG figures
+resvg-py
+pymupdf
+
+# Gemini rubric scoring and query generation
+google-genai>=1.0.0

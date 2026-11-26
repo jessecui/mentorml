@@ -1,28 +1,24 @@
+# Production dependencies: everything the deployed app needs.
+# Curation and benchmark scripts need requirements-dev.txt as well.
+
+# Agent
 langchain-core
 langchain-google-genai
 langgraph
 langgraph-checkpoint-redis
-mcp
 langchain-mcp-adapters
+mcp
 langsmith
+redis
+
+# API server
 fastapi>=0.116
 uvicorn
 python-dotenv
-requests
-jax
-flax
-sentencepiece
-tensorflow
+
+# Retrieval (SigLIP 2 text tower)
+torch
+transformers>=4.49,<5
+safetensors
 numpy
 Pillow
-einops
-overrides
-ml_collections
-kagglehub
-
-# Benchmark dependencies
-beautifulsoup4>=4.11.0
-lxml>=4.9.0
-google-genai>=1.0.0
-transformers  # CLIP baseline
-torch

@@ -1,0 +1,1689 @@
+{
+ "n_diagrams": 620,
+ "n_topics": 138,
+ "n_covered": 133,
+ "topics": [
+  {
+   "section": "Foundations",
+   "topic": "linear regression: fitting a line to data points, residuals",
+   "covered": true,
+   "diagram_ids": [
+    "fig_ef24b2322c",
+    "fig_999d9af046",
+    "fig_5d9e55bdfe",
+    "fig_5f0ef4cbd5",
+    "fig_851116c9e3",
+    "fig_b62fadeeaf",
+    "fig_ef7961ce05"
+   ],
+   "reason": "These diagrams specifically illustrate linear regression lines fitted to data points and the concept of residuals or vertical loss lines.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "logistic regression: sigmoid squashing a linear score into a probability",
+   "covered": true,
+   "diagram_ids": [
+    "fig_5b0358bbcb"
+   ],
+   "reason": "The diagram explicitly visualizes the mapping of a linear score into a probability using the sigmoid function.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "gradient descent: steps down a loss surface toward a minimum",
+   "covered": true,
+   "diagram_ids": [
+    "fig_45139375be",
+    "fig_50f729a2c5",
+    "fig_9072028b2e",
+    "fig_1fd3d7be92",
+    "fig_bf6c54a8f7",
+    "fig_262a967580",
+    "fig_bde58eab44",
+    "fig_d1d1f583d1"
+   ],
+   "reason": "These diagrams specifically illustrate gradient descent paths, steps, or trajectories moving down a loss surface or curve toward a minimum point.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "learning rate: too small, too large and well-chosen step sizes",
+   "covered": true,
+   "diagram_ids": [
+    "fig_840d806f8d",
+    "fig_4736bbfed8"
+   ],
+   "reason": "These diagrams illustrate how different step sizes (learning rates) affect optimization stability and convergence, including bounds where steps become too large and cause divergence.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "stochastic vs minibatch vs full-batch gradient descent trajectories",
+   "covered": true,
+   "diagram_ids": [
+    "fig_d1d1f583d1",
+    "fig_bde58eab44",
+    "fig_262a967580"
+   ],
+   "reason": "These diagrams specifically compare the trajectories and convergence paths of gradient descent versus minibatch or stochastic gradient descent on loss surfaces.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "overfitting and underfitting: training vs validation error as model complexity grows",
+   "covered": true,
+   "diagram_ids": [
+    "fig_891daae29c",
+    "fig_ea2513d45e",
+    "fig_85132eca2b"
+   ],
+   "reason": "These diagrams explicitly plot training and validation/test error against model complexity or training progress to visualize the transition between underfitting and overfitting.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "bias-variance tradeoff curve",
+   "covered": true,
+   "diagram_ids": [
+    "fig_891daae29c"
+   ],
+   "reason": "Only fig_891daae29c explicitly labels and illustrates the bias-variance tradeoff and its relationship to model complexity through training and test error curves.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "train, validation and test split, and k-fold cross-validation",
+   "covered": true,
+   "diagram_ids": [
+    "fig_7d842477d6",
+    "fig_91f34a3cb4"
+   ],
+   "reason": "These diagrams directly illustrate the splitting of data into training, validation, and test sets as well as the k-fold cross-validation process.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "L1 and L2 regularization: weight penalty and its effect on the solution",
+   "covered": true,
+   "diagram_ids": [
+    "fig_ec0ea46e6e",
+    "fig_74e8aeb3bc",
+    "fig_b2e5601eb5",
+    "fig_ee5c9246d1"
+   ],
+   "reason": "These diagrams directly illustrate the geometric and mathematical differences between L1 and L2 regularization penalties and their effects on weight solutions and decision boundaries.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "softmax: turning logits into a probability distribution over classes",
+   "covered": true,
+   "diagram_ids": [
+    "fig_241598a7a6",
+    "fig_0fef04dc56",
+    "fig_dbc5ebc12c"
+   ],
+   "reason": "These diagrams specifically illustrate the softmax function's role in transforming logits into probability distributions across multiple classes.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "cross-entropy loss between predicted and true class distributions",
+   "covered": true,
+   "diagram_ids": [
+    "fig_52afe53e46",
+    "fig_1e69449653",
+    "fig_cce1cac3db"
+   ],
+   "reason": "These diagrams specifically illustrate the calculation, function, or application of cross-entropy loss in classification tasks.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "confusion matrix, precision and recall",
+   "covered": true,
+   "diagram_ids": [
+    "fig_1466e465b7"
+   ],
+   "reason": "The RAG Pipeline diagram explicitly mentions Recall@k as a metric used to evaluate retrieval stages.",
+   "near_misses": []
+  },
+  {
+   "section": "Foundations",
+   "topic": "one-hot encoding vs dense embedding vectors",
+   "covered": true,
+   "diagram_ids": [
+    "fig_473b80d685",
+    "fig_7880fe64f8",
+    "fig_ddd9c79e9a"
+   ],
+   "reason": "These diagrams explicitly demonstrate the transformation or relationship between one-hot encoded input vectors and dense hidden/embedding vectors within neural network architectures.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "perceptron / single neuron: weighted sum of inputs, bias, activation",
+   "covered": true,
+   "diagram_ids": [
+    "fig_11a8a0d8ce",
+    "fig_f646fb4440",
+    "fig_bbbc32def2"
+   ],
+   "reason": "These diagrams specifically illustrate the internal operations of a single neuron or perceptron, including the weighted sum of inputs, the addition of a bias, and the application of an activation function.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "multilayer perceptron: input layer, hidden layers, output layer, fully connected",
+   "covered": true,
+   "diagram_ids": [
+    "fig_5b91ef4e17",
+    "fig_b05938786e",
+    "fig_13fc146abe"
+   ],
+   "reason": "These diagrams explicitly show the structure of a multilayer perceptron including the input layer, hidden layers, output layer, and fully connected connectivity.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "activation functions: ReLU, sigmoid, tanh curves",
+   "covered": true,
+   "diagram_ids": [
+    "fig_c3487c4280",
+    "fig_6d22e40ecb",
+    "fig_5b0358bbcb",
+    "fig_20626fd9c8"
+   ],
+   "reason": "These diagrams explicitly visualize and compare the functional forms, curves, and mathematical properties of ReLU, sigmoid, and tanh activation functions.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "forward propagation through the layers of a network",
+   "covered": true,
+   "diagram_ids": [
+    "fig_13fc146abe",
+    "fig_17f2485ff8",
+    "fig_473b80d685",
+    "fig_94c66b9b9e"
+   ],
+   "reason": "These diagrams specifically describe or show the process of data or input being propagated sequentially through the various layers of a neural network architecture.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "backpropagation: gradients flowing backward through a computational graph via the chain rule",
+   "covered": true,
+   "diagram_ids": [
+    "fig_0c80431c3d",
+    "fig_00f7a2b85f",
+    "fig_3939efdbc5"
+   ],
+   "reason": "These diagrams directly illustrate the core mechanism of backpropagation: gradients flowing backward through computational graphs via the chain rule.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "computational graph of a small expression with forward and backward passes",
+   "covered": true,
+   "diagram_ids": [
+    "fig_00f7a2b85f",
+    "fig_0c80431c3d",
+    "fig_5543ed41aa"
+   ],
+   "reason": "These diagrams specifically illustrate computational graphs showing both forward and backward passes to compute values and gradients.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "vanishing and exploding gradients in deep networks",
+   "covered": true,
+   "diagram_ids": [
+    "fig_6d22e40ecb",
+    "fig_e0a5513aa0",
+    "fig_9efb728660",
+    "fig_97ea1e4560",
+    "fig_e4e42c1d6a"
+   ],
+   "reason": "These diagrams explicitly illustrate vanishing gradients caused by activation saturation, divergence saturation, and precision limits, as well as gradient clipping which is a standard remedy for exploding gradients.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "dropout: randomly removing units during training",
+   "covered": true,
+   "diagram_ids": [
+    "fig_1ee0b43b4e",
+    "fig_0c319765e4"
+   ],
+   "reason": "Both figures directly illustrate the dropout mechanism by showing neural networks with specific neurons and their connections randomly deactivated during training.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "batch normalization: normalizing activations across the batch",
+   "covered": true,
+   "diagram_ids": [
+    "fig_7eb54814cd"
+   ],
+   "reason": "The diagram directly visualizes how batch normalization groups feature map pixels across the batch dimension to calculate normalization statistics, contrasting it with other normalization methods.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "batch norm vs layer norm vs instance norm vs group norm: which axes are normalized",
+   "covered": true,
+   "diagram_ids": [
+    "fig_7eb54814cd"
+   ],
+   "reason": "The diagram fig_7eb54814cd specifically illustrates and compares how Batch Norm, Layer Norm, Instance Norm, and Group Norm group feature map pixels across different axes.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "weight initialization: Xavier / He initialization and activation variance",
+   "covered": false,
+   "diagram_ids": [],
+   "reason": "None of the provided diagrams mention or depict Xavier/He weight initialization or the maintenance of activation variance.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "residual connection: skip connection adding the input to a block's output",
+   "covered": true,
+   "diagram_ids": [
+    "fig_52af7c5046",
+    "fig_c88a578118",
+    "fig_476399bcf2",
+    "fig_369f883817",
+    "fig_6f72fd388d"
+   ],
+   "reason": "These diagrams specifically illustrate the structure of a residual block, showing the identity skip connection and the additive operation where input is added to the output of weight layers.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "momentum in SGD: velocity accumulating past gradients",
+   "covered": true,
+   "diagram_ids": [
+    "fig_8d5636fd90",
+    "fig_44d5a04d13",
+    "fig_6aecf1d975",
+    "fig_b8e01244e8",
+    "fig_ac4d9ae05a"
+   ],
+   "reason": "These diagrams specifically illustrate how momentum accumulates past gradients through velocity or show the comparative effects of momentum-based update strategies.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "Adam optimizer: first and second moment estimates of the gradient",
+   "covered": true,
+   "diagram_ids": [
+    "fig_55e7451726",
+    "fig_900758207c"
+   ],
+   "reason": "Both fig_55e7451726 and fig_900758207c explicitly identify Adam moments as components of memory usage during training stages.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "learning rate schedules: warmup, cosine decay, step decay",
+   "covered": true,
+   "diagram_ids": [
+    "fig_0ff59cb72a",
+    "fig_75e3d6271e",
+    "fig_a7d7d532d6"
+   ],
+   "reason": "The selected diagrams specifically illustrate learning rate schedules including warmup, cosine decay, and the warmup-stable-decay (WSD) method.",
+   "near_misses": []
+  },
+  {
+   "section": "Neural network basics",
+   "topic": "early stopping: stop when validation loss starts rising",
+   "covered": true,
+   "diagram_ids": [
+    "fig_7190d3c867",
+    "fig_ea2513d45e"
+   ],
+   "reason": "Both diagrams explicitly show and describe the training versus validation/test loss curves where the validation loss begins to rise, signaling the point where early stopping would typically occur.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "convolution: kernel sliding over an input to produce a feature map",
+   "covered": true,
+   "diagram_ids": [
+    "fig_91f050f6f8",
+    "fig_0cd115de1e",
+    "fig_e3138fc5d1"
+   ],
+   "reason": "These diagrams explicitly illustrate the sliding window mechanism of a kernel over an input grid to calculate output feature map values.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "padding and stride in convolution and their effect on output size",
+   "covered": true,
+   "diagram_ids": [
+    "fig_0cd115de1e"
+   ],
+   "reason": "This diagram explicitly shows an input with padding being convolved with specific horizontal and vertical strides to produce a resulting output matrix.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "max pooling and average pooling over windows",
+   "covered": true,
+   "diagram_ids": [
+    "fig_b859689ed0",
+    "fig_cf8840375d",
+    "fig_6aa9f88b53",
+    "fig_765b0fbf23"
+   ],
+   "reason": "These diagrams specifically illustrate the mechanics and spatial properties of max pooling operations over windows, including step-by-step calculations and stride configurations.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "convolution with multiple input and output channels",
+   "covered": true,
+   "diagram_ids": [
+    "fig_ddea3f8642",
+    "fig_55438f9d7c"
+   ],
+   "reason": "These diagrams specifically illustrate how convolutions process multiple input and output channels by summing results across channels or using multi-channel kernels.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "1x1 convolution mixing channels",
+   "covered": true,
+   "diagram_ids": [
+    "fig_55438f9d7c",
+    "fig_d7879f745f",
+    "fig_93329224c6"
+   ],
+   "reason": "These diagrams specifically describe or name 1x1 convolutions (pointwise) as the mechanism for mixing or combining channels.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "receptive field growing with depth in a CNN",
+   "covered": true,
+   "diagram_ids": [
+    "fig_0f65ffc1f3",
+    "fig_476facf033",
+    "fig_723b99a153"
+   ],
+   "reason": "These diagrams explicitly illustrate how the receptive field expands across stacked layers through fixed kernels, strides/dilations, or path counting.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "LeNet / basic CNN architecture: conv, pool, fully connected layers",
+   "covered": true,
+   "diagram_ids": [
+    "fig_be10cb24b4",
+    "fig_b4354be27d",
+    "fig_e508d0c391"
+   ],
+   "reason": "These diagrams specifically illustrate the LeNet architecture, including its characteristic sequence of convolutional, pooling, and fully connected layers.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "ResNet block and ResNet architecture",
+   "covered": true,
+   "diagram_ids": [
+    "fig_52af7c5046",
+    "fig_c88a578118",
+    "fig_476399bcf2",
+    "fig_9073b9f440",
+    "fig_6f72fd388d",
+    "fig_369f883817",
+    "fig_02cb2fea0b"
+   ],
+   "reason": "These diagrams directly depict the fundamental structure of ResNet blocks, including identity/projection shortcuts, bottleneck variants, and the overall ResNet-18/50 architectures.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "Inception block with parallel convolution branches",
+   "covered": true,
+   "diagram_ids": [
+    "fig_cf40da2b6d"
+   ],
+   "reason": "The diagram fig_cf40da2b6d directly illustrates the architecture of an Inception block, specifically showing its parallel convolution branches (1x1, 3x3, and 5x5).",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "transposed convolution for upsampling",
+   "covered": true,
+   "diagram_ids": [
+    "fig_5fe0db01a7",
+    "fig_576d061b6c",
+    "fig_c8b17f4ff5"
+   ],
+   "reason": "These diagrams specifically illustrate the mechanics, stride effects, and artifact issues inherent to the transposed convolution operation for upsampling.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "U-Net: encoder, decoder and skip connections",
+   "covered": true,
+   "diagram_ids": [
+    "fig_3095f2a248",
+    "fig_cfea33f93e"
+   ],
+   "reason": "Both fig_3095f2a248 and fig_cfea33f93e explicitly describe the U-Net architecture including its encoder-decoder structure and skip connections.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "object detection: anchor boxes, bounding box prediction, R-CNN family",
+   "covered": true,
+   "diagram_ids": [
+    "fig_de3503c7ac",
+    "fig_81b2e13c7b",
+    "fig_b63a91cfad",
+    "fig_7671af71ae",
+    "fig_b663b57dd8"
+   ],
+   "reason": "These diagrams specifically illustrate the R-CNN family architectures (R-CNN, Fast R-CNN, Faster R-CNN, Mask R-CNN) and key object detection components like anchor boxes and bounding box prediction.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "semantic segmentation with a fully convolutional network",
+   "covered": true,
+   "diagram_ids": [
+    "fig_eb3893d11a",
+    "fig_3095f2a248"
+   ],
+   "reason": "The diagrams specifically illustrate fully convolutional network architectures designed for semantic segmentation tasks.",
+   "near_misses": []
+  },
+  {
+   "section": "Convolutional networks",
+   "topic": "depthwise separable convolution",
+   "covered": true,
+   "diagram_ids": [
+    "fig_93329224c6",
+    "fig_d7879f745f",
+    "fig_5cdca16833",
+    "fig_d7e187c699",
+    "fig_02cb2fea0b"
+   ],
+   "reason": "These diagrams explicitly title or describe the structure, connectivity, or implementation of depthwise separable convolutions or their depthwise components.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "recurrent neural network unrolled through time with a hidden state",
+   "covered": true,
+   "diagram_ids": [
+    "fig_7b5391f354",
+    "fig_0e4205a6d7",
+    "fig_8a3faf8f31",
+    "fig_421ec2ca13",
+    "fig_9e0cc2d93c",
+    "fig_14cbd1d9b0"
+   ],
+   "reason": "These diagrams specifically illustrate recurrent neural networks unrolled or unfolded across time steps, showing the flow of inputs, outputs, and hidden states.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "backpropagation through time",
+   "covered": true,
+   "diagram_ids": [
+    "fig_4766809b1e",
+    "fig_421ec2ca13",
+    "fig_7b5391f354"
+   ],
+   "reason": "These diagrams specifically illustrate backpropagation through time (BPTT), including its full and truncated versions, gradient flow in unrolled RNNs, and the unrolling process itself.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "LSTM cell: forget gate, input gate, output gate, cell state",
+   "covered": true,
+   "diagram_ids": [
+    "fig_5862788f3e",
+    "fig_ad2cac0963"
+   ],
+   "reason": "Both figures directly illustrate the internal architecture of an LSTM cell, including specific references to the forget, input, and output gates and the cell state.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "GRU cell: reset gate and update gate",
+   "covered": true,
+   "diagram_ids": [
+    "fig_e8caaa15d7"
+   ],
+   "reason": "The diagram specifically describes the internal architecture of a GRU cell, including the reset and update gates mentioned in the topic.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "bidirectional RNN: forward and backward hidden states",
+   "covered": true,
+   "diagram_ids": [
+    "fig_d46a4b852e",
+    "fig_4750a430c9"
+   ],
+   "reason": "The diagrams for fig_d46a4b852e and fig_4750a430c9 specifically show the architecture of bidirectional RNNs and LSTMs including their forward and backward chains or passes.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "encoder-decoder sequence-to-sequence model with a context vector",
+   "covered": true,
+   "diagram_ids": [
+    "fig_e3e19bad76",
+    "fig_3d9fcfdf7d"
+   ],
+   "reason": "Both figures specifically depict and describe the process of an encoder creating a context vector that is then used by a decoder to generate a target sequence.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "attention in seq2seq: decoder attending over encoder hidden states",
+   "covered": true,
+   "diagram_ids": [
+    "fig_9cae84fcb9",
+    "fig_5e3def49a6"
+   ],
+   "reason": "Both diagrams specifically illustrate how a decoder attends over encoder hidden states using global or local attention mechanisms to generate a context vector.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "beam search vs greedy decoding",
+   "covered": true,
+   "diagram_ids": [
+    "fig_e93c34335c",
+    "fig_33346d15f9"
+   ],
+   "reason": "The selected diagrams specifically illustrate the mechanisms and trade-offs between beam search and greedy decoding in the context of sequence generation.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "teacher forcing during sequence model training",
+   "covered": true,
+   "diagram_ids": [
+    "fig_2fb6b7b942",
+    "fig_3e2e2925fe"
+   ],
+   "reason": "Both diagrams directly illustrate the core mechanism of teacher forcing, where ground-truth targets are used as inputs for subsequent steps in a sequence model.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "word2vec: skip-gram and CBOW architectures",
+   "covered": true,
+   "diagram_ids": [
+    "fig_7880fe64f8",
+    "fig_ddd9c79e9a",
+    "fig_684892be6a",
+    "fig_e321132ad5",
+    "fig_c1b21b8665",
+    "fig_9281560e7f",
+    "fig_0e94ba35d4"
+   ],
+   "reason": "These diagrams directly illustrate the specific architectures, data generation processes, or training mechanisms (like negative sampling) for the Skip-gram and CBOW models of word2vec.",
+   "near_misses": []
+  },
+  {
+   "section": "Sequence models",
+   "topic": "word embeddings: analogies as vector arithmetic (king - man + woman = queen)",
+   "covered": true,
+   "diagram_ids": [
+    "fig_954507bda8"
+   ],
+   "reason": "fig_954507bda8 explicitly illustrates the vector arithmetic 'king - man + woman = queen' using heatmaps of high-dimensional vectors.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "queries, keys and values: attention as a soft lookup",
+   "covered": true,
+   "diagram_ids": [
+    "fig_4816e57e56",
+    "fig_20a1fcecfb"
+   ],
+   "reason": "Both diagrams specifically use the 'lookup' metaphor to explain how query vectors interact with keys and values in an attention mechanism.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "scaled dot-product attention: MatMul, scale, softmax, weighted sum of values",
+   "covered": true,
+   "diagram_ids": [
+    "fig_efd9514401",
+    "fig_d48774afce",
+    "fig_277ddd751e",
+    "fig_4715f3fded",
+    "fig_1374300e0d"
+   ],
+   "reason": "These diagrams specifically detail the step-by-step operations of scaled dot-product attention, including MatMul, scaling, softmax, and the weighted sum of values.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "self-attention: each token attending to every other token in the sentence",
+   "covered": true,
+   "diagram_ids": [
+    "fig_8d8baec1c6",
+    "fig_1374300e0d"
+   ],
+   "reason": "fig_8d8baec1c6 contrasts standard self-attention (attending to all tokens) with masked self-attention, and fig_1374300e0d explicitly demonstrates a query comparing against keys of all tokens in a sentence.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "multi-head attention: parallel heads, concatenation, linear projection",
+   "covered": true,
+   "diagram_ids": [
+    "fig_adaed4bb7d",
+    "fig_ada96a8a70",
+    "fig_6400323f63",
+    "fig_8fce18e40c",
+    "fig_606b45a81f"
+   ],
+   "reason": "These diagrams specifically illustrate the multi-head attention mechanism's components, including parallel heads, concatenation of results, and final linear projections.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "positional encoding: sinusoids added to token embeddings",
+   "covered": true,
+   "diagram_ids": [
+    "fig_eb892b0c57",
+    "fig_8fa38327a9",
+    "fig_c60b9ff940"
+   ],
+   "reason": "The diagrams specifically illustrate the visualization of sinusoidal positional encoding matrices or the process of adding positional encoding vectors to token/word embeddings.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "rotary position embeddings (RoPE): rotating query and key vectors by position",
+   "covered": true,
+   "diagram_ids": [
+    "fig_01eefc307c"
+   ],
+   "reason": "fig_01eefc307c is the only diagram that illustrates the core mechanism of RoPE, which is the rotation of query and key vectors to maintain relative angular relationships between positions.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "the Transformer architecture: encoder stack and decoder stack",
+   "covered": true,
+   "diagram_ids": [
+    "fig_0fa6247869",
+    "fig_dac17b5bf6",
+    "fig_f1aac85e50"
+   ],
+   "reason": "These diagrams specifically illustrate the combined interaction and structural flow between the encoder and decoder stacks within the standard Transformer architecture.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "transformer encoder block: self-attention, feed-forward, residual connections, layer norm",
+   "covered": true,
+   "diagram_ids": [
+    "fig_ea4dab2084",
+    "fig_00dd9e50a4",
+    "fig_70b9161638",
+    "fig_94c66b9b9e"
+   ],
+   "reason": "These diagrams specifically illustrate the internal components of a Transformer encoder block, including self-attention, feed-forward layers, residual connections, and layer normalization.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "transformer decoder block: masked self-attention, cross-attention, feed-forward",
+   "covered": true,
+   "diagram_ids": [
+    "fig_79f17de407",
+    "fig_f1aac85e50",
+    "fig_91c8dcbb5e",
+    "fig_4f165d2fe6",
+    "fig_7efb21c4ec",
+    "fig_17f2485ff8"
+   ],
+   "reason": "These diagrams specifically illustrate the components of the transformer decoder block, including masked self-attention, cross-attention, and/or feed-forward layers as requested.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "causal / masked self-attention: tokens cannot attend to future positions",
+   "covered": true,
+   "diagram_ids": [
+    "fig_e606780cc6",
+    "fig_8d8baec1c6",
+    "fig_2fda1e7072",
+    "fig_6c31982ece",
+    "fig_54dd799730",
+    "fig_4f165d2fe6"
+   ],
+   "reason": "These diagrams specifically illustrate how masked or causal self-attention mechanisms prevent tokens from attending to future positions using masks or score zeroing.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "pre-norm vs post-norm transformer block",
+   "covered": true,
+   "diagram_ids": [
+    "fig_cdecb461e3",
+    "fig_1f8aeaac7b"
+   ],
+   "reason": "The first diagram directly compares the structure of post-LN and pre-LN transformer architectures, while the second explores the technical phenomenon of token collapse specific to post-norm transformer blocks.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "attention mask and padding mask",
+   "covered": true,
+   "diagram_ids": [
+    "fig_4b1d8aabd5",
+    "fig_2fda1e7072",
+    "fig_7e5074e395",
+    "fig_c61eb34724",
+    "fig_54dd799730",
+    "fig_e606780cc6",
+    "fig_8d8baec1c6",
+    "fig_7efb21c4ec"
+   ],
+   "reason": "The selected diagrams directly illustrate the mechanics and patterns of attention masks, including specific examples of padding masks and causal masks used in Transformer architectures.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "KV cache: reusing keys and values during autoregressive decoding",
+   "covered": true,
+   "diagram_ids": [
+    "fig_a6f6cbc260",
+    "fig_532c36f40c"
+   ],
+   "reason": "The diagrams specifically compare KV caching against recomputation and illustrate the mechanics of updating the pre-allocated cache buffer during autoregressive decoding.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "sparse / local / windowed attention patterns for long sequences",
+   "covered": true,
+   "diagram_ids": [
+    "fig_782aa310de",
+    "fig_cb9cc86d9f",
+    "fig_39f3cfe44a",
+    "fig_6a2d4b7b6a",
+    "fig_40ef6b4085"
+   ],
+   "reason": "These diagrams specifically illustrate sparse attention patterns, windowed/local attention receptive fields, and categorizations of efficient transformer architectures designed for long sequences.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "Vision Transformer: image split into patches, linear projection, class token",
+   "covered": true,
+   "diagram_ids": [
+    "fig_b878197aea",
+    "fig_52782ce4bb"
+   ],
+   "reason": "Both diagrams specifically illustrate the Vision Transformer (ViT) architecture, including the patch splitting, linear projection/embedding, and class token components mentioned in the topic.",
+   "near_misses": []
+  },
+  {
+   "section": "Attention and transformers",
+   "topic": "cross-attention between two sequences or modalities",
+   "covered": true,
+   "diagram_ids": [
+    "fig_c61eb34724",
+    "fig_12fac32593",
+    "fig_38da64e77a",
+    "fig_35b97fc442",
+    "fig_47b7a7333b"
+   ],
+   "reason": "These diagrams explicitly describe or illustrate cross-attention mechanisms between different sequences, modalities, or latent representations.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "tokenization: splitting text into subword tokens (BPE / WordPiece)",
+   "covered": true,
+   "diagram_ids": [
+    "fig_5f64338376",
+    "fig_584e86fdfb",
+    "fig_7cadc1d77e",
+    "fig_4c9ecaccf0",
+    "fig_85b450d053"
+   ],
+   "reason": "These diagrams specifically illustrate the process of splitting text into subword tokens using algorithms like BPE or WordPiece, showing both the merge rules and the resulting token sequences.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "autoregressive language model: predicting the next token from the previous ones",
+   "covered": true,
+   "diagram_ids": [
+    "fig_c8616791c4",
+    "fig_94d296369f",
+    "fig_7acacb53c2",
+    "fig_4f165d2fe6",
+    "fig_9f8ca3f97d",
+    "fig_28b9de4d40",
+    "fig_4e7f26a309"
+   ],
+   "reason": "These diagrams specifically illustrate the process of predicting the next token from previous ones through dataset construction, architectural mechanisms like masked self-attention, and sampling logic.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "BERT masked language modeling: predicting masked tokens",
+   "covered": true,
+   "diagram_ids": [
+    "fig_be1e0f0faf",
+    "fig_bb1953ad33"
+   ],
+   "reason": "These diagrams specifically mention or illustrate BERT's bidirectional encoder for masked input and the process of a generator filling in masked tokens.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "BERT input representation: token, segment and position embeddings, [CLS] and [SEP]",
+   "covered": true,
+   "diagram_ids": [
+    "fig_34a0084825",
+    "fig_daa6a7219d",
+    "fig_7cadc1d77e",
+    "fig_407c962bd0",
+    "fig_4c9ecaccf0",
+    "fig_85b450d053",
+    "fig_27ea09bdbf"
+   ],
+   "reason": "fig_34a0084825 is the only diagram that explicitly depicts the construction of BERT input as the sum of token, segment, and position embeddings, while the other selected diagrams specifically illustrate the use of [CLS] and [SEP] tokens in BERT's input representations.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "pretraining then fine-tuning for downstream tasks",
+   "covered": true,
+   "diagram_ids": [
+    "fig_4e7f26a309",
+    "fig_99b35fb19b",
+    "fig_22e3b29df9",
+    "fig_53bdf98520",
+    "fig_5d80910ade",
+    "fig_daa6a7219d",
+    "fig_1edcad771d"
+   ],
+   "reason": "These diagrams directly illustrate the two-step process of pre-training on a large dataset followed by fine-tuning or adaptation for specific downstream tasks.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "encoder-only vs decoder-only vs encoder-decoder language models",
+   "covered": true,
+   "diagram_ids": [
+    "fig_be1e0f0faf",
+    "fig_c61eb34724"
+   ],
+   "reason": "The diagrams directly compare and contrast the different attention masking patterns and architectural configurations of encoder-only (BERT), decoder-only (GPT), and encoder-decoder (BART) transformer models.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "GPT architecture: stack of transformer decoder blocks",
+   "covered": true,
+   "diagram_ids": [
+    "fig_17f2485ff8",
+    "fig_91c8dcbb5e",
+    "fig_6e904831b9",
+    "fig_c60b9ff940"
+   ],
+   "reason": "These diagrams specifically illustrate the stack of decoder blocks, the internal structure of these blocks, or the flow of tokens through multiple layers within the GPT architecture.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "T5 text-to-text framing of tasks",
+   "covered": true,
+   "diagram_ids": [
+    "fig_3467ade2a5"
+   ],
+   "reason": "The diagram fig_3467ade2a5 specifically illustrates the text-to-text framing of diverse NLP tasks as processed by the T5 model.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "sampling from a language model: temperature, top-k, top-p",
+   "covered": true,
+   "diagram_ids": [
+    "fig_241598a7a6",
+    "fig_795a4bae38",
+    "fig_7acacb53c2"
+   ],
+   "reason": "These diagrams specifically illustrate temperature's effect on probability distributions, top-k selection for candidate tokens, and the overall process of sampling tokens from logits in a language model.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "in-context learning / few-shot prompting",
+   "covered": true,
+   "diagram_ids": [
+    "fig_1c375e7b0a",
+    "fig_b4d82ac9e9",
+    "fig_b797dda045"
+   ],
+   "reason": "These diagrams specifically illustrate in-context learning, few-shot prompting, or the inner-loop adaptation within an input sequence.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "chain-of-thought prompting: intermediate reasoning steps before the answer",
+   "covered": true,
+   "diagram_ids": [
+    "fig_54317eaddf",
+    "fig_7352711561",
+    "fig_e2edbe1c40",
+    "fig_795a4bae38"
+   ],
+   "reason": "These diagrams explicitly illustrate the structure, variations, and branching of chain-of-thought prompting by showing sequential intermediate reasoning steps.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "LoRA: frozen weights plus trainable low-rank matrices A and B",
+   "covered": true,
+   "diagram_ids": [
+    "fig_80199bb2fb"
+   ],
+   "reason": "The diagram for fig_80199bb2fb explicitly shows an input passing through both frozen weights and a pair of low-rank matrices A and B, which directly depicts the LoRA architecture described.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "quantization of model weights to fewer bits",
+   "covered": true,
+   "diagram_ids": [
+    "fig_377fc71c0c",
+    "fig_0d317ef473",
+    "fig_f34fbccac3"
+   ],
+   "reason": "These diagrams directly address quantization techniques, specifically smoothing outliers for quantization, 4-bit transformer bases in QLoRA, and vector-quantized codebooks.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "knowledge distillation: student model trained on teacher's soft targets",
+   "covered": true,
+   "diagram_ids": [
+    "fig_e8f6d2ce64"
+   ],
+   "reason": "The diagram fig_e8f6d2ce64 directly illustrates the knowledge distillation framework where a teacher model transfers knowledge to a student model by aligning their outputs.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "retrieval-augmented generation: retriever fetches documents, generator conditions on them",
+   "covered": true,
+   "diagram_ids": [
+    "fig_84f286f42a",
+    "fig_3c4d2cd5a6",
+    "fig_ac0b2d58a3",
+    "fig_3fbfd938c3",
+    "fig_1466e465b7",
+    "fig_064c71c8b1",
+    "fig_769d8c74ca"
+   ],
+   "reason": "These diagrams specifically illustrate the RAG/RETRO architecture where a retriever fetches external documents or contexts for a generator model to condition on for final output.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "dense passage retrieval: question encoder and passage encoder, dot-product similarity",
+   "covered": true,
+   "diagram_ids": [
+    "fig_9fb89d945f"
+   ],
+   "reason": "The diagram specifically illustrates the dual-encoder architecture of dense retrieval, showing both question and passage encoders and the calculation of relevance via dot product.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "vector search / approximate nearest neighbor over embeddings",
+   "covered": true,
+   "diagram_ids": [
+    "fig_f34fbccac3",
+    "fig_064c71c8b1",
+    "fig_c563ef4201",
+    "fig_b9e3053a70",
+    "fig_35b97fc442"
+   ],
+   "reason": "These diagrams explicitly demonstrate the process of retrieving nearest neighbors from a database or codebook using embeddings.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "instruction tuning / supervised fine-tuning on prompt-response pairs",
+   "covered": true,
+   "diagram_ids": [
+    "fig_b44f28cb5b",
+    "fig_4e7f26a309"
+   ],
+   "reason": "These diagrams explicitly detail the supervised fine-tuning (SFT) phase or assistant adaptation phase where a pre-trained model is tuned on prompt-response pairs.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "mixture of experts: router sending tokens to different expert networks",
+   "covered": true,
+   "diagram_ids": [
+    "fig_23fea2b4c8",
+    "fig_1cd5453a47",
+    "fig_1fd9641877",
+    "fig_6433b9d817",
+    "fig_1be98b1825"
+   ],
+   "reason": "These diagrams specifically illustrate the routing mechanism where a router or gating network directs tokens to different expert networks within a Mixture of Experts architecture.",
+   "near_misses": []
+  },
+  {
+   "section": "Language models",
+   "topic": "hallucination detection or mitigation pipeline for LLM outputs",
+   "covered": true,
+   "diagram_ids": [
+    "fig_b3871ec068",
+    "fig_3fbfd938c3",
+    "fig_a7ffd0d7c7",
+    "fig_a681259cdc"
+   ],
+   "reason": "The selected IDs specifically illustrate pipelines for detecting hallucinations through consistency checks, reranking generated samples, or iterative refinement loops.",
+   "near_misses": []
+  },
+  {
+   "section": "Agents",
+   "topic": "LLM agent overview: planning, memory, tools, action",
+   "covered": true,
+   "diagram_ids": [
+    "fig_6db695d772"
+   ],
+   "reason": "This diagram directly provides a high-level overview of LLM-powered autonomous agents by explicitly connecting the central brain to planning, memory, tools, and action systems.",
+   "near_misses": []
+  },
+  {
+   "section": "Agents",
+   "topic": "ReAct loop: thought, action, observation repeated",
+   "covered": true,
+   "diagram_ids": [
+    "fig_a7ffd0d7c7"
+   ],
+   "reason": "The description for fig_a7ffd0d7c7 explicitly states that the framework augments the standard ReAct loop and illustrates the feedback loop of actions, observations, and reflections.",
+   "near_misses": []
+  },
+  {
+   "section": "Agents",
+   "topic": "tool / function calling: model emits a structured call, runtime executes it, result returned",
+   "covered": true,
+   "diagram_ids": [
+    "fig_500dd08184",
+    "fig_6db695d772",
+    "fig_86d117436e"
+   ],
+   "reason": "These diagrams specifically illustrate LLM agents using structured actions, code execution, or tool use as part of a reasoning and execution loop.",
+   "near_misses": []
+  },
+  {
+   "section": "Agents",
+   "topic": "Reflexion: agent reflecting on failures and retrying with verbal feedback",
+   "covered": true,
+   "diagram_ids": [
+    "fig_a7ffd0d7c7",
+    "fig_a0f47813c8"
+   ],
+   "reason": "Both diagrams specifically illustrate the Reflexion architecture, showing the iterative process of self-reflection and verbal feedback within an LLM-based agent system.",
+   "near_misses": []
+  },
+  {
+   "section": "Agents",
+   "topic": "Tree of Thoughts vs chain-of-thought vs input-output prompting",
+   "covered": true,
+   "diagram_ids": [
+    "fig_54317eaddf",
+    "fig_7352711561",
+    "fig_b4371c1edf"
+   ],
+   "reason": "These diagrams explicitly compare or illustrate Tree of Thoughts, Chain of Thought, and Input-Output prompting paradigms.",
+   "near_misses": []
+  },
+  {
+   "section": "Agents",
+   "topic": "multi-agent conversation: several LLM agents exchanging messages",
+   "covered": true,
+   "diagram_ids": [
+    "fig_f717807c3c",
+    "fig_c9eb7a7535",
+    "fig_86d117436e"
+   ],
+   "reason": "These diagrams specifically illustrate systems where multiple LLM agents communicate and exchange messages, such as group chats, conversational chess, and orchestrated coding workflows.",
+   "near_misses": []
+  },
+  {
+   "section": "Agents",
+   "topic": "agent memory: short-term context, long-term vector store retrieval",
+   "covered": true,
+   "diagram_ids": [
+    "fig_6db695d772",
+    "fig_17b5b2b27e",
+    "fig_a0f47813c8"
+   ],
+   "reason": "These diagrams explicitly depict the architecture of autonomous agents utilizing dual memory systems, specifically naming short-term and long-term memory components.",
+   "near_misses": []
+  },
+  {
+   "section": "Agents",
+   "topic": "plan-and-execute agent: planner produces steps, executor carries them out",
+   "covered": true,
+   "diagram_ids": [
+    "fig_6db695d772"
+   ],
+   "reason": "fig_6db695d772 is the only diagram that explicitly mentions planning strategies and breaking down tasks into subgoals within an agent architecture.",
+   "near_misses": []
+  },
+  {
+   "section": "Agents",
+   "topic": "code-writing agent vs JSON tool-calling agent actions",
+   "covered": true,
+   "diagram_ids": [
+    "fig_500dd08184"
+   ],
+   "reason": "The diagram fig_500dd08184 is the only one that directly compares text/JSON-based agent actions with code-based actions (CodeAct).",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "autoencoder: encoder, bottleneck latent code, decoder, reconstruction loss",
+   "covered": true,
+   "diagram_ids": [
+    "fig_d38f9374c3",
+    "fig_dff66a17a7",
+    "fig_4a22aacb51",
+    "fig_f34fbccac3",
+    "fig_ee073dfbac"
+   ],
+   "reason": "These diagrams explicitly illustrate the core autoencoder components: an encoder, a bottleneck latent representation (z), and a decoder for reconstruction.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "variational autoencoder: encoder outputs mean and variance, reparameterization trick, decoder",
+   "covered": true,
+   "diagram_ids": [
+    "fig_4a22aacb51",
+    "fig_9f9bfe8ffd"
+   ],
+   "reason": "These diagrams specifically illustrate the Variational Autoencoder architecture, including the encoder outputting distribution parameters and the implementation of the reparameterization trick.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "GAN: generator and discriminator in a minimax game",
+   "covered": true,
+   "diagram_ids": [
+    "fig_8689e0fcc0",
+    "fig_58e0c700a6",
+    "fig_17187808b6",
+    "fig_973d0e2c07",
+    "fig_2bce85be99"
+   ],
+   "reason": "These diagrams explicitly illustrate the interaction between a generator and a discriminator/critic within the Generative Adversarial Network (GAN) framework.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "diffusion forward process: gradually adding Gaussian noise to an image",
+   "covered": true,
+   "diagram_ids": [
+    "fig_a91285a328",
+    "fig_a7ab8d4a35",
+    "fig_fbf594b75f",
+    "fig_dabaade5a4",
+    "fig_9581bc0511"
+   ],
+   "reason": "These diagrams specifically describe or show the process of adding noise to data (forward diffusion) through step-by-step Markov chains or training sample generation.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "diffusion reverse process: denoising step by step from noise to image",
+   "covered": true,
+   "diagram_ids": [
+    "fig_8149e7e92d",
+    "fig_a03f47da9f",
+    "fig_9581bc0511",
+    "fig_fbf594b75f",
+    "fig_dabaade5a4"
+   ],
+   "reason": "These diagrams specifically illustrate the reverse diffusion process, showing the step-by-step transition from noise to an image through iterative denoising.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "noise prediction network training in DDPM",
+   "covered": true,
+   "diagram_ids": [
+    "fig_6eaa0637d6"
+   ],
+   "reason": "The diagram specifically depicts the iterative process of training a noise prediction network (UNet) by comparing predicted noise to actual noise labels for backpropagation.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "latent diffusion / Stable Diffusion: VAE latent space, U-Net denoiser, text conditioning",
+   "covered": true,
+   "diagram_ids": [
+    "fig_3a5fab74b1",
+    "fig_6a380f4adb",
+    "fig_38da64e77a",
+    "fig_b7eb4d613a",
+    "fig_4d8ee48554",
+    "fig_3e588c58e8",
+    "fig_a6bdc5dd30"
+   ],
+   "reason": "These diagrams specifically detail the interaction between the VAE latent space, the U-Net denoiser, and text conditioning mechanisms within the Stable Diffusion architecture.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "classifier-free guidance in diffusion models",
+   "covered": false,
+   "diagram_ids": [],
+   "reason": "None of the diagrams mention classifier-free guidance, which is a specific technique for conditioning diffusion models without using an external classifier.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "normalizing flows: invertible transformations of a simple distribution",
+   "covered": true,
+   "diagram_ids": [
+    "fig_44c873977c"
+   ],
+   "reason": "The description for fig_44c873977c explicitly mentions the sequence of invertible transformations converting a simple distribution into a complex one, which directly matches the topic.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "CLIP: contrastive image-text pretraining with an image encoder and a text encoder",
+   "covered": true,
+   "diagram_ids": [
+    "fig_ecb2913983",
+    "fig_89fa6206b8"
+   ],
+   "reason": "These diagrams directly illustrate the CLIP architecture, including its image and text encoders, the contrastive pre-training process, and the alignment of embeddings.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "contrastive learning: positive pairs pulled together, negatives pushed apart (SimCLR)",
+   "covered": true,
+   "diagram_ids": [
+    "fig_741737c885",
+    "fig_5e3710c0ca",
+    "fig_accdcb3b5a",
+    "fig_5d9e8b7b5a",
+    "fig_5628187b22",
+    "fig_c667f26195"
+   ],
+   "reason": "These diagrams specifically illustrate the mechanics of contrastive learning, SimCLR, and the process of pulling positive pairs together while pushing negative pairs apart in an embedding space.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "masked autoencoder (MAE): masking image patches and reconstructing them",
+   "covered": true,
+   "diagram_ids": [
+    "fig_ee073dfbac"
+   ],
+   "reason": "The diagram for fig_ee073dfbac specifically describes the Masked Autoencoder architecture where image patches are masked and then reconstructed by a decoder.",
+   "near_misses": []
+  },
+  {
+   "section": "Generative models",
+   "topic": "text-to-image generation with a CLIP prior and diffusion decoder (unCLIP / DALL-E 2)",
+   "covered": true,
+   "diagram_ids": [
+    "fig_4b60ee922b"
+   ],
+   "reason": "fig_4b60ee922b is the only diagram that specifically illustrates the unCLIP/DALL-E 2 architecture including the text encoder, prior model, and decoder.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "the reinforcement learning loop: agent, environment, state, action, reward",
+   "covered": true,
+   "diagram_ids": [
+    "fig_1b64fad9f7",
+    "fig_9687831443",
+    "fig_46be4f4ac5",
+    "fig_3f962fd4c0"
+   ],
+   "reason": "These diagrams specifically illustrate the standard reinforcement learning feedback loop including the interaction between the agent, environment, state, action, and reward.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "Markov decision process: states, actions, transition probabilities, rewards",
+   "covered": true,
+   "diagram_ids": [
+    "fig_e412c02209",
+    "fig_fb2ffd1f00",
+    "fig_1dd6e867a4",
+    "fig_1b64fad9f7",
+    "fig_9687831443",
+    "fig_46be4f4ac5",
+    "fig_3f962fd4c0"
+   ],
+   "reason": "These diagrams explicitly illustrate Markov Decision Processes or the fundamental interaction loop between agents and environments involving states, actions, rewards, and transition probabilities.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "exploration vs exploitation and epsilon-greedy action selection",
+   "covered": true,
+   "diagram_ids": [
+    "fig_63eab8a922",
+    "fig_297922b5f8"
+   ],
+   "reason": "The first diagram directly compares epsilon-greedy to other exploration strategies, and the second illustrates the fundamental exploration vs exploitation tradeoff.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "value function and Bellman equation backup",
+   "covered": true,
+   "diagram_ids": [
+    "fig_d5746728ab",
+    "fig_991b579b4a",
+    "fig_050abf1c0c",
+    "fig_f908353726",
+    "fig_cb62e2276b"
+   ],
+   "reason": "These diagrams directly illustrate value functions (state-value and action-value) and the backup mechanisms (DP, TD, MC) used to update them via the Bellman equation.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "Monte Carlo vs temporal-difference learning",
+   "covered": true,
+   "diagram_ids": [
+    "fig_f3a252c16b",
+    "fig_d5746728ab"
+   ],
+   "reason": "These diagrams explicitly compare Monte Carlo and Temporal Difference learning approaches in terms of their updates and backup structures.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "Q-learning: Q-table and its update rule",
+   "covered": true,
+   "diagram_ids": [
+    "fig_36e8ce51ba",
+    "fig_5b88e62553"
+   ],
+   "reason": "The first diagram directly illustrates the mapping of states and actions to a Q-table in a grid-world context, while the second compares the traditional Q-table architecture to deep Q-learning.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "deep Q-network (DQN): neural network mapping state to Q-values, replay buffer, target network",
+   "covered": true,
+   "diagram_ids": [
+    "fig_0eb3bcc046",
+    "fig_5b88e62553"
+   ],
+   "reason": "Both diagrams specifically detail the architecture of a Deep Q-Network, including its neural network mapping of states to action values and the use of a replay buffer and target network for training stability.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "policy-based vs value-based methods",
+   "covered": true,
+   "diagram_ids": [
+    "fig_c7558a3e50",
+    "fig_95ce87d74c",
+    "fig_cb62e2276b",
+    "fig_87a38d66b7",
+    "fig_f908353726"
+   ],
+   "reason": "The selected diagrams directly compare policy-based and value-based methods or illustrate their specific mechanisms and convergence paths.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "policy gradient / REINFORCE: adjusting action probabilities by return",
+   "covered": true,
+   "diagram_ids": [
+    "fig_84b2f1e011"
+   ],
+   "reason": "The diagram specifically illustrates the REINFORCE mechanism by showing how sampled actions and rewards result in a gradient step that shifts the action probability distribution.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "actor-critic: actor picks actions, critic estimates value",
+   "covered": true,
+   "diagram_ids": [
+    "fig_4ca8767724",
+    "fig_d5bf7d827e"
+   ],
+   "reason": "Both diagrams specifically illustrate the actor-critic reinforcement learning loop where the actor selects actions and the critic evaluates state values.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "advantage function and A2C / A3C",
+   "covered": true,
+   "diagram_ids": [
+    "fig_73347ee29d"
+   ],
+   "reason": "The diagram directly compares the training architectures of A2C and A3C, which are the primary focus of the learner's topic.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "PPO clipped surrogate objective: probability ratio clipped to a range",
+   "covered": false,
+   "diagram_ids": [],
+   "reason": "None of the provided diagrams directly depict the PPO clipped surrogate objective or its specific mechanism of clipping the probability ratio to a range.",
+   "near_misses": [
+    {
+     "id": "fig_14727373fc",
+     "title": "PPO Clipped Surrogate Objective Function Visualization",
+     "description": "The chart maps six specific cases of the probability ratio and advantage onto two plots, showing where the objective is clipped and where gradients become zero. It specifically illustrates how the clipping mechanism prevents excessively large policy updates by flattening the objective function outside the epsilon-defined trust region.",
+     "teaches": "A learner sees how the Proximal Policy Optimization (PPO) clipped surrogate objective function behaves under different conditions of the advantage estimate and probability ratio.",
+     "rejected_for": "not_glanceable",
+     "visual_quality": 4,
+     "glanceable": 3,
+     "insight": 5,
+     "source": "hf-deep-rl",
+     "page_url": "https://huggingface.co/learn/deep-rl-course/unit8/visualize"
+    }
+   ]
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "trust region: limiting how far the new policy moves from the old one",
+   "covered": false,
+   "diagram_ids": [],
+   "reason": "None of the provided diagrams mention or illustrate trust regions, policy movement constraints, or specific RL algorithms like TRPO or PPO that utilize these concepts.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "on-policy vs off-policy vs offline reinforcement learning",
+   "covered": true,
+   "diagram_ids": [
+    "fig_0362bfef98"
+   ],
+   "reason": "The diagram fig_0362bfef98 explicitly compares the three paradigms requested: on-policy, off-policy, and offline reinforcement learning.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "model-based reinforcement learning: learning a world model and planning with it",
+   "covered": true,
+   "diagram_ids": [
+    "fig_69d6e34e0c",
+    "fig_63a7274fa9",
+    "fig_1985b19c09",
+    "fig_e1b5938656",
+    "fig_b3d6f5b35f",
+    "fig_6f039abab9"
+   ],
+   "reason": "These diagrams specifically describe world model architectures, latent imagination, or the search and distillation loops characteristic of model-based reinforcement learning.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "multi-armed bandit",
+   "covered": true,
+   "diagram_ids": [
+    "fig_9171800687",
+    "fig_13686cc31c"
+   ],
+   "reason": "Both diagrams directly illustrate algorithms specifically designed for the multi-armed bandit problem, namely Upper Confidence Bound (UCB) and Thompson Sampling.",
+   "near_misses": []
+  },
+  {
+   "section": "Reinforcement learning",
+   "topic": "Decision Transformer: sequence modeling of returns, states and actions",
+   "covered": true,
+   "diagram_ids": [
+    "fig_58462f762e"
+   ],
+   "reason": "The diagram fig_58462f762e directly depicts the Decision Transformer architecture, specifically showing how states, actions, and returns are interleaved as tokens for sequence modeling.",
+   "near_misses": []
+  },
+  {
+   "section": "Alignment and human feedback",
+   "topic": "RLHF pipeline: supervised fine-tuning, reward model from human rankings, PPO fine-tuning",
+   "covered": true,
+   "diagram_ids": [
+    "fig_b44f28cb5b"
+   ],
+   "reason": "The diagram fig_b44f28cb5b directly illustrates the three stages of the RLHF pipeline, including supervised fine-tuning, reward model training from human rankings, and PPO-based optimization.",
+   "near_misses": []
+  },
+  {
+   "section": "Alignment and human feedback",
+   "topic": "reward model trained from human preference comparisons",
+   "covered": true,
+   "diagram_ids": [
+    "fig_b44f28cb5b",
+    "fig_645276a1b9"
+   ],
+   "reason": "The diagrams for the RLHF pipeline and Reinforcement Learning from Human Preferences explicitly show reward model training based on human rankings or feedback.",
+   "near_misses": []
+  },
+  {
+   "section": "Alignment and human feedback",
+   "topic": "Direct Preference Optimization (DPO) vs RLHF",
+   "covered": true,
+   "diagram_ids": [
+    "fig_b44f28cb5b",
+    "fig_645276a1b9"
+   ],
+   "reason": "The diagrams illustrate RLHF pipelines and human preference reinforcement learning, which are the foundational concepts being compared to DPO.",
+   "near_misses": []
+  },
+  {
+   "section": "Alignment and human feedback",
+   "topic": "Constitutional AI: model critiques and revises its own responses against principles",
+   "covered": false,
+   "diagram_ids": [],
+   "reason": "None of the diagrams depict the Constitutional AI process where a model critiques and revises its responses based on a set of principles.",
+   "near_misses": [
+    {
+     "id": "fig_3803b79661",
+     "title": "The Constitutional AI (CAI) Training Pipeline",
+     "description": "The process begins with an RLHF model generating responses to red teaming prompts, which are then critiqued and revised to finetune an SL-CAI model. This model then generates sample pairs for a preference model, which ultimately guides the RLAIF training of the final RL-CAI model.",
+     "teaches": "A learner sees the two-stage process of Constitutional AI, beginning with a supervised learning phase for critiques and revisions followed by a reinforcement learning phase using AI feedback.",
+     "rejected_for": "not_glanceable",
+     "visual_quality": 4,
+     "glanceable": 3,
+     "insight": 4,
+     "source": "arxiv",
+     "page_url": "https://arxiv.org/abs/2212.08073"
+    }
+   ]
+  },
+  {
+   "section": "Training at scale",
+   "topic": "data parallel training across multiple GPUs",
+   "covered": true,
+   "diagram_ids": [
+    "fig_c4665cf2a2",
+    "fig_b991124f32",
+    "fig_d273fc0a07"
+   ],
+   "reason": "These diagrams specifically illustrate data parallel training, showing how minibatches are partitioned across multiple GPUs and synchronized via gradients.",
+   "near_misses": []
+  },
+  {
+   "section": "Training at scale",
+   "topic": "mixed precision / gradient accumulation / memory use during training",
+   "covered": true,
+   "diagram_ids": [
+    "fig_b06dd26333",
+    "fig_b1eb85a156",
+    "fig_2b123163eb",
+    "fig_97ea1e4560",
+    "fig_55e7451726",
+    "fig_47e8bfd123"
+   ],
+   "reason": "These diagrams specifically address mixed precision workflows, loss scaling, and memory accumulation/usage components during the training process.",
+   "near_misses": []
+  },
+  {
+   "section": "Training at scale",
+   "topic": "transfer learning: reusing pretrained features and fine-tuning the top layers",
+   "covered": true,
+   "diagram_ids": [
+    "fig_22e3b29df9",
+    "fig_53bdf98520"
+   ],
+   "reason": "The diagrams specifically illustrate the process of transferring pre-trained layer weights and fine-tuning models on new datasets or tasks.",
+   "near_misses": []
+  },
+  {
+   "section": "Training at scale",
+   "topic": "data augmentation: transformed copies of training images",
+   "covered": true,
+   "diagram_ids": [
+    "fig_741737c885",
+    "fig_88dd4ccbb9",
+    "fig_5867254e1c",
+    "fig_a91285a328"
+   ],
+   "reason": "These diagrams specifically illustrate the process of generating and using augmented versions of images for training tasks like contrastive learning, label guessing, and diffusion models.",
+   "near_misses": []
+  },
+  {
+   "section": "Training at scale",
+   "topic": "hyperparameter search: grid search vs random search",
+   "covered": true,
+   "diagram_ids": [
+    "fig_0019b18e93"
+   ],
+   "reason": "The diagram fig_0019b18e93 explicitly compares grid search and random search for hyperparameter optimization by visualizing their sampling strategies.",
+   "near_misses": []
+  }
+ ]
+}

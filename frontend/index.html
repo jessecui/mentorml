@@ -2,9 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%234f46e5'/><g transform='translate(4,4)' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'><path d='M22 10v6M2 10l10-5 10 5-10 5z'/><path d='M6 12v5c3 3 9 3 12 0v-5'/></g></svg>" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MentorML | A Multimodal Agentic Learning Companion for AI/ML Concepts</title>
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      // Apply the theme before first paint so there's no light flash in dark
+      // mode: the saved choice from the header toggle, else the system setting.
+      // Keep the key in sync with src/lib/theme.ts.
+      (function () {
+        var saved = null;
+        try {
+          saved = localStorage.getItem("mentorml:theme");
+        } catch (e) {}
+        var dark =
+          saved === "dark" ||
+          (saved !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) document.documentElement.classList.add("dark");
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

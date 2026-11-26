@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
 import Cookies from "js-cookie";
+import { LogoMark } from "./LogoMark";
 
 interface AuthModalProps {
   onAuthenticated: () => void;
@@ -11,11 +12,13 @@ export function AuthModal({ onAuthenticated }: AuthModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Focus the input on mount
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // The input is disabled while verifying, which drops focus; give it back
+  // so a mistyped name can be retyped straight away
   useEffect(() => {
-    const input = document.getElementById("creator-question");
-    input?.focus();
-  }, []);
+    if (!isLoading) inputRef.current?.focus();
+  }, [isLoading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,15 +32,23 @@ export function AuthModal({ onAuthenticated }: AuthModalProps) {
         body: JSON.stringify({ password }),
       });
 
+      if (response.status === 429) {
+        // Too many wrong attempts: say so, rather than suggest a network problem
+        const body = await response.json().catch(() => null);
+        setError(body?.detail || "Too many attempts. Please wait a few minutes and try again.");
+        return;
+      }
       if (!response.ok) throw new Error("Failed to validate password");
 
       const data = await response.json();
 
       if (data.valid) {
-        Cookies.set("mentor_auth", "true", { expires: 1 }); // 1 day expiry
+        // UI hint only, so the prompt isn't shown again on reload. Access is
+        // checked by the server's HttpOnly session cookie set in this response.
+        Cookies.set("mentor_auth", "true", { expires: 1 });
         onAuthenticated();
       } else {
-        setError("Incorrect answer. Please try again.");
+        setError("That name doesn't match our records. Please try again.");
         setPassword("");
       }
     } catch {
@@ -48,18 +59,33 @@ export function AuthModal({ onAuthenticated }: AuthModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="w-full max-w-sm mx-4 bg-white rounded-2xl shadow-2xl p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">
-          Welcome to MentorML
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(17,24,39,0.45)" }}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-title"
+        className="w-full max-w-md rounded-lg border border-border bg-surface p-6 shadow-xl"
+      >
+        <h2 id="auth-title" className="flex items-center gap-2 text-lg font-semibold text-foreground">
+          <LogoMark />
+          MentorML
         </h2>
-        <p className="text-sm text-gray-500 mb-2">
-          Who created this app?
-        </p>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+          <div className="space-y-2">
+            <p className="text-sm text-muted-foreground">
+              An AI tutor that explains machine learning concepts with diagrams
+            </p>
+            <label
+              htmlFor="creator-question"
+              className="block pt-2 text-sm font-medium text-foreground"
+            >
+              To continue, enter the name of this project's creator.
+            </label>
             <input
+              ref={inputRef}
               id="creator-question"
               name="creator-question"
               type="text"
@@ -67,27 +93,28 @@ export function AuthModal({ onAuthenticated }: AuthModalProps) {
               onChange={(e) => setPassword(e.target.value)}
               disabled={isLoading}
               autoComplete="one-time-code"
-              placeholder="Enter answer"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent disabled:opacity-50"
+              placeholder="Full name"
+              autoFocus
+              className="h-10 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 disabled:bg-muted"
             />
           </div>
 
           {error && (
-            <p className="text-sm text-red-500">{error}</p>
+            <p role="alert" className="text-sm text-danger">{error}</p>
           )}
 
           <button
             type="submit"
             disabled={isLoading || !password.trim()}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-primary text-sm font-medium text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground"
           >
             {isLoading ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Verifying...
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Verifying…
               </>
             ) : (
-              "Submit"
+              "Continue"
             )}
           </button>
         </form>

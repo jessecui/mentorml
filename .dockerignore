@@ -1,0 +1,11 @@
+venv/
+.git/
+.env
+**/__pycache__/
+**/node_modules/
+frontend/dist/
+big_vision_repo/
+corpus_cache/
+model/siglip2_text/
+model/*.npz
+benchmark/

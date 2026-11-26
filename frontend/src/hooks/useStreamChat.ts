@@ -1,16 +1,27 @@
 import { useState, useCallback, useRef } from "react";
+import Cookies from "js-cookie";
 import type { Message, TeachingPlan, Diagram } from "../types";
 
 interface UseStreamChatOptions {
   onPlan?: (plan: TeachingPlan) => void;
   onDiagram?: (diagram: Diagram) => void;
+  // Called when the server has no valid session (expired, or the password changed),
+  // with the message that could not be sent
+  onUnauthorized?: (unsentMessage: string) => void;
+}
+
+// A conversation's ID is its only key on the server, so it must be unguessable.
+// crypto.getRandomValues works on plain http too, unlike crypto.randomUUID.
+function newThreadId(): string {
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  return "thread-" + Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 export function useStreamChat(options: UseStreamChatOptions = {}) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const abortControllerRef = useRef<AbortController | null>(null);
-  const threadIdRef = useRef<string>(`thread-${Date.now()}`);
+  const threadIdRef = useRef<string>(newThreadId());
 
   const sendMessage = useCallback(
     async (content: string) => {
@@ -49,6 +60,17 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
           signal: abortControllerRef.current.signal,
         });
 
+        if (response.status === 401) {
+          // No valid session: show the login over the chat. The server never got this
+          // question, so drop it from the transcript; it goes back in the input box
+          // and the user resends it after signing in.
+          Cookies.remove("mentor_auth");
+          setMessages((prev) =>
+            prev.filter((msg) => msg.id !== userMessage.id && msg.id !== assistantId)
+          );
+          options.onUnauthorized?.(content.trim());
+          return;
+        }
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}`);
         }
@@ -59,9 +81,11 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
         const decoder = new TextDecoder();
         let buffer = "";
         let accumulatedContent = "";
-        let accumulatedThinking = "";
         let plan: TeachingPlan | undefined;
         const diagrams: Map<string, Diagram> = new Map();
+        // An "event:" line and its "data:" line can arrive in different reads
+        let eventType = "";
+        let finished = false;
 
         while (true) {
           const { done, value } = await reader.read();
@@ -73,24 +97,13 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
           const lines = buffer.split("\n");
           buffer = lines.pop() || ""; // Keep incomplete line in buffer
 
-          let eventType = "";
           for (const line of lines) {
             if (line.startsWith("event: ")) {
               eventType = line.slice(7);
             } else if (line.startsWith("data: ") && eventType) {
               const data = line.slice(6);
               try {
-                if (eventType === "thinking") {
-                  const token = JSON.parse(data) as string;
-                  accumulatedThinking += token;
-                  setMessages((prev) =>
-                    prev.map((msg) =>
-                      msg.id === assistantId
-                        ? { ...msg, thinking: accumulatedThinking }
-                        : msg
-                    )
-                  );
-                } else if (eventType === "token") {
+                if (eventType === "token") {
                   const token = JSON.parse(data) as string;
                   accumulatedContent += token;
                   setMessages((prev) =>
@@ -98,6 +111,15 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
                       msg.id === assistantId
                         ? { ...msg, content: accumulatedContent }
                         : msg
+                    )
+                  );
+                } else if (eventType === "reset") {
+                  // The server restarted the answer (model fallback, or a second
+                  // call after an extra search): drop the text streamed so far
+                  accumulatedContent = "";
+                  setMessages((prev) =>
+                    prev.map((msg) =>
+                      msg.id === assistantId ? { ...msg, content: "" } : msg
                     )
                   );
                 } else if (eventType === "plan") {
@@ -120,6 +142,7 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
                     )
                   );
                 } else if (eventType === "done") {
+                  finished = true;
                   const doneData = JSON.parse(data) as { diagrams: Diagram[] };
                   // Update with final diagrams (only referenced ones)
                   const finalDiagrams = doneData.diagrams;
@@ -135,8 +158,22 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
                     )
                   );
                 } else if (eventType === "error") {
+                  // Show the server's message; keep any text that already arrived
                   const errorData = JSON.parse(data) as { error: string };
-                  throw new Error(errorData.error);
+                  finished = true;
+                  setMessages((prev) =>
+                    prev.map((msg) =>
+                      msg.id === assistantId
+                        ? {
+                            ...msg,
+                            content: msg.content || errorData.error,
+                            isStreaming: false,
+                            wasInterrupted: Boolean(msg.content),
+                    diagrams: [], // not saved by the server, so later turns could not refer to them
+                          }
+                        : msg
+                    )
+                  );
                 }
               } catch (e) {
                 if (e instanceof SyntaxError) {
@@ -149,6 +186,26 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
             }
           }
         }
+
+        if (!finished) {
+          // The connection closed early (proxy timeout, redeploy): keep any partial
+          // text, stop the spinner and say what happened
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.id === assistantId
+                ? {
+                    ...msg,
+                    content:
+                      msg.content ||
+                      "The connection was interrupted before an answer arrived. Please try again.",
+                    isStreaming: false,
+                    wasInterrupted: Boolean(msg.content),
+                    diagrams: [], // not saved by the server, so later turns could not refer to them
+                  }
+                : msg
+            )
+          );
+        }
       } catch (error) {
         if ((error as Error).name === "AbortError") {
           console.log("Request aborted");
@@ -156,7 +213,7 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
           setMessages((prev) =>
             prev.map((msg) =>
               msg.id === assistantId
-                ? { ...msg, isStreaming: false, wasStopped: true }
+                ? { ...msg, isStreaming: false, wasStopped: true, diagrams: [] }
                 : msg
             )
           );
@@ -171,6 +228,8 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
                       msg.content ||
                       "Sorry, an error occurred. Please try again.",
                     isStreaming: false,
+                    wasInterrupted: Boolean(msg.content),
+                    diagrams: [], // not saved by the server, so later turns could not refer to them
                   }
                 : msg
             )
@@ -190,7 +249,7 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
 
   const clearMessages = useCallback(() => {
     setMessages([]);
-    threadIdRef.current = `thread-${Date.now()}`;
+    threadIdRef.current = newThreadId();
   }, []);
 
   return {

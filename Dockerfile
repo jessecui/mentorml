@@ -20,33 +20,37 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system dependencies for ML libraries
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+# CPU-only PyTorch first, so the requirements install does not pull the CUDA build
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Clone big_vision (required for SigLIP)
-RUN git clone --quiet --branch=main --depth=1 \
-    https://github.com/google-research/big_vision big_vision_repo
+# Export the SigLIP 2 text tower (all the app needs at query time), then drop
+# the full checkpoint so the vision tower never ships in the image.
+# The model must match the one the corpus embeddings were built with.
+ARG SIGLIP_MODEL_ID=google/siglip2-so400m-patch14-384
+ENV SIGLIP_MODEL_ID=${SIGLIP_MODEL_ID}
+# Only the small config module and the export script go in before the export, so
+# editing scorer.py does not invalidate this layer (and its multi-gigabyte download)
+COPY model/siglip_config.py model/
+COPY scripts/export_text_tower.py scripts/
+RUN python scripts/export_text_tower.py && rm -rf /root/.cache/huggingface
+ENV HF_HUB_OFFLINE=1
 
-# Download model files
-RUN mkdir -p model && \
-    curl -L -o model/gemma_tokenizer.model \
-    https://storage.googleapis.com/big_vision/paligemma_tokenizer.model && \
-    curl -L -o model/siglip2_so400m14_384.npz \
-    https://storage.googleapis.com/big_vision/siglip2/siglip2_so400m14_384.npz
+# This image is deployed behind Railway's proxy, so count wrong passwords per visitor
+# (from the proxy's X-Forwarded-For entry) rather than per proxy. Unset it if the image
+# is ever exposed directly to the internet, where a client could forge that header.
+ENV TRUST_PROXY=1
 
-# Copy application code
+# Copy application code and the curated diagram corpus
+COPY model/*.py model/
 COPY main.py .
 COPY agent/ agent/
 COPY mcp_server/ mcp_server/
-COPY model/*.py model/
-COPY benchmark/ benchmark/
+COPY corpus/metadata.json corpus/embeddings.npz corpus/
+COPY corpus/images/ corpus/images/
 
 # Copy built frontend from Stage 1
 COPY --from=frontend-builder /app/frontend/dist frontend/dist
