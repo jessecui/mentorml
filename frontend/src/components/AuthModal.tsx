@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
-import Cookies from "js-cookie";
 import { LogoMark } from "./LogoMark";
 
 interface AuthModalProps {
@@ -25,37 +24,29 @@ export function AuthModal({ onAuthenticated }: AuthModalProps) {
     setIsLoading(true);
     setError("");
 
+    let response: Response;
     try {
-      const response = await fetch("/validate-password", {
+      response = await fetch("/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ answer: password }),
       });
-
-      if (response.status === 429) {
-        // Too many wrong attempts: say so, rather than suggest a network problem
-        const body = await response.json().catch(() => null);
-        setError(body?.detail || "Too many attempts. Please wait a few minutes and try again.");
-        return;
-      }
-      if (!response.ok) throw new Error("Failed to validate password");
-
-      const data = await response.json();
-
-      if (data.valid) {
-        // UI hint only, so the prompt isn't shown again on reload. Access is
-        // checked by the server's HttpOnly session cookie set in this response.
-        Cookies.set("mentor_auth", "true", { expires: 1 });
-        onAuthenticated();
-      } else {
-        setError("That name doesn't match our records. Please try again.");
-        setPassword("");
-      }
     } catch {
       setError("Network error. Please try again.");
-    } finally {
       setIsLoading(false);
+      return;
     }
+
+    if (response.ok) {
+      // The server set its HttpOnly session cookie in this response
+      onAuthenticated();
+    } else {
+      // A wrong name (401), too many attempts (429) or a server problem: show the server's message
+      const body = await response.json().catch(() => null);
+      setError(typeof body?.detail === "string" ? body.detail : `Request failed (HTTP ${response.status})`);
+      if (response.status === 401) setPassword("");
+    }
+    setIsLoading(false);
   };
 
   return (

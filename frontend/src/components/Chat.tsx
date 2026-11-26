@@ -28,13 +28,23 @@ export function Chat({ onUnauthorized }: ChatProps) {
     <div className="flex h-dvh flex-col bg-background">
       {/* Header */}
       <header className="flex shrink-0 items-center gap-3 border-b border-border bg-surface px-4 py-2.5">
-        <LogoMark className="h-8 w-8" />
-        <div className="min-w-0">
-          <h1 className="text-sm font-semibold leading-tight">MentorML</h1>
-          <p className="truncate text-xs text-muted-foreground">
-            Machine learning, explained with diagrams
-          </p>
-        </div>
+        {/* The logo and name go back to the home screen, the same as "New chat" */}
+        <button
+          type="button"
+          onClick={() => {
+            if (!isStreaming) clearMessages();
+          }}
+          title="Back to the start"
+          className="flex min-w-0 cursor-pointer items-center gap-3 rounded-md text-left hover:opacity-80"
+        >
+          <LogoMark className="h-8 w-8" />
+          <div className="min-w-0">
+            <h1 className="text-sm font-semibold leading-tight">MentorML</h1>
+            <p className="truncate text-xs text-muted-foreground">
+              Machine learning, explained with diagrams
+            </p>
+          </div>
+        </button>
         <div className="ml-auto flex items-center gap-1">
           <button
             type="button"
@@ -63,7 +73,7 @@ export function Chat({ onUnauthorized }: ChatProps) {
       </header>
 
       {/* Messages */}
-      <MessageList messages={messages} onFillSuggestion={setInput} />
+      <MessageList messages={messages} onFillSuggestion={setInput} onFollowup={sendMessage} />
 
       {/* Input */}
       <ChatInput

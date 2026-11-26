@@ -10,20 +10,17 @@ Provides:
 """
 
 import asyncio
-import hashlib
 import hmac
 import json
 import logging
 import mimetypes
 import os
-import secrets
-import re
 import time
 from contextlib import AsyncExitStack, asynccontextmanager
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import Cookie, Depends, FastAPI, Header, HTTPException, Request, Response
+from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -32,6 +29,7 @@ from pydantic import BaseModel, Field
 load_dotenv()
 
 from agent.graph import DIAGRAM_REF, content_text, rendered_ids, replay_shown  # noqa: E402
+from auth import Gate  # noqa: E402
 
 # Python's built-in type table has no .webp; without /etc/mime.types, corpus images
 # would be served as text/plain
@@ -49,12 +47,6 @@ FRONTEND_DIST = PROJECT_ROOT / "frontend" / "dist"
 # index.html must always be re-fetched, or browsers keep loading an old frontend build after a rebuild.
 NO_CACHE = {"Cache-Control": "no-cache"}
 
-
-# Login session (same design as project-philo): an HttpOnly cookie holding an expiry
-# time, signed so it cannot be forged or set from the browser. The frontend's own
-# "mentor_auth" cookie is only a hint for whether to show the sign-in prompt.
-SESSION_COOKIE = "mentor_session"
-SESSION_TTL_S = 24 * 3600
 
 # Redis list used as an append-only log. It survives redeploys, unlike the container's disk.
 MISSES_KEY = "mentorml:diagram_misses"
@@ -184,11 +176,6 @@ class ChatRequest(BaseModel):
     }
 
 
-class ValidatePasswordRequest(BaseModel):
-    """Password validation request."""
-    password: str = Field(max_length=200)
-
-
 class DiagramReference(BaseModel):
     """A diagram shown in a response."""
     id: str
@@ -208,6 +195,7 @@ class TeachingPlanResponse(BaseModel):
     topic: str
     steps: list[str]
     diagrams_needed: list[str]
+    followups: list[str] = []  # questions the learner might ask next, shown as buttons
 
 
 class ChatResponse(BaseModel):
@@ -361,57 +349,17 @@ async def _log_miss_if_any(request: ChatRequest, plan, diagrams: list[dict], can
     })
 
 
-# --- Auth Dependency ---
+# --- Sign-in gate ---
 
-def _session_secret() -> bytes:
-    """
-    Key for signing session cookies. AUTH_SECRET if set; otherwise derived from the
-    server's own secrets (the password and the Gemini API key) so sessions survive
-    restarts and the key cannot be guessed; otherwise random (sessions then reset when
-    the server restarts).
-    """
-    explicit = os.getenv("AUTH_SECRET")
-    if explicit:
-        return explicit.encode()
-    password = os.getenv("APP_PASSWORD", "")
-    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY", "")
-    if password and api_key:
-        return hashlib.sha256(f"mentorml-session|{password}|{api_key}".encode()).digest()
-    return secrets.token_bytes(32)
-
-
-SESSION_SECRET = _session_secret()
-_SESSION_TOKEN = re.compile(r"(\d{1,12})\.([0-9a-f]{64})")
-
-
-def _sign(expires_at: int) -> str:
-    return hmac.new(SESSION_SECRET, str(expires_at).encode(), hashlib.sha256).hexdigest()
-
-
-def _new_session_token() -> str:
-    expires_at = int(time.time()) + SESSION_TTL_S
-    return f"{expires_at}.{_sign(expires_at)}"
-
-
-def _session_is_valid(token: str | None) -> bool:
-    match = _SESSION_TOKEN.fullmatch(token or "")
-    if not match:
-        return False
-    expires_at = int(match.group(1))
-    if expires_at < time.time():
-        return False
-    return hmac.compare_digest(match.group(2).encode(), _sign(expires_at).encode())
-
-
-async def require_auth(mentor_session: str | None = Cookie(default=None)):
-    """Require a valid session cookie (issued by /validate-password)."""
-    if not _session_is_valid(mentor_session):
-        raise HTTPException(status_code=401, detail="Unauthorized")
+# The gate (auth.py): POST /login and GET /me, the same in Attune and PhiloSearch. The signing key
+# is derived from the creator's name and the Gemini API key unless AUTH_SECRET is set.
+gate = Gate("mentor", key_source=os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY", ""))
+app.include_router(gate.router)
 
 
 # --- Endpoints ---
 
-@app.post("/chat", response_model=ChatResponse, summary="Chat with MentorML", dependencies=[Depends(require_auth)])
+@app.post("/chat", response_model=ChatResponse, summary="Chat with MentorML", dependencies=[Depends(gate.require)])
 async def chat(request: ChatRequest):
     """
     Send a message to the MentorML agent.
@@ -457,7 +405,8 @@ async def chat(request: ChatRequest):
         plan_response = None
         if plan:
             plan_response = TeachingPlanResponse(
-                topic=plan.topic, steps=plan.steps, diagrams_needed=plan.diagrams_needed
+                topic=plan.topic, steps=plan.steps, diagrams_needed=plan.diagrams_needed,
+                followups=getattr(plan, "followups", []),
             )
         _log_miss_in_background(request, plan, diagrams, candidates)
 
@@ -474,7 +423,7 @@ async def chat(request: ChatRequest):
 
 # --- Streaming Endpoint ---
 
-@app.post("/chat/stream", summary="Stream chat with MentorML (SSE)", dependencies=[Depends(require_auth)])
+@app.post("/chat/stream", summary="Stream chat with MentorML (SSE)", dependencies=[Depends(gate.require)])
 async def chat_stream(request: ChatRequest):
     """
     Stream a chat response using Server-Sent Events.
@@ -526,6 +475,7 @@ async def chat_stream(request: ChatRequest):
                             "topic": plan.topic,
                             "steps": plan.steps,
                             "diagrams_needed": plan.diagrams_needed,
+                            "followups": getattr(plan, "followups", []),
                         }
                         yield f"event: plan\ndata: {json.dumps(plan_data)}\n\n"
 
@@ -634,91 +584,6 @@ async def get_misses(x_admin_token: str | None = Header(default=None)):
         except json.JSONDecodeError:
             continue  # skip a corrupt entry rather than fail the whole listing
     return {"misses": misses}
-
-
-# The password is a name, and names are easy to guess, so wrong answers are limited
-# per client address (as in project-philo).
-MAX_FAILED_ATTEMPTS = 10
-FAILED_ATTEMPT_WINDOW_S = 15 * 60
-# Addresses tracked before stale entries are swept, so many one-off addresses
-# cannot grow the table without bound
-MAX_TRACKED_CLIENTS = 10_000
-_failed_attempts: dict[str, list[float]] = {}
-
-
-def _client_address(http_request: Request) -> str:
-    """
-    The visitor's address: the socket address, unless TRUST_PROXY is set. Behind Railway's
-    proxy every request comes from the proxy, which adds the visitor's address as the LAST
-    X-Forwarded-For entry (a client can only forge entries before it), so set TRUST_PROXY=1
-    there. Off by default, because a client reaching the app directly could forge the header;
-    if it is forgotten behind a proxy, visitors share one lockout rather than escape it.
-    """
-    forwarded = http_request.headers.get("x-forwarded-for", "")
-    if forwarded and os.getenv("TRUST_PROXY", "").strip().lower() in ("1", "true", "yes"):
-        return forwarded.split(",")[-1].strip()
-    return http_request.client.host if http_request.client else "unknown"
-
-
-def _recent_failures(client: str, now: float) -> list[float]:
-    if len(_failed_attempts) > MAX_TRACKED_CLIENTS:
-        for address in list(_failed_attempts):
-            _failed_attempts[address] = [t for t in _failed_attempts[address] if now - t < FAILED_ATTEMPT_WINDOW_S]
-            if not _failed_attempts[address]:
-                del _failed_attempts[address]
-        # Still full of recent failures: forget the oldest addresses first
-        while len(_failed_attempts) > MAX_TRACKED_CLIENTS:
-            del _failed_attempts[next(iter(_failed_attempts))]
-    # Re-inserted rather than updated in place, so the dict stays ordered by each
-    # address's latest attempt and the sweep above drops the stalest first
-    recent = [t for t in _failed_attempts.pop(client, []) if now - t < FAILED_ATTEMPT_WINDOW_S]
-    if recent:
-        _failed_attempts[client] = recent
-    return recent
-
-
-@app.post("/validate-password", summary="Validate app password")
-async def validate_password(request: ValidatePasswordRequest, http_request: Request, response: Response):
-    """
-    Validate the password and, if it matches, issue the signed session cookie that
-    protected endpoints check.
-
-    Password is stored in APP_PASSWORD environment variable.
-    Comparison is case-insensitive with all whitespace removed.
-    Returns {"valid": true/false}; 429 after MAX_FAILED_ATTEMPTS wrong answers from
-    one address within FAILED_ATTEMPT_WINDOW_S.
-    """
-    app_password = "".join(os.getenv("APP_PASSWORD", "").split()).lower()
-    user_password = "".join(request.password.split()).lower()
-
-    if not app_password:
-        raise HTTPException(
-            status_code=500,
-            detail="APP_PASSWORD environment variable not configured"
-        )
-
-    client = _client_address(http_request)
-    now = time.time()
-    if len(_recent_failures(client, now)) >= MAX_FAILED_ATTEMPTS:
-        raise HTTPException(status_code=429, detail="Too many attempts. Please try again later.")
-
-    valid = hmac.compare_digest(user_password.encode(), app_password.encode())
-    if not valid:
-        # Appended at the end of the dict's order (newest failure last)
-        _failed_attempts[client] = _failed_attempts.pop(client, []) + [now]
-    if valid:
-        # A successful sign-in clears this visitor's earlier typos
-        _failed_attempts.pop(client, None)
-        forwarded_proto = http_request.headers.get("x-forwarded-proto", "")
-        response.set_cookie(
-            SESSION_COOKIE,
-            _new_session_token(),
-            max_age=SESSION_TTL_S,
-            httponly=True,
-            samesite="lax",
-            secure=http_request.url.scheme == "https" or forwarded_proto == "https",
-        )
-    return {"valid": valid}
 
 
 @app.get("/", summary="Health check / Frontend")

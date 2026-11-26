@@ -76,6 +76,10 @@ DIAGRAM_REF = re.compile(r"\[diagram:\s*([A-Za-z0-9_-]+)\]")
 
 RETRIEVE_TOOL = "retrieve_diagram"
 MAX_DIAGRAM_QUERIES = 2
+MAX_TERMS = 10
+MAX_FOLLOWUPS = 3
+# Earlier question-and-answer pairs sent to the answer model along with the new question
+MAX_HISTORY_EXCHANGES = 8
 # Tool calls issued by the planner carry this prefix so they can be told apart
 # from searches the answering model decides to run itself.
 PLAN_CALL_PREFIX = "plan_"
@@ -90,6 +94,8 @@ class TeachingPlan(BaseModel):
     diagrams_needed: list[str] = Field(default_factory=list, description="Diagram searches to run")
     is_followup: bool = Field(default=False, description="Whether this continues the previous topic")
     is_fallback: bool = Field(default=False, description="Planning failed; this plan just searches on the question")
+    terms_to_explain: list[str] = Field(default_factory=list, description="Terms the answer must explain in plain words")
+    followups: list[str] = Field(default_factory=list, description="Questions the learner might ask next")
 
 
 class AgentState(BaseModel):
@@ -111,27 +117,76 @@ class PlanOutput(BaseModel):
     diagram_queries: list[str] = Field(
         description="Searches for diagrams that would help, most important first. Each names a concept and its key parts."
     )
+    terms_to_explain: list[str] = Field(
+        description="Technical terms and acronyms the answer will need that this reader may not know."
+    )
+    followups: list[str] = Field(
+        description="2-3 short questions the learner might ask next, in the learner's own voice."
+    )
 
 
 # --- Prompts ---
 
+# Who the answers are written for. Shared by the planner and the answer prompt.
+READER = (
+    "The reader is one person: smart, motivated, comfortable with basic programming, and knows roughly what a "
+    "neural network is (layers, weights, training by adjusting the weights to reduce error). Assume nothing "
+    "beyond that: no reinforcement learning, statistics, probability or linear algebra vocabulary, and no "
+    "familiarity with research acronyms. They would much rather have something briefly explained that they "
+    "already knew than be lost halfway through. They can ask follow-up questions, so one answer does not have "
+    "to cover everything."
+)
+
 PLANNER_PROMPT = """You are the planner for MentorML, a teaching assistant for AI and machine learning that explains concepts with diagrams.
+
+""" + READER + """
 
 Turn the learner's latest message into a teaching plan.
 
 steps: the points to cover, in order. Use 2-4 steps for a simple question and up to 6 for a broad topic. For a follow-up, use 1-3 steps that answer just what was asked.
+- The first step is always the everyday intuition: an analogy or plain picture of what is going on and why it matters. For a comparison, plan one analogy that can carry every item.
+- Later steps cover how it works, in plain words.
+- Do not plan a step for formulas or derivations unless the learner asked for the maths.
+
+terms_to_explain: the technical terms and acronyms the answer will need that this reader may not know, up to 10. Include ones that feel basic to an expert ("policy", "reward", "gradient", "loss", "sampling"). The answer must explain each in plain words when it first appears.
+
+followups: 2-3 short questions (under 12 words each) the learner might want to ask next, written in the learner's own voice and plain words. They should go beyond what this answer will cover: a concrete example, a comparison, why something works, or the maths behind one part. Give none for greetings, thanks or off-topic messages.
 
 diagram_queries: searches to run against a curated library of ML teaching diagrams (architectures, training procedures, attention, reinforcement learning, diffusion, agents and more). The answer should normally include a diagram, so:
 - Give 1 search for most questions, and 2 only when the answer covers two distinct things worth seeing.
-- Write each search as the concept's usual name, then a colon, then the key parts the picture should show, 6-15 words in total. For example "scaled dot-product attention: queries, keys, values, softmax, weighted sum" or "actor-critic: actor picks action, critic estimates value, environment returns reward". Keep the part before the colon short and standard ("dropout", "LSTM cell", "LoRA"), because it is also searched on its own.
+- Write each search as the concept's usual name, then a colon, then the key parts the picture should show, 6-15 words in total. For example "scaled dot-product attention: queries, keys, values, softmax, weighted sum" or "actor-critic: actor picks action, critic estimates value, environment returns reward". Keep the part before the colon short and standard ("dropout", "LSTM cell", "LoRA"), because it is also searched on its own. These searches use the standard technical names, unlike the answer.
 - For a follow-up, search for what the follow-up is about, not the earlier topic again.
 - Give no searches only when there is nothing to draw: greetings, thanks, or questions that are not about a technical concept.
 
 is_followup: true when the message continues the conversation's current topic."""
 
-ANSWER_PROMPT = """You are MentorML, an expert AI/ML teaching assistant that explains concepts with diagrams.
+ANSWER_PROMPT = """You are MentorML, a teaching assistant that explains AI and machine learning concepts with diagrams.
 
-Write a clear, complete explanation that follows the teaching plan below. Be friendly, use analogies, and make the concept accessible. Write a standalone explanation: no wrap-up phrases such as "in conclusion" or "let's bring it all together".
+THE READER
+""" + READER + """
+
+HOW TO EXPLAIN
+1. Intuition first, and stay with it. Open with an everyday picture or analogy for what is going on and why it matters, told in a few full sentences of prose (not a bullet list) before any technical name appears. Then keep using it: begin each part of the answer by saying what happens in the analogy, and only then say what that corresponds to in the real system. When comparing several things, carry ONE analogy through all of them, so each difference shows up as a change to the same picture.
+2. Meaning first, name second. Say the idea in plain words, then attach the technical name to it. Never use a technical term, acronym or symbol the reader has not already been given in plain words, including terms that feel basic to an expert (policy, reward, gradient, loss, distribution, sampling, baseline). The first time an acronym appears, spell it out and say what it means. If a term is not worth explaining, leave it out and say the plain thing.
+3. Everyday words. Write "parameter count", not "parameter footprint"; "extra", not "auxiliary"; "the usual reinforcement learning setup", not "reinforcement learning machinery".
+4. No symbols in prose. Write "the winning response", not a variable for it. Leave formulas out by default and describe what the calculation does in words. Include a formula only when the learner asked for the maths, and then explain every symbol in words right beside it.
+5. Understanding over coverage. Explain the core idea of each thing well instead of listing every component. Leave derivations, implementation details and edge cases for follow-up questions.
+6. Tables, lists and diagram walkthroughs follow the same rules: plain words in every cell and bullet.
+
+EXAMPLES of rules 2-4. Copy the pattern, not the topics.
+Instead of: "A frozen copy of the original model used to calculate a Kullback-Leibler (KL) penalty."
+Write: "A frozen copy of the original model. The model being trained is penalised for drifting too far from how this copy behaves, which stops it degenerating into gibberish. That penalty is known as a KL penalty."
+Instead of: "It then updates the actor using a clipped surrogate objective."
+Write: "It then limits how large each update is allowed to be, so one lucky or unlucky example cannot throw the model off course. That limit is called a clipped surrogate objective."
+Instead of: "a prompt x, a winning response y_w and a losing response y_l. The loss increases the likelihood of y_w while decreasing the likelihood of y_l."
+Write: "a prompt, a response people preferred and one they did not. Training nudges the model to make the preferred response more likely and the other one less likely."
+Instead of: "There is no dynamic rollout generation during training."
+Write: "The model writes no new responses during training. It learns only from examples collected beforehand."
+Instead of: "Softmax converts the logits into a distribution."
+Write: "The raw scores are then squashed into percentages that add up to 100%, so each can be read as how likely that option is. This step is called softmax."
+
+ENDING
+Stop when the explanation is done. Do not end with a question, an offer to explain more, or a recap such as "in conclusion". Suggested follow-up questions are shown to the reader separately.
 
 DIAGRAMS
 Candidate diagrams have already been retrieved for you and are listed below with a description of what each one shows. You cannot see the images, so rely on those descriptions.
@@ -139,7 +194,7 @@ Candidate diagrams have already been retrieved for you and are listed below with
 - If one qualifies, include the best one. Include a second only if it shows something different and equally useful. The whole answer must contain at most two [diagram: ...] references. Among qualifying candidates, prefer higher clarity.
 - If none qualifies, include no diagram and do not mention that one is missing. A missing diagram is better than an unrelated one. Never use a diagram as an analogy or a "conceptual bridge" to a different topic, and never write things like "while this diagram is about X".
 - Cite only IDs from the candidate list, or IDs you used earlier in this conversation. Never invent an ID.
-- When you describe a diagram, stick to what its description says. Do not invent visual details.
+- When you walk the reader through a diagram, stick to what its description says and do not invent visual details. The descriptions are written in technical language: restate them in the reader's plain words, explaining any term or acronym the diagram uses.
 {tool_rule}
 FORMAT
 Reference a diagram as [diagram: ID] using the exact ID. Put the reference on its own line with a blank line before and after, then explain what it shows AFTER it. Never refer to a diagram inline.
@@ -149,7 +204,7 @@ Here's how attention works:
 
 [diagram: fig_3fa9c1d2e0]
 
-The diagram above shows the scaled dot-product attention mechanism...
+The diagram above shows...
 
 WRONG:
 As you see in [diagram: fig_3fa9c1d2e0], it shows the attention mechanism...
@@ -363,6 +418,8 @@ async def plan_node(state: AgentState) -> dict:
             steps=[s for s in output.steps if s.strip()] or [f"Explain: {question}"],
             diagrams_needed=[q.strip() for q in output.diagram_queries if q.strip()][:MAX_DIAGRAM_QUERIES],
             is_followup=output.is_followup and bool(digest),
+            terms_to_explain=[t.strip() for t in output.terms_to_explain if t.strip()][:MAX_TERMS],
+            followups=[f.strip() for f in output.followups if f.strip()][:MAX_FOLLOWUPS],
         )
     except Exception as exc:
         # Planning must never block an answer: on an error or a timeout, search on the question itself.
@@ -445,6 +502,8 @@ def _make_answer_node(tools: list[BaseTool], known_diagram_ids: set[str] | None)
             + (" (a follow-up: answer what was asked, do not repeat the earlier explanation)" if plan.is_followup else "")
             + "\nSteps to cover:\n"
             + "\n".join(f"  {i + 1}. {s}" for i, s in enumerate(plan.steps))
+            + ("\nTerms the reader needs explained in plain words when they first appear (leave out any you "
+               "do not need): " + ", ".join(plan.terms_to_explain) if plan.terms_to_explain else "")
             + "\n\nCANDIDATE DIAGRAMS\n"
             + _format_candidates(turn_results)
         )
@@ -457,7 +516,13 @@ def _make_answer_node(tools: list[BaseTool], known_diagram_ids: set[str] | None)
         # image that is not on screen.
         history = state.messages[:idx + 1]
         _, shown_per_message = replay_shown(history, known_diagram_ids)
+        # Only the most recent exchanges are sent, so a long conversation does not grow
+        # the prompt without limit. The full history stays in the checkpoint.
+        questions = [i for i, m in enumerate(history) if isinstance(m, HumanMessage)]
+        first_sent = questions[-(MAX_HISTORY_EXCHANGES + 1)] if len(questions) > MAX_HISTORY_EXCHANGES + 1 else 0
         for i, m in enumerate(history):
+            if i < first_sent:
+                continue
             if isinstance(m, HumanMessage):
                 if isinstance(messages_for_llm[-1], HumanMessage):
                     # The previous question got no answer (stopped, failed, or empty):

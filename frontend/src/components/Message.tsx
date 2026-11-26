@@ -4,7 +4,7 @@ import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
 import type { Message as MessageType, Diagram, TeachingPlan } from "../types";
 import { DiagramCard } from "./DiagramCard";
-import { Loader2, ChevronDown, ChevronRight, StopCircle } from "lucide-react";
+import { Loader2, ChevronDown, ChevronRight, CornerDownRight, StopCircle } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 // Matches MAX_DIAGRAMS_PER_ANSWER on the server
@@ -12,6 +12,8 @@ const MAX_DIAGRAMS = 2;
 
 interface MessageProps {
   message: MessageType;
+  // Set on the latest answer only: sends a suggested follow-up question
+  onFollowup?: (question: string) => void;
 }
 
 // The agent's teaching plan: one quiet line that expands
@@ -61,7 +63,7 @@ function PlanSection({ plan }: { plan: TeachingPlan }) {
   );
 }
 
-export function Message({ message }: MessageProps) {
+export function Message({ message, onFollowup }: MessageProps) {
   const isUser = message.role === "user";
 
   // Build a map of diagrams by ID for quick lookup
@@ -227,6 +229,28 @@ export function Message({ message }: MessageProps) {
             <span>Response stopped</span>
           </div>
         )}
+
+        {/* Ways to go deeper, once the answer has finished cleanly */}
+        {onFollowup &&
+          !message.isStreaming &&
+          !message.wasStopped &&
+          !message.wasInterrupted &&
+          message.content &&
+          (message.plan?.followups?.length ?? 0) > 0 && (
+            <div className="mt-5 flex flex-col items-start gap-2">
+              {message.plan!.followups!.map((question) => (
+                <button
+                  key={question}
+                  type="button"
+                  onClick={() => onFollowup(question)}
+                  className="flex max-w-full cursor-pointer items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-left text-sm text-muted-foreground hover:border-accent hover:text-foreground"
+                >
+                  <CornerDownRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                  <span>{question}</span>
+                </button>
+              ))}
+            </div>
+          )}
       </div>
     </article>
   );

@@ -2,6 +2,8 @@ export interface TeachingPlan {
   topic: string;
   steps: string[];
   diagrams_needed: string[];
+  // Questions the learner might ask next, shown as buttons under the answer
+  followups?: string[];
 }
 
 export interface Diagram {

@@ -6,6 +6,8 @@ import type { Message as MessageType } from "../types";
 interface MessageListProps {
   messages: MessageType[];
   onFillSuggestion?: (message: string) => void;
+  // Sends a follow-up question suggested under the latest answer
+  onFollowup?: (question: string) => void;
 }
 
 const SUGGESTIONS = [
@@ -15,7 +17,7 @@ const SUGGESTIONS = [
   "How do diffusion models generate images?",
 ];
 
-export function MessageList({ messages, onFillSuggestion }: MessageListProps) {
+export function MessageList({ messages, onFillSuggestion, onFollowup }: MessageListProps) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -50,8 +52,13 @@ export function MessageList({ messages, onFillSuggestion }: MessageListProps) {
   return (
     <div className="min-h-0 flex-1 overflow-y-auto [contain:strict]">
       <div className="mx-auto max-w-3xl px-4 pb-12 pt-6">
-        {messages.map((message) => (
-          <Message key={message.id} message={message} />
+        {messages.map((message, index) => (
+          <Message
+            key={message.id}
+            message={message}
+            // Follow-ups only under the latest answer; older ones would be out of context
+            onFollowup={index === messages.length - 1 ? onFollowup : undefined}
+          />
         ))}
         <div ref={bottomRef} />
       </div>

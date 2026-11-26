@@ -1,11 +1,10 @@
 import { useState, useCallback, useRef } from "react";
-import Cookies from "js-cookie";
 import type { Message, TeachingPlan, Diagram } from "../types";
 
 interface UseStreamChatOptions {
   onPlan?: (plan: TeachingPlan) => void;
   onDiagram?: (diagram: Diagram) => void;
-  // Called when the server has no valid session (expired, or the password changed),
+  // Called when the server has no valid session (expired, or the server's signing key changed),
   // with the message that could not be sent
   onUnauthorized?: (unsentMessage: string) => void;
 }
@@ -64,7 +63,6 @@ export function useStreamChat(options: UseStreamChatOptions = {}) {
           // No valid session: show the login over the chat. The server never got this
           // question, so drop it from the transcript; it goes back in the input box
           // and the user resends it after signing in.
-          Cookies.remove("mentor_auth");
           setMessages((prev) =>
             prev.filter((msg) => msg.id !== userMessage.id && msg.id !== assistantId)
           );

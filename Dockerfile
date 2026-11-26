@@ -39,14 +39,9 @@ COPY scripts/export_text_tower.py scripts/
 RUN python scripts/export_text_tower.py && rm -rf /root/.cache/huggingface
 ENV HF_HUB_OFFLINE=1
 
-# This image is deployed behind Railway's proxy, so count wrong passwords per visitor
-# (from the proxy's X-Forwarded-For entry) rather than per proxy. Unset it if the image
-# is ever exposed directly to the internet, where a client could forge that header.
-ENV TRUST_PROXY=1
-
 # Copy application code and the curated diagram corpus
 COPY model/*.py model/
-COPY main.py .
+COPY main.py auth.py ./
 COPY agent/ agent/
 COPY mcp_server/ mcp_server/
 COPY corpus/metadata.json corpus/embeddings.npz corpus/
