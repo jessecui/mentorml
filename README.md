@@ -4,7 +4,7 @@ A teaching assistant for AI and machine learning that explains concepts in plain
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-dark.png">
-  <img alt="MentorML answering &quot;How does a neural network classify an image into one of several classes?&quot;: an analogy about identifying a blurry photograph, above a diagram of a network sorting a pear into one of four fruit classes from Google's Machine Learning Crash Course" src="docs/screenshot-light.png">
+  <img alt="MentorML answering &quot;How does an LSTM cell decide what to remember and what to forget?&quot;: the cell state explained as a whiteboard and the gates as guards controlling a valve, above a diagram of an LSTM cell from Dive into Deep Learning" src="docs/screenshot-light.png">
 </picture>
 
 ## Features
