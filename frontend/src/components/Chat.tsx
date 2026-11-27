@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Moon, Plus, Sun } from "lucide-react";
 import { useStreamChat } from "../hooks/useStreamChat";
 import { useTheme } from "../lib/theme";
+import { useVisibleHeight } from "../lib/viewport";
 import { MessageList } from "./MessageList";
 import { ChatInput } from "./ChatInput";
 import { LogoMark } from "./LogoMark";
@@ -23,9 +24,10 @@ export function Chat({ onUnauthorized }: ChatProps) {
       },
     });
   const { theme, toggleTheme } = useTheme();
+  useVisibleHeight();
 
   return (
-    <div className="flex h-dvh flex-col bg-background">
+    <div className="h-app flex flex-col bg-background">
       {/* Header */}
       <header className="flex shrink-0 items-center gap-3 border-b border-border bg-surface px-4 py-2.5">
         {/* The logo and name go back to the home screen, the same as "New chat" */}

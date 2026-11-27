@@ -72,6 +72,12 @@ body {
   @apply bg-background text-foreground antialiased;
 }
 
+/* The app shell's height: the visible part of the screen. --app-height is set by
+   useVisibleHeight (lib/viewport.ts) so the layout shrinks when a phone keyboard opens. */
+.h-app {
+  height: var(--app-height, 100dvh);
+}
+
 /* One focus style everywhere: an amber outline. In the base layer so that fields
    which draw their own ring can switch it off with outline-none. */
 @layer base {
