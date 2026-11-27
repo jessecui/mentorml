@@ -9,7 +9,7 @@ A teaching assistant for AI and machine learning that explains concepts in plain
 
 ## Features
 
-- 🤖 **Plan-and-Execute Agent**: LangGraph agent with one structured planning call, tool-based retrieval and one streamed answer; the first words arrive in about 2.5 seconds
+- 🤖 **Plan-and-Execute Agent**: LangGraph agent with one structured planning call, tool-based retrieval and one streamed answer; the first words arrive in about 3 seconds
 - 🔍 **SigLIP 2 Retrieval**: Query-image search over precomputed embeddings (82.6% top-1 against CLIP's 45.0% on the curated benchmark), plus keyword matches
 - 🔌 **MCP Tool Server**: Diagram retrieval runs as a separate MCP subprocess (stdio); the agent calls it like any LangChain tool
 - 🎨 **Curated Corpus**: 620 diagrams from 11 sources, each scored by a Gemini rubric for whether it teaches something, how much insight it adds, and how clear it is at a glance
@@ -332,12 +332,19 @@ Measured on the same questions before and after the agent was reworked:
 
 | | Before | After |
 |---|--------|-------|
-| **Time to first answer text**, new question | 20.8s | about 2.5s |
-| **Time to first answer text**, follow-up | 11.2s | about 2.5s |
+| **Time to first answer text**, new question | 20.8s | about 3s |
+| **Time to first answer text**, follow-up | 11.2s | about 3s |
 | **Model calls per answer** | 5-6 | 2 |
 | **Model looking at the image per query** | Yes (about 2s per diagram) | No (described once, at curation) |
 
-Raising the answer model's thinking level costs most of that: first text arrived after 7-24s at "medium" and 17-36s at "high", against 2.6-3.5s at "low" (one run per setting).
+What changed to get there:
+
+- **Two model calls instead of five or six.** The old agent looped: reason, search, look at each image, reason again. Now one structured call plans the lesson and the searches, and one streamed call writes the answer.
+- **No image reading at question time.** Each diagram is described once during curation, so the answer model chooses from text descriptions and never has to look at the pictures.
+- **A small planner.** Planning runs on Flash-Lite with thinking set to minimal, and the answer model runs with thinking set to low.
+- **A lighter retrieval model.** Only the SigLIP 2 text tower is loaded, through PyTorch; before, the full model was loaded through JAX. This mostly helps startup time and memory.
+
+Times are from a local run, not a deployed server. Raising the answer model's thinking level gives most of the gain back: first text arrived after 7-24s at "medium" and 17-36s at "high", against 2.6-3.5s at "low" (one run per setting).
 
 ### Run Evaluations
 
