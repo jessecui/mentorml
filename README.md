@@ -39,7 +39,7 @@ flowchart TB
     subgraph API["#nbsp;#nbsp;#nbsp;#nbsp;#nbsp;#nbsp;#nbsp;#nbsp;API: /chat/stream (LangGraph agent)#nbsp;#nbsp;#nbsp;#nbsp;#nbsp;#nbsp;#nbsp;#nbsp;"]
         A["Verify session"] --> P["Plan the lesson<br/>steps · terms to explain · searches<br/>Gemini 3.5 Flash-Lite"]
         P --> T["retrieve_diagram<br/>MCP tool server (stdio)"]
-        T --> Q["Embed the search<br/>SigLIP 2 text tower"]
+        T --> Q["Embed the search phrase<br/>SigLIP 2 text tower"]
         Q --> K["Rank images<br/>+ keyword matches · 12 candidates"]
         K --> W["Write the answer<br/>pick the diagram that fits, or none<br/>Gemini 3.8 Flash"]
     end
