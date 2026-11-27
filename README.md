@@ -324,7 +324,7 @@ SigLIP 2 against CLIP ViT-L/14 on query-image retrieval. Every image in the corp
 
 The benchmark measures plain query-image retrieval with the query as written. The app adds the bare concept name as a second phrasing and a few keyword matches, and returns about 12 candidates for the answer model to choose from, so Accuracy@5 is the closer guide to what a learner sees.
 
-The LangSmith experiment on the same 620 queries (dataset `mentorml-curated-diagram-retrieval-v2`) gave SigLIP 2 82.6% and CLIP 45.2% top-1 (+37.4pp). It ran before the benchmark was changed to give CLIP the lossless images instead of the shipped WebPs, which accounts for the one-query difference.
+The LangSmith experiment on the same 620 queries (dataset `mentorml-curated-diagram-retrieval-v2`) gave the same results: SigLIP 2 82.6% top-1 and 97.3% top-5, CLIP 45.0% top-1 and 66.0% top-5 (+37.6pp top-1).
 
 ### Response Time
 
