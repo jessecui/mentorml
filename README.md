@@ -4,7 +4,7 @@ A teaching assistant for AI and machine learning that explains concepts in plain
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-dark.png">
-  <img alt="MentorML answering &quot;How does self-attention work in a transformer?&quot;: queries, keys and values explained with a library-catalogue analogy, above a diagram from The Illustrated GPT-2" src="docs/screenshot-light.png">
+  <img alt="MentorML answering &quot;How does a neural network classify an image into one of several classes?&quot;: an analogy about identifying a blurry photograph, above a diagram of a network sorting a pear into one of four fruit classes from Google's Machine Learning Crash Course" src="docs/screenshot-light.png">
 </picture>
 
 ## Features
