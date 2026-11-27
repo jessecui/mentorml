@@ -1,19 +1,25 @@
 # Production dependencies: everything the deployed app needs.
 # Curation and benchmark scripts need requirements-dev.txt as well.
 
-# Agent
-langchain-core
-langchain-google-genai
-langgraph
-langgraph-checkpoint-redis
-langchain-mcp-adapters
-mcp
-langsmith
-redis
+# Agent. Pinned to the versions the app is tested with: an unpinned install once
+# pulled a newer checkpoint library that broke every follow-up question.
+langchain-core==1.2.7
+langchain-google-genai==4.2.0
+google-genai==1.59.0
+langgraph==1.0.6
+langgraph-prebuilt==1.0.6
+langgraph-checkpoint==3.0.1
+langgraph-checkpoint-redis==0.3.2
+langchain-mcp-adapters==0.2.2
+mcp==1.27.0
+langsmith==0.4.4
+redis==7.1.0
+redisvl==0.13.2
+pydantic==2.11.7
 
 # API server
-fastapi>=0.116
-uvicorn
+fastapi==0.136.1
+uvicorn==0.35.0
 python-dotenv
 
 # Retrieval (SigLIP 2 text tower)

@@ -37,7 +37,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 # Each step has a model chain: the first is used, the rest are fallbacks tried in
 # order if a call errors (model retired, overloaded, rate limited).
@@ -102,6 +102,15 @@ class AgentState(BaseModel):
     """State for the Plan-and-Execute teaching agent."""
     messages: Annotated[list[BaseMessage], add_messages]
     plan: TeachingPlan | None = None
+
+    @field_validator("plan", mode="before")
+    @classmethod
+    def _plan_from_checkpoint(cls, value):
+        # Newer checkpoint libraries hand a saved plan back in its serialised form
+        # ({"type": "constructor", "kwargs": {...}}) instead of rebuilding the TeachingPlan.
+        if isinstance(value, dict) and value.get("type") == "constructor" and isinstance(value.get("kwargs"), dict):
+            return value["kwargs"]
+        return value
 
     class Config:
         arbitrary_types_allowed = True
