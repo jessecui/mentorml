@@ -86,7 +86,8 @@ export function AuthModal({ onAuthenticated }: AuthModalProps) {
               autoComplete="one-time-code"
               placeholder="Full name"
               autoFocus
-              className="h-10 w-full rounded-md border border-border bg-surface px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 disabled:bg-muted"
+              // 16px on phones: iOS Safari zooms the page when a field with smaller text is focused
+              className="h-10 w-full rounded-md border border-border bg-surface px-3 text-base text-foreground sm:text-sm placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 disabled:bg-muted"
             />
           </div>
 
