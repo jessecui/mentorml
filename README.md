@@ -41,7 +41,7 @@ flowchart TB
         P --> T["retrieve_diagram<br/>MCP tool server (stdio)"]
         T --> Q["Embed the search phrase<br/>SigLIP 2 text tower"]
         Q --> K["Rank images<br/>+ keyword matches · 12 candidates"]
-        K --> W["Write the answer<br/>pick the diagram that fits, or none<br/>Gemini 3.8 Flash"]
+        K --> W["Write the answer<br/>pick up to two diagrams that fit, or none<br/>Gemini 3.8 Flash"]
     end
 
     OUT(["Browser<br/>streamed answer + diagram<br/>+ follow-up buttons"])
